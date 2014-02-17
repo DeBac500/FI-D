@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="version">1</string>
+    <string name="dbname">proben</string>
+    <string-array name="Artikel">
+        <item>ArtNr,NUMERIC(35) NOT NULL</item>
+        <item>Bezeichnung,VARCHAR(256)</item>
+        <item>EANCode,NUMERIC(35)</item>
+        <item>Bio,BOOL</item>
+    </string-array>
+    <string-array name="Kunde">
+        <item>KNummer,NUMERIC(35) NOT NULL</item>
+        <item>KName,VARCHAR(256)</item>
+    </string-array>
+    <string-array name="Kundenvertreter">
+        <item>KVName,VARCHAR(256) NOT NULL</item>
+        <item>KNummer,NUMERIC(35) NOT NULL</item>
+    </string-array>
+    <string-array name="Probenzieher">
+        <item>Name,VARCHAR(256) NOT NULL</item>
+    </string-array>
+    <string-array name="Probenziehung">
+        <item>KVName,VARCHAR(256) NOT NULL</item>
+        <item>KNummer,NUMERIC(35) NOT NULL</item>
+        <item>Name,VARCHAR(256) NOT NULL</item>
+        <item>Ziehungsdatum,DATE NOT NULL</item>
+        <item>Ziehungszeit,TIME NOT NULL</item>
+        <item>Ziehungsort,VARCHAR(256)</item>
+        <item>Preis,DECIMAL(30)</item>
+        <item>Status,NUMERIC(35)</item>
+    </string-array>
+    <string-array name="Probendaten">
+        <item>KVName,VARCHAR(256) NOT NULL</item>
+        <item>KNummer,NUMERIC(35) NOT NULL</item>
+        <item>Name,VARCHAR(256) NOT NULL</item>
+        <item>Ziehungsdatum,DATE NOT NULL</item>
+        <item>ArtNr,NUMERIC(35) NOT NULL</item>
+        <item>Ziehungszeit,TIME NOT NULL</item>
+        <item>Packungszahl,NUMERIC(35)</item>
+        <item>MHD,DATE</item>
+        <item>Chargennummer,NUMERIC(35)</item>
+        <item>LieferNr,NUMERIC(35)</item>
+        <item>Lieferant,VARCHAR(256)</item>
+        <item>Probenbeschreibung,VARCHAR(2048)</item>
+        <item>B2BNr,VARCHAR(256)</item>
+        <item>Packungsgroesse,VARCHAR(256)</item>
+
+    </string-array>
+    <string-array name="Profil">
+        <item>PName,VARCHAR(256) NOT NULL</item>
+        <item>KVName,BOOL</item>
+        <item>KNummer,BOOL</item>
+        <item>Name,BOOL</item>
+        <item>Ziehungsdatum,BOOL</item>
+        <item>ArtNr,BOOL</item>
+        <item>Ziehungszeit,BOOL</item>
+        <item>Packungszahl,BOOL</item>
+        <item>MHD,BOOL</item>
+        <item>Chargennummer,BOOL</item>
+        <item>LieferNr,BOOL</item>
+        <item>Lieferant,BOOL</item>
+        <item>Probenbeschreibung,BOOL</item>
+        <item>B2BNr,BOOL</item>
+        <item>Packungsgroesse,BOOL</item>
+        <item>Bezeichnung,BOOL</item>
+        <item>EANCode,BOOL</item>
+        <item>Bio,BOOL</item>
+    </string-array>
+
+    <string-array name="drop">
+        <item>
+            DROP TABLE IF EXISTS Artikel
+        </item>
+        <item>
+            DROP TABLE IF EXISTS Kunde
+        </item>
+        <item>
+            DROP TABLE IF EXISTS Kundenvertreter
+        </item>
+        <item>
+            DROP TABLE IF EXISTS Probenzieher
+        </item>
+        <item>
+            DROP TABLE IF EXISTS Probenziehung
+        </item>
+        <item>
+            DROP TABLE IF EXISTS Probendaten
+        </item>
+        <item>
+            DROP TABLE IF EXISTS Profil
+        </item>
+    </string-array>
+
+    <string-array name="extend">
+        <item>ALTER TABLE Artikel ADD CONSTRAINT PK_Artikel PRIMARY KEY (ArtNr)</item>
+        <item>ALTER TABLE Kunde ADD CONSTRAINT PK_Kunde PRIMARY KEY (KNummer)</item>
+        <item>ALTER TABLE Kundenvertreter ADD CONSTRAINT PK_Kundenvertreter PRIMARY KEY (KVName,KNummer)</item>
+        <item>ALTER TABLE Probenzieher ADD CONSTRAINT PK_Probenzieher PRIMARY KEY (Name)</item>
+        <item>ALTER TABLE Probenziehung ADD CONSTRAINT PK_Probenziehung PRIMARY KEY (KVName,KNummer,Name,Ziehungsdatum,Ziehungszeit)</item>
+        <item>ALTER TABLE Probendaten ADD CONSTRAINT PK_Probendaten PRIMARY KEY (KVName,KNummer,Name,Ziehungsdatum,ArtNr,Ziehungszeit)</item>
+        <item>ALTER TABLE Kundenvertreter ADD CONSTRAINT FK_Kundenvertreter_0 FOREIGN KEY (KNummer) REFERENCES Kunde (KNummer)</item>
+        <item>ALTER TABLE Probenziehung ADD CONSTRAINT FK_Probenziehung_0 FOREIGN KEY (KVName,KNummer) REFERENCES Kundenvertreter (KVName,KNummer)</item>
+        <item>ALTER TABLE Probenziehung ADD CONSTRAINT FK_Probenziehung_1 FOREIGN KEY (Name) REFERENCES Probenzieher (Name)</item>
+        <item>ALTER TABLE Probendaten ADD CONSTRAINT FK_Probendaten_0 FOREIGN KEY (KVName,KNummer,Name,Ziehungsdatum,Ziehungszeit) REFERENCES Probenziehung (KVName,KNummer,Name,Ziehungsdatum,Ziehungszeit)</item>
+        <item>ALTER TABLE Probendaten ADD CONSTRAINT FK_Probendaten_1 FOREIGN KEY (ArtNr) REFERENCES Artikel (ArtNr)</item>
+        <item>ALTER TABLE Profil ADD CONSTRAINT PK_Profil PRIMARY KEY (PName)</item>
+    </string-array>
+
+    <string-array name="insert">
+        <item>INSERT INTO Kunde VALUES (0,\"Testkunde\")</item>
+        <item>INSERT INTO Kunde VALUES (1,\"Testkunde1\")</item>
+
+        <item>INSERT INTO Kundenvertreter VALUES  (\"Testkundenvertreter Fritz\",0)</item>
+        <item>INSERT INTO Kundenvertreter VALUES  (\"Franz\",1)</item>
+
+        <item>INSERT INTO Probenzieher VALUES (\"Probenzieher Franz\")</item>
+        <item>INSERT INTO Probenzieher VALUES (\"Fritz\")</item>
+
+        <item>INSERT INTO Probenziehung VALUES (\"Testkundenvertreter Fritz\", 0, \"Probenzieher Franz\", \"2013-12-11\", \"12:34:56\", \"Wien\", 100, 0)</item>
+        <item>INSERT INTO Probenziehung VALUES (\"Franz\", 1, \"Fritz\", \"2014-12-11\", \"13:34:56\", \"Wien\", 100, 0)</item>
+
+        <item>INSERT INTO Artikel VALUES (41, \"Colaflasche\", 4142, 0)</item>
+        <item>INSERT INTO Artikel VALUES (51, \"Eistee\", 5152, 0)</item>
+        <item>INSERT INTO Artikel VALUES (31, \"Fanta\", 3132, 0)</item>
+
+        <item>INSERT INTO Probendaten VALUES (\"Testkundenvertreter Fritz\", 0, \"Probenzieher Franz\", \"2013-12-11\", 41, \"12:34:56\", 3, \"2015-05-05\", 999, 888, \"CCC\", \"Hat komische Wuermer\", 777, \"12x13x99 cm\")</item>
+        <item>INSERT INTO Probendaten VALUES (\"Testkundenvertreter Fritz\", 0, \"Probenzieher Franz\", \"2013-12-11\", 51, \"12:34:56\", 3, \"2015-05-05\", 999, 888, \"CCC\", \"Hat komische Wuermer\", 777, \"12x13x99 cm\")</item>
+        <item>INSERT INTO Probendaten VALUES (\"Testkundenvertreter Fritz\", 0, \"Probenzieher Franz\", \"2013-12-11\", 31, \"12:34:56\", 3, \"2015-05-05\", 999, 888, \"CCC\", \"Hat komische Wuermer\", 777, \"12x13x99 cm\")</item>
+
+        <item>INSERT INTO Probendaten VALUES (\"Franz\", 1, \"Fritz\", \"2014-12-11\", 41, \"13:34:56\", 3, \"2015-05-05\", 999, 888, \"CCC\", \"Hat komische Wuermer\", 777, \"12x13x99 cm\")</item>
+
+
+        <item>INSERT INTO Profil VALUES (\"Profil_Test1\", 0, 1, 0, 5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1)</item>
+        <item>INSERT INTO Profil VALUES (\"Profil_Alle\", 1, 1, 1, 5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1)</item>
+    </string-array>
+</resources>

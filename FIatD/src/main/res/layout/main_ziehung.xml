@@ -1,0 +1,84 @@
+<TableLayout
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <TableRow>
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/logo_barcodescanner1"
+            android:text="Barcodescanner"
+            android:id="@+id/zieh_scan"
+            android:layout_gravity="top"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Probenziehung:"
+            android:textSize="30dp"
+            android:layout_marginLeft="11dp"/>
+
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="70dp"
+            android:id="@+id/zieh_ziehung"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Profil:"
+            android:layout_marginTop="13dp"
+            android:textSize="30dp"
+            android:layout_marginLeft="20dp"/>
+
+        <Spinner
+            android:layout_width="200dp"
+            android:layout_height="70dp"
+            android:id="@+id/zieh_profil"/>
+    </TableRow>
+
+    <GridLayout
+        android:layout_width="fill_parent"
+        android:layout_height="565dp"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <ListView
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/zieh_list"
+            android:layout_row="0"
+            android:layout_column="0" />
+
+    </GridLayout>
+    <LinearLayout>
+        <Button
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:layout_height="fill_parent"
+            android:layout_width="350dp"
+            android:id="@+id/zieh_unkund"
+            android:textSize="30dp"
+            android:text="Unterschrift Kunde"/>
+
+        <Button
+            android:layout_height="fill_parent"
+            android:layout_width="350dp"
+            android:id="@+id/zieh_commit"
+            android:textSize="30dp"
+            android:text="Ziehung Beenden"/>
+
+        <Button
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:layout_height="fill_parent"
+            android:layout_width="350dp"
+            android:id="@+id/zieh_uncomp"
+            android:textSize="30dp"
+            android:text="Unterschrift LVA"/>
+
+    </LinearLayout>
+</TableLayout>

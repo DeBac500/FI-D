@@ -1,0 +1,40 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/action_settings"
+        android:title="@string/action_settings"
+        android:orderInCategory="100"
+        android:showAsAction="never|withText"
+        android:enabled="false"/>
+
+    <item android:id="@+id/action_help"
+        android:icon="@android:drawable/ic_menu_help"
+        android:title="Help"
+        android:showAsAction="always"
+        android:enabled="false"/>
+
+    <item android:id="@+id/action_search"
+        android:icon="@android:drawable/ic_menu_search"
+        android:title="@string/action_search"
+        android:showAsAction="always"
+        android:enabled="false"/>
+
+    <item android:id="@+id/action_profile"
+        android:title="@string/action_profile"
+        android:showAsAction="never"/>
+
+    <item android:id="@+id/action_samplepuller"
+        android:title="@string/action_samplepuller"
+        android:showAsAction="never"/>
+
+    <item android:id="@+id/action_customer"
+        android:title="@string/action_customer"
+        android:showAsAction="never"/>
+
+    <item android:id="@+id/action_decoy"
+        android:title="@string/action_decoy"
+        android:showAsAction="never"/>
+
+    <item android:id="@+id/action_artikel"
+        android:title="Artikel"
+        android:showAsAction="never"/>
+</menu>

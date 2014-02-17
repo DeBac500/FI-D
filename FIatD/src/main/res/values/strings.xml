@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">FI@D</string>
+    <string name="hello_world">Welcome Screen!</string>
+    <string name="action_settings">Einstellungen</string>
+    <string name="action_search">Suche</string>
+    <string name="action_compose">Vergleich</string>
+    <string name="title_activity_settings">Einstellungen</string>
+    <string name="action_profile">Profil</string>
+    <string name="action_samplepuller">Probenzieher</string>
+    <string name="action_customer">Kunde</string>
+    <string name="action_decoy">Kundenvertreter</string>
+</resources>

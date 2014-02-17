@@ -1,0 +1,26 @@
+<TableLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center">
+
+    <TableRow>
+
+        <TextView
+            android:text="@string/hello_world"
+            android:textSize="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_column="0" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <Button android:text="Weiter..."
+            android:textSize="30dp"
+            android:id="@+id/welc_next" />
+    </TableRow>
+
+</TableLayout>
