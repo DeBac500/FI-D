@@ -1,12 +1,14 @@
-package at.XDDominik.fi_d.fiatd.Ziehung;
+package at.XDDominik.fi_d.fiatd.Profil;
 
 import android.app.Activity;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Spinner;
 
 import at.XDDominik.fi_d.fiatd.Database;
 import at.XDDominik.fi_d.fiatd.MainActivity;
@@ -15,16 +17,15 @@ import at.XDDominik.fi_d.fiatd.R;
 import at.XDDominik.fi_d.fiatd.Tabs;
 
 /**
- * Created by Dominik on 17.02.14.
+ * Created by dominik on 18.02.14.
  */
-public class MainZiehung  extends Activity{
+public class MainProfil extends Activity {
     private Database db;
-    private ProbenAdapter proa;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main_ziehung);
+        setContentView(R.layout.main_profile);
 
         db = new Database(this);
         db.open();
@@ -32,20 +33,23 @@ public class MainZiehung  extends Activity{
         Tabs tabs = new Tabs(this);
         tabs.initTab(0);
 
-        ListView proben = (ListView)findViewById(R.id.zieh_list);
-        proa = new ProbenAdapter(this,db.getArtikelCursor(),false);
-        proben.setAdapter(proa);
+        ListView profile = (ListView)findViewById(R.id.list_profil);
+        ProfilAdapter pa = new ProfilAdapter(this,db.getProfil(),false);
+        profile.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-        Spinner ziehungen = (Spinner)findViewById(R.id.zieh_ziehung);
-        ZiehungsAdapter zadp = new ZiehungsAdapter(this,db.getZiehungCursor(),false);
-        ZiehungsItemListener zil = new ZiehungsItemListener(this);
-        ziehungen.setOnItemSelectedListener(zil);
-        ziehungen.setAdapter(zadp);
+            }
+        });
+        profile.setAdapter(pa);
 
-        Spinner profile = (Spinner)findViewById(R.id.zieh_profil);
-        ProfilAdapter profa = new ProfilAdapter(this,db.getProfil(),false);
-        profile.setAdapter(profa);
+        Button b1 = (Button)findViewById(R.id.setting_addprof);
+        b1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
+            }
+        });
 
     }
     @Override
@@ -63,5 +67,4 @@ public class MainZiehung  extends Activity{
         return true;
     }
     public Database getDB(){return this.db;}
-    public ProbenAdapter getPA(){return  this.proa;}
 }

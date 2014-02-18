@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content" android:layout_height="wrap_content"
+    android:layout_gravity="center|top">
+    <TableRow>
+        <TextView
+            android:text="Kunden Vertreter"
+            android:textSize="30dp"
+            android:layout_gravity="center"/>
+    </TableRow>
+    <TableRow>
+        <ListView
+            android:layout_height="600dp"
+            android:id="@+id/list_kv"/>
+    </TableRow>
+    <TableRow>
+        <Button
+            android:text="Neuen Kunden Vertreter Erstellen"
+            android:layout_column="0"
+            android:textSize="30dp"
+            android:width="1000dp"
+            android:textAlignment="center"
+            android:id="@+id/setting_addkv"/>
+    </TableRow>
+</TableLayout>

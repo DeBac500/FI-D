@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<TableLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_gravity="center_horizontal">
+    <TableRow>
+
+    </TableRow>
+    <TableRow>
+        <TextView
+            android:text="Artikel NR:"
+            android:textSize="30dp"/>
+        <EditText
+            android:textSize="30dp"
+            android:layout_width="300dp"
+            android:inputType="number"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:orientation="horizontal"
+            android:id="@+id/nartnr"/>
+
+
+    </TableRow>
+    <TableRow>
+        <TextView
+            android:text="Artikel Beschreibung:"
+            android:textSize="30dp"/>
+        <EditText
+            android:textSize="30dp"
+            android:singleLine="false"
+            android:id="@+id/nartbesch"/>
+    </TableRow>
+    <TableRow>
+        <TextView
+            android:text="EAN Code:"
+            android:textSize="30dp"/>
+        <EditText
+            android:textSize="30dp"
+            android:inputType="number"
+            android:singleLine="true"
+            android:id="@+id/narteanc"/>
+    </TableRow>
+    <TableRow>
+        <TextView
+            android:text="Bio:"
+            android:textSize="30dp"/>
+        <EditText
+            android:textSize="30dp"
+            android:singleLine="true"
+            android:hint="Ja oder Nein"
+            android:id="@+id/nartbio"/>
+    </TableRow>
+    <TableRow>
+        <Button
+            android:text="Abbrechen"
+            android:id="@+id/nartabb"/>
+        <Button
+            android:text="Speichern"
+            android:id="@+id/nartsave"/>
+    </TableRow>
+    <TableRow>
+        <Button
+            android:text="Löschen"
+            android:id="@+id/nartdel"
+            android:enabled="false"
+            android:layout_span="2"/>
+    </TableRow>
+    <TableRow>
+        <NumberPicker
+            android:textSize="30dp"
+            android:layout_width="300dp"
+            android:visibility="invisible"
+            android:singleLine="true"
+            android:id="@+id/nartnrd"/>
+    </TableRow>
+
+</TableLayout>

@@ -2,17 +2,24 @@ package at.XDDominik.fi_d.fiatd;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+import at.XDDominik.fi_d.fiatd.Kunde.mainKunde;
+import at.XDDominik.fi_d.fiatd.Kundenvertreter.mainKundevertreter;
+import at.XDDominik.fi_d.fiatd.Probenzieher.mainProbenzieher;
 import at.XDDominik.fi_d.fiatd.Ziehung.MainZiehung;
 
 public class MainActivity extends Activity implements View.OnClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -33,5 +40,47 @@ public class MainActivity extends Activity implements View.OnClickListener {
     public void onClick(View v) {
         Intent intent = new Intent(this, MainZiehung.class);
         startActivity(intent);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        boolean b = MainActivity.OptionsItemSelected(item,this);
+        if(!b)
+            return super.onOptionsItemSelected(item);
+        else
+            return b;
+    }
+
+    public static boolean OptionsItemSelected(MenuItem item,Activity a) {
+        // Handle presses on the action bar items
+        Intent intent;
+        switch (item.getItemId()) {
+            case R.id.action_settings:
+
+                return true;
+            case android.R.id.home:
+
+                return true;
+            case R.id.action_profile:
+
+                return true;
+            case R.id.action_samplepuller:
+                intent = new Intent(a, mainProbenzieher.class);
+                a.startActivity(intent);
+                return true;
+            case R.id.action_customer:
+                intent = new Intent(a, mainKunde.class);
+                a.startActivity(intent);
+                return true;
+            case R.id.action_decoy:
+                intent = new Intent(a, mainKundevertreter.class);
+                a.startActivity(intent);
+                return true;
+            case R.id.action_artikel:
+
+                return true;
+            default:
+                return false;
+        }
     }
 }

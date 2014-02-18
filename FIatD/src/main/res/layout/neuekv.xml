@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<TableLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_horizontal">
+    <TableRow>
+        <TextView
+            android:text="Kundenvertreter"
+            android:textSize="30dp"
+            android:layout_span="2"/>
+    </TableRow>
+    <TableRow>
+        <TextView android:text="Kunde:"
+            android:textSize="30dp"/>
+        <Spinner
+            android:id="@+id/nkvk"/>
+    </TableRow>
+    <TableRow>
+        <TextView android:text="Name:"
+            android:textSize="30dp"/>
+        <EditText
+            android:layout_width="400dp"
+            android:textSize="30dp"
+            android:id="@+id/nkvn"/>
+    </TableRow>
+    <EditText
+        android:id="@+id/nkvkd"
+        android:visibility="invisible"/>
+</TableLayout>

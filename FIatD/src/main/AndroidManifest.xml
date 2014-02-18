@@ -25,6 +25,10 @@
         <activity
             android:name=".Ziehung.MainZiehung"
             android:label="FI@D" />
+        <activity android:name=".Profil.MainProfil" />
+        <activity android:name=".Probenzieher.mainProbenzieher" />
+        <activity android:name=".Kunde.mainKunde" />
+        <activity android:name=".Kundenvertreter.mainKundevertreter" />
     </application>
 
 </manifest>
