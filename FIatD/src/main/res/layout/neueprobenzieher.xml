@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<TableLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_horizontal"
+    android:gravity="center_horizontal">
+    <TableRow
+        android:layout_width="300dp">
+        <TextView
+
+            android:text="Probenzieher"
+            android:layout_span="2"
+            android:textSize="30dp"
+            android:textAlignment="center"/>
+    </TableRow>
+    <TableRow>
+        <TextView
+            android:layout_width="fill_parent"
+            android:text="Name:"
+            android:textSize="30dp"/>
+        <EditText
+            android:layout_width="400dp"
+            android:textSize="30dp"
+            android:id="@+id/npzn"/>
+    </TableRow>
+    <!--
+    <TableRow>
+        <Button
+            android:text="Abbrechen"
+            android:textSize="30dp"
+            android:id="@+id/npzabb"/>
+        <Button
+            android:text="Speichern"
+            android:textSize="30dp"
+            android:id="@+id/npzsave"/>
+    </TableRow>
+
+    <TableRow>
+        <Button
+            android:text="Löschen"
+            android:textSize="30dp"
+            android:id="@+id/npzdel"
+            android:layout_span="2"
+            android:enabled="false"/>
+    </TableRow>-->
+</TableLayout>

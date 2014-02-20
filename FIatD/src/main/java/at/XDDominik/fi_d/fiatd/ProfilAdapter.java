@@ -16,16 +16,20 @@ import android.widget.TextView;
 public class ProfilAdapter extends CursorAdapter{
     private Activity main;
     private LayoutInflater inflater;
-
+    private boolean bb;
     public ProfilAdapter(Activity context, Cursor c, boolean autoRequery) {
-        super(context, c, autoRequery);
+        super(context, c, false);
         this.main=context;
+        bb = autoRequery;
         this.inflater = LayoutInflater.from(context);
     }
 
     @Override
     public View newView(Context context, Cursor cursor, ViewGroup parent) {
-        return inflater.inflate(R.layout.profile_list, parent,false);
+        if(bb)
+            return inflater.inflate(R.layout.profile_list_2, parent,false);
+        else
+            return inflater.inflate(R.layout.profile_list, parent,false);
     }
 
     @Override

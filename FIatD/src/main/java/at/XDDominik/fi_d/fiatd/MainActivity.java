@@ -12,6 +12,7 @@ import android.widget.Button;
 import at.XDDominik.fi_d.fiatd.Kunde.mainKunde;
 import at.XDDominik.fi_d.fiatd.Kundenvertreter.mainKundevertreter;
 import at.XDDominik.fi_d.fiatd.Probenzieher.mainProbenzieher;
+import at.XDDominik.fi_d.fiatd.Profil.MainProfil;
 import at.XDDominik.fi_d.fiatd.Ziehung.MainZiehung;
 
 public class MainActivity extends Activity implements View.OnClickListener {
@@ -62,7 +63,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
                 return true;
             case R.id.action_profile:
-
+                intent = new Intent(a, MainProfil.class);
+                a.startActivity(intent);
                 return true;
             case R.id.action_samplepuller:
                 intent = new Intent(a, mainProbenzieher.class);

@@ -43,6 +43,12 @@ public class Tabs implements ActionBar.TabListener{
                     break;
             }
     }
+    public void unselect(){
+        try{
+            ab.selectTab(null);
+        }catch(NullPointerException e){}
+        select = -1;
+    }
 
     @Override
     public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {

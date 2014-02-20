@@ -11,11 +11,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import at.XDDominik.fi_d.fiatd.Database;
 import at.XDDominik.fi_d.fiatd.MainActivity;
-import at.XDDominik.fi_d.fiatd.ProfilAdapter;
 import at.XDDominik.fi_d.fiatd.R;
 import at.XDDominik.fi_d.fiatd.Tabs;
 
@@ -36,6 +34,7 @@ public class mainProbenzieher extends Activity implements Probenzieher_Dialog.Pr
 
         Tabs tabs = new Tabs(this);
         tabs.initTab(0);
+        tabs.unselect();
 
         ListView profile = (ListView)findViewById(R.id.list_probenzieher);
         pa = new PZAdapter(this,db.getProbenZieher(),false);

@@ -34,6 +34,7 @@ public class mainKunde extends Activity implements Kunde_Dialog.Probenzieher_Dia
 
         Tabs tabs = new Tabs(this);
         tabs.initTab(0);
+        tabs.unselect();
 
         ListView profile = (ListView)findViewById(R.id.list_kunde);
         pa = new KundenAdapter(this,db.getKunden(),false);

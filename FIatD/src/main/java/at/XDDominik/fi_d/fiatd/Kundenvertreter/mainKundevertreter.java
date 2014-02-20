@@ -34,6 +34,7 @@ public class mainKundevertreter extends Activity implements Kundevertreter_Dialo
 
         Tabs tabs = new Tabs(this);
         tabs.initTab(0);
+        tabs.unselect();
 
         ListView profile = (ListView)findViewById(R.id.list_kv);
         pa = new KundenvertreterAdapter(this,db.getKundenVertreter(),false);
