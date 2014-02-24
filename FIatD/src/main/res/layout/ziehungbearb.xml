@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<TableLayout
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_gravity="center"
+    android:layout_marginLeft="0dp"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <TableLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <TableRow>
+            <Spinner
+                android:layout_width="650dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/list_ziehung"
+                android:layout_row="0"
+                android:layout_column="0"
+                android:layout_span="3" />
+
+
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:text="alle Proben"
+                android:layout_width="610dp"
+                android:textSize="25dp"/>
+            <TextView
+                android:text="in dieser Ziehung"
+                android:layout_column="2"
+                android:textSize="25dp"/>
+        </TableRow>
+        <TableRow>
+        <ListView
+            android:layout_width="610dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/list_probe"
+            android:layout_row="0"
+            android:layout_column="0" />
+            <TableLayout
+                android:layout_gravity="center"
+                android:gravity="center">
+                <TableRow>
+                    <ImageButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_action_forward"
+                        android:text="Rechts"
+                        android:id="@+id/links"
+                        android:layout_gravity="top"/>
+                </TableRow>
+                <TableRow>
+                    <ImageButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_action_back"
+                        android:text="Links"
+                        android:id="@+id/rechts"
+                        android:layout_gravity="top"/>
+                </TableRow>
+            </TableLayout>
+        <ListView
+            android:layout_width="610dp"
+            android:layout_height="540dp"
+            android:id="@+id/list_inziehung"
+            android:layout_row="0"
+            android:layout_column="2" />
+        </TableRow>
+        <TableRow>
+            <Button
+                android:text="Ziehung erstellen"
+                android:textSize="30dp"
+                android:layout_span="3"
+                android:id="@+id/addziehung"/>
+        </TableRow>
+    </TableLayout>
+
+</TableLayout>

@@ -29,6 +29,8 @@
         <activity android:name=".Probenzieher.mainProbenzieher" />
         <activity android:name=".Kunde.mainKunde" />
         <activity android:name=".Kundenvertreter.mainKundevertreter" />
+        <activity android:name=".ZiehungBearb.MainZiehungBearb" />
+        <activity android:name=".ClientServerZiehung.MainClientServerZiehung" />
     </application>
 
 </manifest>

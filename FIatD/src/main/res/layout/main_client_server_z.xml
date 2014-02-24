@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<TableLayout
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--
+    <TableRow>
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/logo_barcodescanner1"
+            android:text="Barcodescanner"
+            android:id="@+id/scan_button"
+            android:layout_gravity="top"/>
+    </TableRow>
+-->
+    <TableLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+        <TableRow>
+        <TextView
+            android:layout_width="610dp"
+            android:layout_height="wrap_content"
+            android:text="am Tablet"
+            android:textSize="25dp"
+            android:id="@+id/txt_client"
+            android:layout_row="0"
+            android:layout_column="0"
+            android:textAlignment="gravity"
+            android:layout_gravity="center"/>
+        <TextView
+            android:layout_width="610dp"
+            android:layout_height="wrap_content"
+            android:text="am Server"
+            android:textSize="25dp"
+            android:id="@+id/txt_server"
+            android:layout_row="0"
+            android:layout_column="2"
+            android:layout_gravity="center"/>
+        </TableRow>
+        <TableRow>
+        <ListView
+            android:layout_width="610dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/list_client"
+            android:layout_row="1"
+            android:layout_column="0" />
+        <TableLayout
+            android:layout_gravity="center"
+            android:gravity="center">
+            <TableRow
+               >
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_action_forward"
+                    android:text="Rechts"
+                    android:id="@+id/rechts"
+                    android:layout_gravity="top"/>
+            </TableRow>
+            <TableRow>
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_action_back"
+                    android:text="Links"
+                    android:id="@+id/links"
+                    android:layout_gravity="top"/>
+            </TableRow>
+        </TableLayout>
+        <ListView
+            android:layout_width="610dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/list_server"
+            android:layout_row="1"
+            android:layout_column="2" />
+        </TableRow>
+    </TableLayout>
+
+</TableLayout>

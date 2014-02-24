@@ -64,19 +64,31 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 return true;
             case R.id.action_profile:
                 intent = new Intent(a, MainProfil.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                 a.startActivity(intent);
+                a.finish();
+                a.overridePendingTransition(0,0);
                 return true;
             case R.id.action_samplepuller:
                 intent = new Intent(a, mainProbenzieher.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                 a.startActivity(intent);
+                a.finish();
+                a.overridePendingTransition(0,0);
                 return true;
             case R.id.action_customer:
                 intent = new Intent(a, mainKunde.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                 a.startActivity(intent);
+                a.finish();
+                a.overridePendingTransition(0,0);
                 return true;
             case R.id.action_decoy:
                 intent = new Intent(a, mainKundevertreter.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                 a.startActivity(intent);
+                a.finish();
+                a.overridePendingTransition(0,0);
                 return true;
             case R.id.action_artikel:
 

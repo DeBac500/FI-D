@@ -1,10 +1,13 @@
 package at.XDDominik.fi_d.fiatd.Ziehung;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Spinner;
 
@@ -34,6 +37,12 @@ public class MainZiehung  extends Activity{
 
         ListView proben = (ListView)findViewById(R.id.zieh_list);
         proa = new ProbenAdapter(this,db.getArtikelCursor(),false);
+        proben.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent inte = new Intent();
+            }
+        });
         proben.setAdapter(proa);
 
         Spinner ziehungen = (Spinner)findViewById(R.id.zieh_ziehung);
