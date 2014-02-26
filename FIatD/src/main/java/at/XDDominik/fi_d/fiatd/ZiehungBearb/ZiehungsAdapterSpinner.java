@@ -1,4 +1,4 @@
-package at.XDDominik.fi_d.fiatd.Ziehung;
+package at.XDDominik.fi_d.fiatd.ZiehungBearb;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -13,11 +13,11 @@ import at.XDDominik.fi_d.fiatd.R;
 /**
  * Created by Dominik on 17.02.14.
  */
-public class ZiehungsAdapter extends CursorAdapter{
-    private MainZiehung main;
+public class ZiehungsAdapterSpinner extends CursorAdapter{
+    private MainZiehungBearb main;
     private LayoutInflater inflater;
 
-    public ZiehungsAdapter(MainZiehung context, Cursor c, boolean autoRequery) {
+    public ZiehungsAdapterSpinner(MainZiehungBearb context, Cursor c, boolean autoRequery) {
         super(context, c, autoRequery);
         this.main=context;
         this.inflater = LayoutInflater.from(context);

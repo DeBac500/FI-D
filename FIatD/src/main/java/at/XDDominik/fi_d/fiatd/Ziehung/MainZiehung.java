@@ -8,14 +8,17 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import at.XDDominik.fi_d.fiatd.Database;
 import at.XDDominik.fi_d.fiatd.MainActivity;
 import at.XDDominik.fi_d.fiatd.ProfilAdapter;
 import at.XDDominik.fi_d.fiatd.R;
 import at.XDDominik.fi_d.fiatd.Tabs;
+import at.XDDominik.fi_d.fiatd.Unterschrift.UnterschKunde;
 
 /**
  * Created by Dominik on 17.02.14.
@@ -23,6 +26,7 @@ import at.XDDominik.fi_d.fiatd.Tabs;
 public class MainZiehung  extends Activity{
     private Database db;
     private ProbenAdapter proa;
+    private Spinner ziehungen;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
@@ -45,7 +49,7 @@ public class MainZiehung  extends Activity{
         });
         proben.setAdapter(proa);
 
-        Spinner ziehungen = (Spinner)findViewById(R.id.zieh_ziehung);
+        ziehungen = (Spinner)findViewById(R.id.zieh_ziehung);
         ZiehungsAdapter zadp = new ZiehungsAdapter(this,db.getZiehungCursor(),false);
         ZiehungsItemListener zil = new ZiehungsItemListener(this);
         ziehungen.setOnItemSelectedListener(zil);
@@ -54,6 +58,17 @@ public class MainZiehung  extends Activity{
         Spinner profile = (Spinner)findViewById(R.id.zieh_profil);
         ProfilAdapter profa = new ProfilAdapter(this,db.getProfil(),false);
         profile.setAdapter(profa);
+
+        Button b = (Button)findViewById(R.id.zieh_unkund);
+        b.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainZiehung.this,UnterschKunde.class);
+                intent.putExtra(UnterschKunde.KDatum,((TextView)ziehungen.getSelectedView().findViewById(R.id.spin1_tv1)).getText());
+                intent.putExtra(UnterschKunde.KName,((TextView)ziehungen.getSelectedView().findViewById(R.id.spin1_tv2)).getText());
+                MainZiehung.this.startActivityForResult(intent, UnterschKunde.Sucsess);
+            }
+        });
 
 
     }
