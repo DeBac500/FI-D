@@ -26,12 +26,14 @@
             android:name=".Ziehung.MainZiehung"
             android:label="FI@D" />
         <activity android:name=".Profil.MainProfil" />
+        <activity android:name=".Artikel.mainArtikel" />
         <activity android:name=".Probenzieher.mainProbenzieher" />
         <activity android:name=".Kunde.mainKunde" />
         <activity android:name=".Kundenvertreter.mainKundevertreter" />
         <activity android:name=".ZiehungBearb.MainZiehungBearb" />
         <activity android:name=".ClientServerZiehung.MainClientServerZiehung" />
         <activity android:name=".Unterschrift.UnterschKunde" />
+        <activity android:name=".Unterschrift.UnterschLVA" />
         <activity android:name=".ZiehungBearb.NeueZiehung" />
     </application>
 

@@ -20,39 +20,40 @@ import at.XDDominik.fi_d.fiatd.Tabs;
 /**
  * Created by dominik on 18.02.14.
  */
-public class mainKunde extends Activity implements Artikel_Dialog.Probenzieher_Dialog_Listener{
+public class mainArtikel extends Activity implements Artikel_Dialog.Probenzieher_Dialog_Listener{
     private Database db;
-    private KundenAdapter pa;
+    private ArtikelAdapter pa;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main_customer);
+        setContentView(R.layout.main_artikel);
 
         db = new Database(this);
         db.open();
 
         Tabs tabs = new Tabs(this);
         tabs.initTab(0);
+        tabs.unselect();
 
-        ListView profile = (ListView)findViewById(R.id.list_kunde);
-        pa = new KundenAdapter(this,db.getKunden(),false);
+        ListView profile = (ListView)findViewById(R.id.list_artikel);
+        pa = new ArtikelAdapter(this,db.getArtikelCursor(),false);
         profile.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Cursor c = (Cursor)adapterView.getItemAtPosition(i);
-                Artikel_Dialog newFragment = new Artikel_Dialog(db,mainKunde.this);
+                Artikel_Dialog newFragment = new Artikel_Dialog(db,mainArtikel.this);
                 newFragment.setup(c);
                 newFragment.show(getFragmentManager(), "Probenzieher");
             }
         });
         profile.setAdapter(pa);
 
-        Button b1 = (Button)findViewById(R.id.setting_addkunde);
+        Button b1 = (Button)findViewById(R.id.setting_addartikel);
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Artikel_Dialog newFragment = new Artikel_Dialog(db,mainKunde.this);
+                Artikel_Dialog newFragment = new Artikel_Dialog(db,mainArtikel.this);
                 newFragment.show(getFragmentManager(), "Probenzieher");
             }
         });
@@ -77,6 +78,6 @@ public class mainKunde extends Activity implements Artikel_Dialog.Probenzieher_D
 
     @Override
     public void onDialogPositiveClick(DialogFragment dialog) {
-        pa.swapCursor(db.getKunden());
+        pa.swapCursor(db.getArtikelCursor());
     }
 }

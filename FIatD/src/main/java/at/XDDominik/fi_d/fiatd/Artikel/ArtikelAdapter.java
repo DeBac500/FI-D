@@ -13,11 +13,11 @@ import at.XDDominik.fi_d.fiatd.R;
 /**
  * Created by dominik on 18.02.14.
  */
-public class KundenAdapter extends CursorAdapter {
-    private mainKunde main;
+public class ArtikelAdapter extends CursorAdapter {
+    private mainArtikel main;
     private LayoutInflater inflater;
 
-    public KundenAdapter(mainKunde context, Cursor c, boolean autoRequery) {
+    public ArtikelAdapter(mainArtikel context, Cursor c, boolean autoRequery) {
         super(context, c, autoRequery);
         this.main=context;
         this.inflater = LayoutInflater.from(context);
@@ -33,7 +33,7 @@ public class KundenAdapter extends CursorAdapter {
         TextView tv1;
         tv1 = (TextView)view.findViewById(R.id.beschreibung);
         //tv2 = (TextView)view.findViewById(R.id.nummer);
-        tv1.setText(cursor.getString(cursor.getColumnIndex("KName")));
+        tv1.setText(cursor.getString(cursor.getColumnIndex("Bezeichnung")));
         //tv2.setText(cursor.getString(cursor.getColumnIndex("Bezeichnung")));
         tv1.setFocusable(false);
         //tv2.setFocusable(false);

@@ -10,8 +10,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.Toast;
+
+import java.util.ArrayList;
 
 import at.XDDominik.fi_d.fiatd.Database;
 import at.XDDominik.fi_d.fiatd.MainActivity;
@@ -26,6 +31,8 @@ public class MainZiehungBearb extends Activity {
     private Spinner ziehungen;
     private ZiehungsAdapter za;
     private ZiehungsAdapter za1;
+    private ArrayList<Integer> toz = new ArrayList<Integer>(),ausz = new ArrayList<Integer>();
+    private Cursor tozc, auszc;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
@@ -46,16 +53,97 @@ public class MainZiehungBearb extends Activity {
             }
         });
         ListView lv = (ListView)findViewById(R.id.list_probe);
-        za = new ZiehungsAdapter(this,db.getArtikelCursor(),false);
+        za = new ZiehungsAdapter(this,db.getArtikelCursor(),false,lv);
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                CheckBox cb = (CheckBox)view.findViewById(R.id.check);
+                Cursor c = (Cursor)adapterView.getItemAtPosition(i);
+                if(!cb.isChecked()){
+                    MainZiehungBearb.this.toz.add(c.getPosition());
+                    MainZiehungBearb.this.tozc = c;
+                    cb.setChecked(!cb.isChecked());
+                }else{
+                    MainZiehungBearb.this.toz.remove((Integer) c.getPosition());
+                    cb.setChecked(!cb.isChecked());
+                }
+            }
+        });
         lv.setAdapter(za);
 
         ListView lv1 = (ListView)findViewById(R.id.list_inziehung);
-        za1 = new ZiehungsAdapter(this,db.getArtikelCursor(),false);
-        lv1.setAdapter(za1);
+        za1 = new ZiehungsAdapter(this,db.getArtikelCursor(),false,lv1);
+        lv1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                CheckBox cb = (CheckBox)view.findViewById(R.id.check);
+                Cursor c = (Cursor)adapterView.getItemAtPosition(i);
+                if(!cb.isChecked()){
+                    MainZiehungBearb.this.ausz.add(c.getPosition());
+                    MainZiehungBearb.this.auszc = c;
+                    cb.setChecked(!cb.isChecked());
+                }else{
+                    MainZiehungBearb.this.ausz.remove((Integer) c.getPosition());
+                    cb.setChecked(!cb.isChecked());
+                }
+            }
+        });
+        lv1.setAdapter(za1)  ;
+        ImageButton links = (ImageButton)findViewById(R.id.links);
+        ImageButton rechts = (ImageButton)findViewById(R.id.rechts);
+
+        links.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                for(int i = 0; i < MainZiehungBearb.this.ausz.size();i++){
+                    Integer temp = MainZiehungBearb.this.ausz.get(i);
+                    Cursor tempc = MainZiehungBearb.this.auszc;
+                    tempc.moveToPosition(temp);
+                    if(temp != null)
+                        MainZiehungBearb.this.db.removePD(tempc);
+                    else
+                        Toast.makeText(MainZiehungBearb.this.getBaseContext(), "Temp null" , Toast.LENGTH_SHORT).show();
+                }
+                MainZiehungBearb.this.za1.swapCursor(MainZiehungBearb.this.db.getprobeninZ((Cursor)MainZiehungBearb.this.ziehungen.getSelectedItem()));
+                MainZiehungBearb.this.za.swapCursor(MainZiehungBearb.this.db.getArtikelex((Cursor)MainZiehungBearb.this.ziehungen.getSelectedItem()));
+                MainZiehungBearb.this.za1.setallboxf();
+                MainZiehungBearb.this.za.setallboxf();
+                MainZiehungBearb.this.ausz.clear();
+                MainZiehungBearb.this.toz.clear();
+            }
+        });
+
+        rechts.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                for(int i = 0; i < MainZiehungBearb.this.toz.size();i++){
+                    Integer temp = MainZiehungBearb.this.toz.get(i);
+                    Cursor tempc = MainZiehungBearb.this.tozc;
+                    tempc.moveToPosition(temp);
+                    Cursor sp = null;
+                    if(MainZiehungBearb.this.ziehungen!=null)
+                        sp = (Cursor)MainZiehungBearb.this.ziehungen.getSelectedItem();
+                    else
+                        Toast.makeText(MainZiehungBearb.this.getBaseContext(), "s null", Toast.LENGTH_SHORT).show();
+                    if(temp != null)
+                        if(sp != null)
+                            MainZiehungBearb.this.db.addPD(sp,tempc);
+                        else
+                            Toast.makeText(MainZiehungBearb.this.getBaseContext(), "sp null" , Toast.LENGTH_SHORT).show();
+                    else
+                        Toast.makeText(MainZiehungBearb.this.getBaseContext(), "Temp null" , Toast.LENGTH_SHORT).show();
+                }
+                MainZiehungBearb.this.za1.swapCursor(MainZiehungBearb.this.db.getprobeninZ((Cursor) MainZiehungBearb.this.ziehungen.getSelectedItem()));
+                MainZiehungBearb.this.za.swapCursor(MainZiehungBearb.this.db.getArtikelex((Cursor) MainZiehungBearb.this.ziehungen.getSelectedItem()));
+                MainZiehungBearb.this.za1.setallboxf();
+                MainZiehungBearb.this.za.setallboxf();
+                MainZiehungBearb.this.ausz.clear();
+                MainZiehungBearb.this.toz.clear();
+            }
+        });
 
         ziehungen = (Spinner)findViewById(R.id.list_ziehung);
         ZiehungsAdapterSpinner zadp = new ZiehungsAdapterSpinner(this,db.getZiehungCursor(),false);
-        //ZiehungsItemListener zil = new ZiehungsItemListener(this);
         ziehungen.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {

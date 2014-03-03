@@ -34,6 +34,7 @@ public class KAdapter extends CursorAdapter{
         tv1 = (TextView)view.findViewById(R.id.pro_tv1);
         //tv2 = (TextView)view.findViewById(R.id.nummer);
         tv1.setText(cursor.getString(cursor.getColumnIndex("KName")));
+        tv1.setHint(cursor.getString(cursor.getColumnIndex("KNummer")));
         //tv2.setText(cursor.getString(cursor.getColumnIndex("Bezeichnung")));
         tv1.setFocusable(false);
         //tv2.setFocusable(false);

@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import at.XDDominik.fi_d.fiatd.Database;
 import at.XDDominik.fi_d.fiatd.R;
@@ -24,7 +25,7 @@ public class Artikel_Dialog extends DialogFragment{
     public Artikel_Dialog(Database db, Activity a){
         this.db = db;
         LayoutInflater inflater = a.getLayoutInflater();
-        v = inflater.inflate(R.layout.neukunde,null);
+        v = inflater.inflate(R.layout.neuerartikel,null);
     }
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -38,13 +39,32 @@ public class Artikel_Dialog extends DialogFragment{
                 .setPositiveButton("Speichern", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
-                        EditText hh=(EditText)v.findViewById(R.id.nkna);
-                        EditText hh1=(EditText)v.findViewById(R.id.nknu);
-                        if(hh.getHint() != null)
-                            db.exeSQL("UPDATE Kunde SET KName=\""+hh.getText()+"\",KNummer=\""+hh1.getText()+"\" WHERE KNummer=\"" + hh1.getHint()+"\"");
-                        else
-                            db.exeSQL("INSERT INTO Kunde VALUES (\""+hh1.getText()+"\",\""+hh.getText()+"\")");
-                        mListener.onDialogPositiveClick(Artikel_Dialog.this);
+                        try{
+                            EditText nr=(EditText)v.findViewById(R.id.nartnr);
+                            EditText besch=(EditText)v.findViewById(R.id.nartbesch);
+                            EditText ean = (EditText)v.findViewById(R.id.narteanc);
+                            EditText bio = (EditText)v.findViewById(R.id.nartbio);
+                            int anr = Integer.parseInt(nr.getText().toString());
+                            System.out.println("NR: " + anr);
+
+                            int eanc = Integer.parseInt(ean.getText().toString());
+                            int bioc = 0;
+                            if(bio.getText().toString().equalsIgnoreCase("Ja"))
+                                bioc = 1;
+                            else if(bio.getText().toString().equalsIgnoreCase("Nein"))
+                                bioc = 0;
+                            else{
+                                Toast.makeText(Artikel_Dialog.this.getActivity(), "Bitte ja oder nein eungaben", Toast.LENGTH_SHORT).show();
+                            }
+                            if(nr.getHint() != null){
+                                int oanr=Integer.parseInt(nr.getHint().toString());
+                                db.exeSQL("UPDATE Artikel SET ArtNr=" + anr + ",Bezeichnung=\"" + besch.getText() + "\",EANCode=" + eanc + ",Bio=" + bioc + " WHERE ArtNr=" + oanr);
+                            }else
+                                db.exeSQL("INSERT INTO Artikel (ArtNr, Bezeichnung, EANCode, Bio) VALUES ("+anr+", \""+besch.getText()+"\", "+eanc+", "+bioc+")");
+                            mListener.onDialogPositiveClick(Artikel_Dialog.this);
+                        }catch(NumberFormatException e){
+                            Toast.makeText(Artikel_Dialog.this.getActivity(),"Bitte Zahlen eingeben",Toast.LENGTH_SHORT).show();
+                        }
                     }
                 })
                 .setNegativeButton("Abbrechen", new DialogInterface.OnClickListener() {
@@ -55,9 +75,14 @@ public class Artikel_Dialog extends DialogFragment{
                 .setNeutralButton("Löschen", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        EditText h=(EditText)v.findViewById(R.id.nknu);
-                        db.exeSQL("DELETE FROM Kunde WHERE KNummer=\"" + h.getHint()+"\"");
-                        mListener.onDialogPositiveClick(Artikel_Dialog.this);
+                        try {
+                            EditText nr = (EditText) v.findViewById(R.id.nartnr);
+                            int oanr = Integer.parseInt(nr.getHint().toString());
+                            db.exeSQL("DELETE FROM Artikel WHERE ArtNr=" + oanr);
+                            mListener.onDialogPositiveClick(Artikel_Dialog.this);
+                        } catch (NumberFormatException e) {
+                            Toast.makeText(Artikel_Dialog.this.getActivity(), "Konnte nicht gelöscht werden!\nBitte nochmal versuchen!", Toast.LENGTH_SHORT).show();
+                        }
                     }
                 });
         return builder.create();
@@ -76,12 +101,25 @@ public class Artikel_Dialog extends DialogFragment{
         }
     }
     public void setup(Cursor c){
-        EditText hh=(EditText)v.findViewById(R.id.nkna);
-        EditText hh1=(EditText)v.findViewById(R.id.nknu);
-        hh.setText(c.getString(c.getColumnIndex("KName")));
-        hh.setHint(c.getString(c.getColumnIndex("KName")));
-        hh1.setText(c.getString(c.getColumnIndex("KNummer")));
-        hh1.setHint(c.getString(c.getColumnIndex("KNummer")));
+        EditText nr=(EditText)v.findViewById(R.id.nartnr);
+        EditText besch=(EditText)v.findViewById(R.id.nartbesch);
+        EditText ean = (EditText)v.findViewById(R.id.narteanc);
+        EditText bio = (EditText)v.findViewById(R.id.nartbio); 
+        
+        nr.setText(c.getString(c.getColumnIndex("ArtNr")));
+        besch.setText(c.getString(c.getColumnIndex("Bezeichnung")));
+        ean.setText(c.getString(c.getColumnIndex("EANCode")));
+
+        nr.setHint(c.getString(c.getColumnIndex("ArtNr")));
+        besch.setHint(c.getString(c.getColumnIndex("Bezeichnung")));
+        ean.setHint(c.getString(c.getColumnIndex("EANCode")));
+
+        Integer s = c.getInt(c.getColumnIndex("Bio"));
+        if(s > 0 )
+            bio.setText("Ja");
+        else if(s == 0)
+            bio.setText("Nein");
+
     }
     public interface Probenzieher_Dialog_Listener {
         public void onDialogPositiveClick(DialogFragment dialog);

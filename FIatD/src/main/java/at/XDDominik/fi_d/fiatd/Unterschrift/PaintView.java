@@ -25,7 +25,9 @@ public class PaintView extends View implements View.OnTouchListener {
     List<Point> points = new ArrayList<Point>();
     Paint paint;
     Path path;
-    UnterschKunde context;
+    Context context;
+    UnterschKunde kund;
+    UnterschLVA lva;
     String kname, kdatum,type;
 
     public String getType() {
@@ -54,8 +56,11 @@ public class PaintView extends View implements View.OnTouchListener {
 
     public PaintView(Context context, AttributeSet attrs) {
         super(context, attrs);
+        this.context = context;
         if(context instanceof UnterschKunde)
-            this.context = (UnterschKunde)context;
+            this.kund = (UnterschKunde)context;
+        else if(context instanceof  UnterschLVA)
+            this.lva = (UnterschLVA)context;
         else
             Toast.makeText(context, "No Main", Toast.LENGTH_SHORT).show();
         cn();

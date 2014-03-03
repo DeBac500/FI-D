@@ -52,28 +52,5 @@
             android:hint="Ja oder Nein"
             android:id="@+id/nartbio"/>
     </TableRow>
-    <TableRow>
-        <Button
-            android:text="Abbrechen"
-            android:id="@+id/nartabb"/>
-        <Button
-            android:text="Speichern"
-            android:id="@+id/nartsave"/>
-    </TableRow>
-    <TableRow>
-        <Button
-            android:text="Löschen"
-            android:id="@+id/nartdel"
-            android:enabled="false"
-            android:layout_span="2"/>
-    </TableRow>
-    <TableRow>
-        <NumberPicker
-            android:textSize="30dp"
-            android:layout_width="300dp"
-            android:visibility="invisible"
-            android:singleLine="true"
-            android:id="@+id/nartnrd"/>
-    </TableRow>
 
 </TableLayout>

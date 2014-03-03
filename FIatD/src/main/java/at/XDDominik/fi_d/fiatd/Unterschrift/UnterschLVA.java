@@ -17,7 +17,7 @@ import at.XDDominik.fi_d.fiatd.Tabs;
 /**
  * Created by dominik on 25.02.14.
  */
-public class UnterschKunde extends Activity {
+public class UnterschLVA extends Activity {
     public static String KDatum = "KDatum", KName = "KName";
     public static int Sucsess = 1234567890;
 
@@ -45,16 +45,16 @@ public class UnterschKunde extends Activity {
                 kdatum= null;
                 kname = null;
             } else {
-                kdatum= extras.getString(UnterschKunde.KDatum);
-                kname= extras.getString(UnterschKunde.KName);
+                kdatum= extras.getString(UnterschLVA.KDatum);
+                kname= extras.getString(UnterschLVA.KName);
             }
         } else {
-            kdatum= (String) savedInstanceState.getSerializable(UnterschKunde.KDatum);
-            kname= (String) savedInstanceState.getSerializable(UnterschKunde.KName);
+            kdatum= (String) savedInstanceState.getSerializable(UnterschLVA.KDatum);
+            kname= (String) savedInstanceState.getSerializable(UnterschLVA.KName);
         }
         if(kname != null && kdatum  != null){
             TextView tv = (TextView)findViewById(R.id.un_text);
-            tv.setText("Unterschrift Kunde");
+            tv.setText("Unterschrift LVA");
 
             pp = (PaintView)findViewById(R.id.view);
             pp.setType("Kunde");
@@ -75,14 +75,14 @@ public class UnterschKunde extends Activity {
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                UnterschKunde.this.onBackPressed();
+                UnterschLVA.this.onBackPressed();
             }
         });
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //TODO save image!!!!!!
-                UnterschKunde.this.onBackPressed();
+                UnterschLVA.this.onBackPressed();
             }
         });
     }

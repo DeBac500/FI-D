@@ -19,6 +19,7 @@ import at.XDDominik.fi_d.fiatd.ProfilAdapter;
 import at.XDDominik.fi_d.fiatd.R;
 import at.XDDominik.fi_d.fiatd.Tabs;
 import at.XDDominik.fi_d.fiatd.Unterschrift.UnterschKunde;
+import at.XDDominik.fi_d.fiatd.Unterschrift.UnterschLVA;
 
 /**
  * Created by Dominik on 17.02.14.
@@ -67,6 +68,17 @@ public class MainZiehung  extends Activity{
                 intent.putExtra(UnterschKunde.KDatum,((TextView)ziehungen.getSelectedView().findViewById(R.id.spin1_tv1)).getText());
                 intent.putExtra(UnterschKunde.KName,((TextView)ziehungen.getSelectedView().findViewById(R.id.spin1_tv2)).getText());
                 MainZiehung.this.startActivityForResult(intent, UnterschKunde.Sucsess);
+            }
+        });
+
+        Button b1 = (Button)findViewById(R.id.zieh_uncomp);
+        b1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainZiehung.this,UnterschLVA.class);
+                intent.putExtra(UnterschKunde.KDatum,((TextView)ziehungen.getSelectedView().findViewById(R.id.spin1_tv1)).getText());
+                intent.putExtra(UnterschKunde.KName,((TextView)ziehungen.getSelectedView().findViewById(R.id.spin1_tv2)).getText());
+                MainZiehung.this.startActivityForResult(intent, UnterschLVA.Sucsess);
             }
         });
 

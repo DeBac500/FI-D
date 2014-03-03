@@ -154,4 +154,8 @@ public class Database extends SQLiteOpenHelper {
                 "Ziehungsdatum = \""+c.getString(c.getColumnIndex("Ziehungsdatum"))+"\" AND " +
                 "Ziehungszeit = \""+c.getString(c.getColumnIndex("Ziehungszeit"))+"\");",null);
     }
+    public Cursor getKVinK(Cursor c){
+        return db.rawQuery("SELECT KVName as _id,* FROM Kundenvertreter WHERE " +
+                "KNummer == " + c.getInt(c.getColumnIndex("KNummer")),null);
+    }
 }

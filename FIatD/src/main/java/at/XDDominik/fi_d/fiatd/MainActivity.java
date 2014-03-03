@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+import at.XDDominik.fi_d.fiatd.Artikel.mainArtikel;
 import at.XDDominik.fi_d.fiatd.Kunde.mainKunde;
 import at.XDDominik.fi_d.fiatd.Kundenvertreter.mainKundevertreter;
 import at.XDDominik.fi_d.fiatd.Probenzieher.mainProbenzieher;
@@ -91,7 +92,11 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 a.overridePendingTransition(0,0);
                 return true;
             case R.id.action_artikel:
-
+                intent = new Intent(a, mainArtikel.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                a.startActivity(intent);
+                a.finish();
+                a.overridePendingTransition(0,0);
                 return true;
             default:
                 return false;
