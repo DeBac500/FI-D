@@ -35,6 +35,7 @@
         <activity android:name=".Unterschrift.UnterschKunde" />
         <activity android:name=".Unterschrift.UnterschLVA" />
         <activity android:name=".ZiehungBearb.NeueZiehung" />
+        <activity android:name=".Ziehung.EditeProbeactivity" />
     </application>
 
 </manifest>

@@ -1,6 +1,7 @@
 package at.XDDominik.fi_d.fiatd.Unterschrift;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.Menu;
@@ -75,14 +76,18 @@ public class UnterschKunde extends Activity {
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                UnterschKunde.this.onBackPressed();
+                Intent returnIntent = new Intent();
+                UnterschKunde.this.setResult(Activity.RESULT_CANCELED, returnIntent);
+                UnterschKunde.this.finish();
             }
         });
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //TODO save image!!!!!!
-                UnterschKunde.this.onBackPressed();
+                Intent returnIntent = new Intent();
+                UnterschKunde.this.setResult(Activity.RESULT_OK, returnIntent);
+                UnterschKunde.this.finish();
             }
         });
     }

@@ -1,6 +1,7 @@
 package at.XDDominik.fi_d.fiatd.Unterschrift;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.Menu;
@@ -54,7 +55,7 @@ public class UnterschLVA extends Activity {
         }
         if(kname != null && kdatum  != null){
             TextView tv = (TextView)findViewById(R.id.un_text);
-            tv.setText("Unterschrift LVA");
+            tv.setText("Unterschrift Kunde");
 
             pp = (PaintView)findViewById(R.id.view);
             pp.setType("Kunde");
@@ -75,14 +76,18 @@ public class UnterschLVA extends Activity {
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                UnterschLVA.this.onBackPressed();
+                Intent returnIntent = new Intent();
+                UnterschLVA.this.setResult(Activity.RESULT_CANCELED, returnIntent);
+                UnterschLVA.this.finish();
             }
         });
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //TODO save image!!!!!!
-                UnterschLVA.this.onBackPressed();
+                Intent returnIntent = new Intent();
+                UnterschLVA.this.setResult(Activity.RESULT_OK, returnIntent);
+                UnterschLVA.this.finish();
             }
         });
     }
