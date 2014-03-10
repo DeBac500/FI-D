@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CursorAdapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Spinner;
@@ -33,6 +34,7 @@ public class MainZiehungBearb extends Activity {
     private ZiehungsAdapter za1;
     private ArrayList<Integer> toz = new ArrayList<Integer>(),ausz = new ArrayList<Integer>();
     private Cursor tozc, auszc;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
@@ -44,6 +46,9 @@ public class MainZiehungBearb extends Activity {
 
         Tabs tabs = new Tabs(this);
         tabs.initTab(1);
+
+
+
         Button b = (Button)findViewById(R.id.addziehung);
         b.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -173,6 +178,11 @@ public class MainZiehungBearb extends Activity {
 
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
+    }
+    @Override
+    public void onResume(){
+        ((CursorAdapter)ziehungen.getAdapter()).swapCursor(db.getZiehungCursor());
+        super.onResume();
     }
     public Database getDB(){return this.db;}
     public ZiehungsAdapter getZiehungsAdapterInZ(){

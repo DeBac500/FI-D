@@ -1,8 +1,7 @@
-package at.XDDominik.fi_d.fiatd.ZiehungBearb;
+package at.XDDominik.fi_d.fiatd.ClientServerZiehung;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,13 +17,13 @@ import at.XDDominik.fi_d.fiatd.R;
 /**
  * Created by dominik on 25.02.14.
  */
-public class ZiehungsAdapter extends CursorAdapter{
-    private MainZiehungBearb main;
+public class ProbenAdapter extends CursorAdapter{
+    private MainClientServerZiehung main;
     private LayoutInflater inflater;
     private ArrayList<CheckBox> box = new ArrayList<CheckBox>();
     private ListView mv;
 
-    public ZiehungsAdapter(MainZiehungBearb context, Cursor c, boolean autoRequery, ListView mv) {
+    public ProbenAdapter(MainClientServerZiehung context, Cursor c, boolean autoRequery, ListView mv) {
         super(context, c, autoRequery);
         this.main=context;
         this.inflater = LayoutInflater.from(context);
@@ -42,11 +41,10 @@ public class ZiehungsAdapter extends CursorAdapter{
         TextView tv1,tv2;
         tv1 = (TextView)view.findViewById(R.id.beschreibung);
         tv2 = (TextView)view.findViewById(R.id.nummer);
-        tv1.setText(cursor.getString(cursor.getColumnIndex("Bezeichnung")));
-        tv2.setText(cursor.getString(cursor.getColumnIndex("ArtNr")));
+        tv1.setText(cursor.getString(cursor.getColumnIndex("Ziehungsdatum")));
+        tv2.setText(cursor.getString(cursor.getColumnIndex("KName")));
         tv1.setFocusable(false);
         tv2.setFocusable(false);
-
 
         CheckBox c = (CheckBox)view.findViewById(R.id.check);
         c.setClickable(false);

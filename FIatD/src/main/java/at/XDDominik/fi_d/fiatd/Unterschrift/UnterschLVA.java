@@ -19,7 +19,7 @@ import at.XDDominik.fi_d.fiatd.Tabs;
  * Created by dominik on 25.02.14.
  */
 public class UnterschLVA extends Activity {
-    public static String KDatum = "KDatum", KName = "KName";
+    public static String KDatum = "KDatum", KName = "KName",load = "laden";
     public static int Sucsess = 1234567890;
 
     private Database db;
@@ -39,27 +39,35 @@ public class UnterschLVA extends Activity {
         tabs.unselect();
 
         String kdatum,kname;
+        boolean load;
         Bundle extras;
         if (savedInstanceState == null) {
             extras = getIntent().getExtras();
             if(extras == null) {
                 kdatum= null;
                 kname = null;
+                load= false;
             } else {
                 kdatum= extras.getString(UnterschLVA.KDatum);
                 kname= extras.getString(UnterschLVA.KName);
+                load = extras.getBoolean(UnterschLVA.load);
             }
         } else {
             kdatum= (String) savedInstanceState.getSerializable(UnterschLVA.KDatum);
             kname= (String) savedInstanceState.getSerializable(UnterschLVA.KName);
+            load = savedInstanceState.getBoolean(UnterschLVA.load);
         }
         if(kname != null && kdatum  != null){
             TextView tv = (TextView)findViewById(R.id.un_text);
-            tv.setText("Unterschrift Kunde");
+            tv.setText("Unterschrift LVA");
 
             pp = (PaintView)findViewById(R.id.view);
-            pp.setType("Kunde");
-
+            pp.setType("LVA");
+            pp.setKdatum(kdatum);
+            pp.setKname(kname);
+            if(load){
+                pp.load();
+            }
             Button neu = (Button)findViewById(R.id.unneu);
             neu.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -84,7 +92,7 @@ public class UnterschLVA extends Activity {
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO save image!!!!!!
+                UnterschLVA.this.pp.save();
                 Intent returnIntent = new Intent();
                 UnterschLVA.this.setResult(Activity.RESULT_OK, returnIntent);
                 UnterschLVA.this.finish();

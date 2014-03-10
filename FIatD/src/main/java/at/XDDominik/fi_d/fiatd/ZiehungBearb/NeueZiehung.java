@@ -1,6 +1,7 @@
 package at.XDDominik.fi_d.fiatd.ZiehungBearb;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -16,7 +17,10 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 import at.XDDominik.fi_d.fiatd.Database;
 import at.XDDominik.fi_d.fiatd.MainActivity;
@@ -29,6 +33,7 @@ import at.XDDominik.fi_d.fiatd.Tabs;
 public class NeueZiehung extends Activity {
     private Database db;
     private KVAdapter kva;
+    private boolean update;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
@@ -42,6 +47,21 @@ public class NeueZiehung extends Activity {
         tabs.initTab(0);
         tabs.unselect();
 
+        Bundle extras;
+        if (savedInstanceState == null) {
+            extras = getIntent().getExtras();
+            if(extras == null) {
+                update= false;
+            } else {
+                update= extras.getBoolean("Update");
+
+            }
+        } else {
+            update = savedInstanceState.getBoolean("Update");
+        }
+        if(update)
+            Toast.makeText(getBaseContext(), "Ziehung für nicht abgeschlossene Proben" , Toast.LENGTH_SHORT).show();
+
         Button b = (Button)findViewById(R.id.nziehsave);
         b.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,8 +74,9 @@ public class NeueZiehung extends Activity {
                     DatePicker date = (DatePicker)a.findViewById(R.id.nziehdate);
                     TimePicker time = (TimePicker)a.findViewById(R.id.nziehtime);
                     EditText ort = (EditText)a.findViewById(R.id.nziehort);
-
+                    SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
                     String datet = ""+date.getYear()+"-"+(date.getMonth()+1)+"-"+date.getDayOfMonth();
+                    Date d = df.parse(datet);
                     String timet = ""+time.getCurrentHour()+":"+time.getCurrentMinute()+":00";
                     TextView t = (TextView)k.getSelectedView().findViewById(R.id.pro_tv1);
                     int kt = Integer.parseInt(t.getHint().toString());
@@ -65,10 +86,23 @@ public class NeueZiehung extends Activity {
                     String pzt = t.getText().toString();
 
                     a.getDB().exeSQL("INSERT INTO Probenziehung (KVName, KNummer, Name, Ziehungsdatum, Ziehungszeit, Ziehungsort, Preis, Status) " +
-                                "VALUES (\""+kvt+"\", "+kt+", \""+pzt+"\", \""+datet+"\", \""+timet+"\", \""+ort.getText()+"\","+0+" , 1)");
-                    NeueZiehung.this.onBackPressed();
+                                "VALUES (\""+kvt+"\", "+kt+", \""+pzt+"\", \""+df.format(d)+"\", \""+timet+"\", \""+ort.getText()+"\","+0+" , 0)");
+                    if(update){
+                        Intent returnIntent = new Intent();
+                        returnIntent.putExtra("ZDatum",datet);
+                        returnIntent.putExtra("ZTime",timet);
+                        returnIntent.putExtra("ZKVName",kvt);
+                        returnIntent.putExtra("ZKNummer",kt);
+                        returnIntent.putExtra("ZName",pzt);
+                        NeueZiehung.this.setResult(Activity.RESULT_OK, returnIntent);
+                        NeueZiehung.this.finish();
+                    }else{
+                        NeueZiehung.this.finish();
+                    }
                 }catch(NumberFormatException e){
                     Toast.makeText(NeueZiehung.this, "Bitte Zahlen eingeben", Toast.LENGTH_SHORT).show();
+                } catch (ParseException e) {
+                    e.printStackTrace();
                 }
             }
         });
@@ -77,7 +111,13 @@ public class NeueZiehung extends Activity {
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                NeueZiehung.this.onBackPressed();
+                if(update){
+                    Intent returnIntent = new Intent();
+                    NeueZiehung.this.setResult(Activity.RESULT_CANCELED, returnIntent);
+                    NeueZiehung.this.finish();
+                }else{
+                    NeueZiehung.this.finish();
+                }
             }
         });
 

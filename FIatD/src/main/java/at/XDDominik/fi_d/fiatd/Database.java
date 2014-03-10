@@ -158,4 +158,11 @@ public class Database extends SQLiteOpenHelper {
         return db.rawQuery("SELECT KVName as _id,* FROM Kundenvertreter WHERE " +
                 "KNummer == " + c.getInt(c.getColumnIndex("KNummer")),null);
     }
+    public Cursor getZiehungAll(Cursor kz){
+        return db.rawQuery("SELECT * FROM Probenziehung NATURAL JOIN Kundenvertreter NATURAL JOIN Kunde Where KVName = \""+kz.getString(kz.getColumnIndex("KVName"))+"\" AND " +
+                "KNummer = "+kz.getInt(kz.getColumnIndex("KNummer"))+" AND " +
+                "Name = \""+kz.getString(kz.getColumnIndex("Name"))+"\" AND " +
+                "Ziehungsdatum = \""+kz.getString(kz.getColumnIndex("Ziehungsdatum"))+"\" AND " +
+                "Ziehungszeit = \""+kz.getString(kz.getColumnIndex("Ziehungszeit"))+"\"",null);
+    }
 }

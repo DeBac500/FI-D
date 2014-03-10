@@ -59,6 +59,8 @@ public class UnterschKunde extends Activity {
 
             pp = (PaintView)findViewById(R.id.view);
             pp.setType("Kunde");
+            pp.setKdatum(kdatum);
+            pp.setKname(kname);
 
             Button neu = (Button)findViewById(R.id.unneu);
             neu.setOnClickListener(new View.OnClickListener() {
@@ -84,7 +86,7 @@ public class UnterschKunde extends Activity {
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO save image!!!!!!
+                UnterschKunde.this.pp.save();
                 Intent returnIntent = new Intent();
                 UnterschKunde.this.setResult(Activity.RESULT_OK, returnIntent);
                 UnterschKunde.this.finish();

@@ -3,7 +3,6 @@ package at.XDDominik.fi_d.fiatd.Ziehung;
 import android.database.Cursor;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Toast;
 
 /**
  * Created by Dominik on 17.02.14.
@@ -17,6 +16,7 @@ public class ZiehungsItemListener implements AdapterView.OnItemSelectedListener,
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         Cursor c = (Cursor)parent.getItemAtPosition(position);
         main.getPA().swapCursor(main.getDB().getprobeninZ(c));
+        main.ziehc = c;
         //Toast.makeText(main.getBaseContext(), "Spinner an:" + position, Toast.LENGTH_LONG).show();
     }
 

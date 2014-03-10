@@ -2,6 +2,7 @@ package at.XDDominik.fi_d.fiatd.Unterschrift;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -14,6 +15,8 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.Toast;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -146,9 +149,27 @@ public class PaintView extends View implements View.OnTouchListener {
             Bitmap bitmap = Bitmap.createBitmap(this.getWidth(), this.getHeight(), Bitmap.Config.ARGB_8888);
             Canvas canvas = new Canvas(bitmap);
             this.draw(canvas);
-            FileOutputStream fos = this.context.openFileOutput(type + "_"+kname+"_"+kdatum+",jpg", Context.MODE_PRIVATE);
+            FileOutputStream fos = this.context.openFileOutput(type + "_"+kname+"_"+kdatum+".jpg", Context.MODE_PRIVATE);
             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+            fos.close();
         } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public void load(){
+        try {
+            FileInputStream fis = this.context.openFileInput(type + "_" + kname + "_" + kdatum + ".jpg");
+            Bitmap bitmap = BitmapFactory.decodeStream(fis);
+            if(bitmap==null){
+                Toast.makeText(context, "Image is not Loaded",Toast.LENGTH_SHORT).show();
+            }else{
+                Canvas can = new Canvas();
+                //Paint p = new Paint();
+                this.onDraw(can);
+                can.drawBitmap(bitmap,0.0f,0.0f,paint);
+
+            }
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
     }

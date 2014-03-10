@@ -27,6 +27,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
         Button next = (Button)findViewById(R.id.welc_next);
         next.setOnClickListener(this);
+
     }
 
 

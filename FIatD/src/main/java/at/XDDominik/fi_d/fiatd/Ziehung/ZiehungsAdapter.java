@@ -2,6 +2,7 @@ package at.XDDominik.fi_d.fiatd.Ziehung;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,6 +37,9 @@ public class ZiehungsAdapter extends CursorAdapter{
         tv2 = (TextView)view.findViewById(R.id.spin1_tv2);
         tv1.setText(cursor.getString(cursor.getColumnIndex("Ziehungsdatum")));
         tv2.setText(cursor.getString(cursor.getColumnIndex("KName")));
+        if(cursor.getInt(cursor.getColumnIndex("Status"))!=0)
+            view.setBackgroundColor(Color.GREEN);
+        System.out.println("Stauts: "+ cursor.getInt(cursor.getColumnIndex("Status")));
         tv1.setFocusable(false);
         tv2.setFocusable(false);
     }
