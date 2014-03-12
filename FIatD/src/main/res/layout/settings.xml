@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<TableLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_gravity="center_horizontal">
+    <TableRow>
+
+    </TableRow>
+    <TableRow>
+        <TextView
+            android:text="Server-Adresse:"
+            android:textSize="30dp"/>
+        <EditText
+            android:textSize="30dp"
+            android:layout_width="300dp"
+            android:inputType="number"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:orientation="horizontal"
+            android:id="@+id/sett_ip"/>
+
+
+    </TableRow>
+    <TableRow>
+        <TextView
+            android:text="Server-Port:"
+            android:textSize="30dp"/>
+        <EditText
+            android:textSize="30dp"
+            android:singleLine="false"
+            android:id="@+id/sett_port"/>
+    </TableRow>
+
+</TableLayout>

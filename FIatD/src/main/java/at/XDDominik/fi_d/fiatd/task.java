@@ -17,7 +17,7 @@ public class task extends AsyncTask {
     @Override
     protected Object doInBackground(Object[] params) {
         try{
-            conn = new TCPConnection(tab,new Socket("10.0.104.144",12345));
+            conn = new TCPConnection(tab,new Socket("10.0.105.203",12345));
             conn.open();
         }catch(IOException e){e.printStackTrace();}
         return null;

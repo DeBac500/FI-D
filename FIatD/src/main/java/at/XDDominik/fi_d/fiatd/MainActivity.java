@@ -9,6 +9,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.Properties;
+
 import at.XDDominik.fi_d.fiatd.Artikel.mainArtikel;
 import at.XDDominik.fi_d.fiatd.Kunde.mainKunde;
 import at.XDDominik.fi_d.fiatd.Kundenvertreter.mainKundevertreter;
@@ -17,7 +23,7 @@ import at.XDDominik.fi_d.fiatd.Profil.MainProfil;
 import at.XDDominik.fi_d.fiatd.Ziehung.MainZiehung;
 
 public class MainActivity extends Activity implements View.OnClickListener {
-
+    public static String config = "config.properties",ip = "IP-Address", port = "Server-Port";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
@@ -27,6 +33,29 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
         Button next = (Button)findViewById(R.id.welc_next);
         next.setOnClickListener(this);
+
+        System.out.println("Test!!!!");
+        try {
+            FileInputStream fis = openFileInput(MainActivity.config);
+            fis.close();
+            System.out.println("Prop notcreated!");
+        } catch (FileNotFoundException e) {
+            try {
+                Properties pro = new Properties();
+                pro.setProperty(MainActivity.ip,"127.0.0.1");
+                pro.setProperty(MainActivity.port,"4444");
+                FileOutputStream fos = openFileOutput(MainActivity.config,MODE_PRIVATE);
+                pro.store(fos,null);
+                fos.close();
+                System.out.println("Prop created!");
+            } catch (FileNotFoundException e1) {
+                e1.printStackTrace();
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 
@@ -59,7 +88,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
         Intent intent;
         switch (item.getItemId()) {
             case R.id.action_settings:
-
+                Settings_Dialog setting = new Settings_Dialog(a);
+                setting.show(a.getFragmentManager(),"Settings");
                 return true;
             case android.R.id.home:
 
