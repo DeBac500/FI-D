@@ -4,6 +4,11 @@
         android:title="@string/action_settings"
         android:orderInCategory="100"
         android:showAsAction="never|withText"/>
+    <item android:id="@+id/action_search"
+        android:icon="@android:drawable/ic_menu_search"
+        android:title="@string/action_search"
+        android:showAsAction="always"
+        android:enabled="false"/>
 
     <item android:id="@+id/action_help"
         android:icon="@android:drawable/ic_menu_help"
@@ -11,11 +16,11 @@
         android:showAsAction="always"
         android:enabled="false"/>
 
-    <item android:id="@+id/action_search"
-        android:icon="@android:drawable/ic_menu_search"
-        android:title="@string/action_search"
+    <item android:id="@+id/action_sync"
+        android:icon="@android:drawable/ic_popup_sync"
+        android:title="Syncronisieren"
         android:showAsAction="always"
-        android:enabled="false"/>
+        android:enabled="true"/>
 
     <item android:id="@+id/action_profile"
         android:title="@string/action_profile"

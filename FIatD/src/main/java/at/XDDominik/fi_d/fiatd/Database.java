@@ -165,4 +165,7 @@ public class Database extends SQLiteOpenHelper {
                 "Ziehungsdatum = \""+kz.getString(kz.getColumnIndex("Ziehungsdatum"))+"\" AND " +
                 "Ziehungszeit = \""+kz.getString(kz.getColumnIndex("Ziehungszeit"))+"\"",null);
     }
+    public Cursor getFinishZ(){
+        return db.rawQuery("SELECT * FROM Probenziehung WHERE Status=1",null);
+    }
 }

@@ -1,6 +1,5 @@
 package at.XDDominik.fi_d.fiatd.ClientServerZiehung;
 
-import android.database.Cursor;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -17,19 +16,19 @@ import Server.Probenziehung;
 import at.XDDominik.fi_d.fiatd.R;
 import at.XDDominik.fi_d.fiatd.Reciever;
 import at.XDDominik.fi_d.fiatd.TCPConnection;
-import at.XDDominik.fi_d.fiatd.task;
+import at.XDDominik.fi_d.fiatd.Verbindung;
 
 /**
  * Created by dominik on 05.03.14.
  */
 public class ServerReciever implements Reciever{
     private MainClientServerZiehung main;
-    private task t;
+    private Verbindung t;
     private ArrayAdapter<Probenziehung> a2;
 
     public ServerReciever(MainClientServerZiehung main){
         this.main = main;
-        t = new task(this);
+        t = new Verbindung(this);
         t.execute();
     }
     public void setUp(){

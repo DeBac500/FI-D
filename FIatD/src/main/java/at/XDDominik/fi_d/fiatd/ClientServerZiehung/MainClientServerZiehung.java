@@ -2,6 +2,7 @@ package at.XDDominik.fi_d.fiatd.ClientServerZiehung;
 
 import android.app.Activity;
 import android.content.pm.ActivityInfo;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -21,7 +22,7 @@ import at.XDDominik.fi_d.fiatd.R;
 import at.XDDominik.fi_d.fiatd.Reciever;
 import at.XDDominik.fi_d.fiatd.TCPConnection;
 import at.XDDominik.fi_d.fiatd.Tabs;
-import at.XDDominik.fi_d.fiatd.task;
+import at.XDDominik.fi_d.fiatd.Verbindung;
 
 /**
  * Created by dominik on 24.02.14.
@@ -30,9 +31,11 @@ public class MainClientServerZiehung extends Activity implements Reciever{
     private Database db;
     public LinkedList<Probenziehung> pzz = new LinkedList<Probenziehung>();
     private ServerAdapter a2;
-    private task feedTask;
+    private Verbindung feedTask;
     private ProbenAdapter pa;
-    public ArrayList<Probenziehung> fclient = new ArrayList<Probenziehung>(),fserver = new ArrayList<Probenziehung>();
+    private Cursor fclientc;
+    private ArrayList<Integer> fclient = new ArrayList<Integer>();
+    public ArrayList<Probenziehung> fserver = new ArrayList<Probenziehung>();
     private ServerReciever sr;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,12 +63,13 @@ public class MainClientServerZiehung extends Activity implements Reciever{
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 CheckBox cb = (CheckBox)view.findViewById(R.id.check);
-                Probenziehung c = (Probenziehung)adapterView.getItemAtPosition(i);
+                Cursor c = (Cursor)adapterView.getItemAtPosition(i);
                 if(!cb.isChecked()){
-                    MainClientServerZiehung.this.fclient.add(c);
+                    MainClientServerZiehung.this.fclient.add(c.getPosition());
+                    MainClientServerZiehung.this.fclientc=c;
                     cb.setChecked(!cb.isChecked());
                 }else{
-                    MainClientServerZiehung.this.fclient.remove(c);
+                    MainClientServerZiehung.this.fclient.remove((Integer)c.getPosition());
                     cb.setChecked(!cb.isChecked());
                 }
             }
