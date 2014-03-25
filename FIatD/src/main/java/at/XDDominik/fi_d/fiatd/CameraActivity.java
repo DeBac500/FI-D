@@ -9,6 +9,11 @@ import android.util.Log;
 
 import java.io.File;
 
+/**
+ *
+ * @author Dominik Backhausen dominik.backhausen@gmail.com
+ * @version 0.9
+ */
 public class CameraActivity extends Activity {
 
     private static final String LOG_TAG = CameraActivity.class.getSimpleName();
