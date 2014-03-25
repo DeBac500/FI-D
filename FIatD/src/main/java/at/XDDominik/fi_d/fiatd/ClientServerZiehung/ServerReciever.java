@@ -28,7 +28,7 @@ public class ServerReciever implements Reciever{
 
     public ServerReciever(MainClientServerZiehung main){
         this.main = main;
-        t = new Verbindung(this);
+        t = new Verbindung(main,this);
         t.execute();
     }
     public void setUp(){

@@ -13,6 +13,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedList;
+import java.util.Properties;
 
 import Server.InvalidParameterException;
 import Server.Kunde;
@@ -25,16 +26,25 @@ import Server.Probenziehung;
  */
 public class Verbindung extends AsyncTask {
     private Reciever tab;
+    private Activity a;
     private TCPConnection conn;
-    public Verbindung(Reciever t){
+    public Verbindung(Activity a,Reciever t){
         tab = t;
+        this.a = a;
     }
     @Override
     protected Object doInBackground(Object[] params) {
         try{
-            conn = new TCPConnection(tab,new Socket("10.0.105.203",12345));
+            Properties pro = new Properties();
+            FileInputStream fis = a.openFileInput(MainActivity.config);
+            pro.load(fis);
+            String ip = pro.getProperty(MainActivity.ip);
+            String port = pro.getProperty(MainActivity.port);
+            fis.close();
+            conn = new TCPConnection(tab,new Socket(ip,Integer.parseInt(port)));
             conn.open();
         }catch(IOException e){e.printStackTrace();}
+        catch (NumberFormatException e){Toast.makeText(a,"Port Ist keine Zahl",Toast.LENGTH_SHORT).show();};
         return null;
     }
     public TCPConnection getTCP(){return conn;}

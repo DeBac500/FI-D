@@ -44,6 +44,7 @@
         <item>Probenbeschreibung,VARCHAR(2048)</item>
         <item>B2BNr,VARCHAR(256)</item>
         <item>Packungsgroesse,VARCHAR(256)</item>
+        <item>Bild,VARCHAR(256)</item>
 
     </string-array>
     <string-array name="Profil">
@@ -65,6 +66,7 @@
         <item>Bezeichnung,BOOL</item>
         <item>EANCode,BOOL</item>
         <item>Bio,BOOL</item>
+
     </string-array>
 
     <string-array name="drop">
@@ -123,11 +125,11 @@
         <item>INSERT INTO Artikel VALUES (51, \"Eistee\", 5152, 0)</item>
         <item>INSERT INTO Artikel VALUES (31, \"Fanta\", 3132, 0)</item>
 
-        <item>INSERT INTO Probendaten VALUES (\"Testkundenvertreter Fritz\", 0, \"Probenzieher Franz\", \"2013-12-11\", 41, \"12:34:56\", 3, \"2015-05-05\", 999, 888, \"CCC\", \"Hat komische Wuermer\", 777, \"12x13x99 cm\")</item>
-        <item>INSERT INTO Probendaten VALUES (\"Testkundenvertreter Fritz\", 0, \"Probenzieher Franz\", \"2013-12-11\", 51, \"12:34:56\", 3, \"2015-05-05\", 999, 888, \"CCC\", \"Hat komische Wuermer\", 777, \"12x13x99 cm\")</item>
-        <item>INSERT INTO Probendaten VALUES (\"Testkundenvertreter Fritz\", 0, \"Probenzieher Franz\", \"2013-12-11\", 31, \"12:34:56\", 3, \"2015-05-05\", 999, 888, \"CCC\", \"Hat komische Wuermer\", 777, \"12x13x99 cm\")</item>
+        <item>INSERT INTO Probendaten VALUES (\"Testkundenvertreter Fritz\", 0, \"Probenzieher Franz\", \"2013-12-11\", 41, \"12:34:56\", 3, \"2015-05-05\", 999, 888, \"CCC\", \"Hat komische Wuermer\", 777, \"12x13x99 cm\",\"kein Bild\")</item>
+        <item>INSERT INTO Probendaten VALUES (\"Testkundenvertreter Fritz\", 0, \"Probenzieher Franz\", \"2013-12-11\", 51, \"12:34:56\", 3, \"2015-05-05\", 999, 888, \"CCC\", \"Hat komische Wuermer\", 777, \"12x13x99 cm\",\"kein Bild\")</item>
+        <item>INSERT INTO Probendaten VALUES (\"Testkundenvertreter Fritz\", 0, \"Probenzieher Franz\", \"2013-12-11\", 31, \"12:34:56\", 3, \"2015-05-05\", 999, 888, \"CCC\", \"Hat komische Wuermer\", 777, \"12x13x99 cm\",\"kein Bild\")</item>
 
-        <item>INSERT INTO Probendaten VALUES (\"Franz\", 1, \"Fritz\", \"2014-12-11\", 41, \"13:34:56\", 3, \"2015-05-05\", 999, 888, \"CCC\", \"Hat komische Wuermer\", 777, \"12x13x99 cm\")</item>
+        <item>INSERT INTO Probendaten VALUES (\"Franz\", 1, \"Fritz\", \"2014-12-11\", 41, \"13:34:56\", 3, \"2015-05-05\", 999, 888, \"CCC\", \"Hat komische Wuermer\", 777, \"12x13x99 cm\",\"kein Bild\")</item>
 
 
         <item>INSERT INTO Profil VALUES (\"Profil_Test1\", 0, 1, 0, 5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1)</item>

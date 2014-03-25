@@ -65,7 +65,7 @@ public class MainZiehung  extends Activity implements Reciever, Finish_Dialog.Fi
         Tabs tabs = new Tabs(this);
         tabs.initTab(0);
 
-        feedTask = new Verbindung(this);
+        feedTask = new Verbindung(this,this);
         feedTask.execute(new String[] { "hello", "hello" });
 
         Button com = (Button)findViewById(R.id.zieh_commit);

@@ -15,7 +15,7 @@
         <EditText
             android:textSize="30dp"
             android:layout_width="300dp"
-            android:inputType="number"
+            android:singleLine="true"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:orientation="horizontal"
@@ -29,7 +29,8 @@
             android:textSize="30dp"/>
         <EditText
             android:textSize="30dp"
-            android:singleLine="false"
+            android:singleLine="true"
+            android:inputType="number"
             android:id="@+id/sett_port"/>
     </TableRow>
 

@@ -1,11 +1,13 @@
 package at.XDDominik.fi_d.fiatd.Ziehung;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import at.XDDominik.fi_d.fiatd.Database;
 import at.XDDominik.fi_d.fiatd.MainActivity;
@@ -59,6 +61,7 @@ public class EditeProbeactivity extends Activity {
             Cursor c2 = db.getprobeninZ(c1);
             c2.moveToPosition(data);
             e.setStand(c2);
+            e.setKunde(c1.getString(c1.getColumnIndex("KName")));
             setContentView(e);
         }
     }
@@ -77,4 +80,14 @@ public class EditeProbeactivity extends Activity {
         return true;
     }
     public Database getDB(){return this.db;}
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode == 100){
+            if(resultCode == RESULT_OK)
+                Toast.makeText(this,"Foto gemacht",Toast.LENGTH_SHORT);
+            if(resultCode == RESULT_CANCELED)
+                Toast.makeText(this,"Abbgebrochen",Toast.LENGTH_SHORT);
+        }
+    }
 }

@@ -16,7 +16,7 @@ import android.widget.TextView;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import at.XDDominik.fi_d.fiatd.R;
+import at.XDDominik.fi_d.fiatd.Ziehung.EditeProbe;
 
 /**
  * Created by dominik on 04.12.13.
@@ -37,14 +37,8 @@ public class EditeProfil extends ScrollView implements Serializable {
         TableRow rr2 = new TableRow(context);
         put = new ArrayList<CheckBox>();
 
-        String[] art = context.getResources().getStringArray(R.array.Artikel);
-        String[] dat = context.getResources().getStringArray(R.array.Probendaten);
-        ArrayList<String> all = new ArrayList<String>();
-        for(int i = 0; i<art.length;i++)
-            all.add(art[i]);
-        for(int i = 0; i < dat.length;i++)
-            if(!all.contains(dat[i]))
-                all.add(dat[i]);
+        ArrayList<String> all =EditeProbe.generateList(context, null);
+
         int mid = (all.size())/2;
 
         TableLayout tl = new TableLayout(context);
