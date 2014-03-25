@@ -216,7 +216,7 @@ public class MainZiehung  extends Activity implements Reciever, Finish_Dialog.Fi
                     }while(lastc.moveToNext());
                     this.ziehungen.invalidate();
 
-                    Verbindung.syncZiehungen(this.db,this,this.feedTask);
+                    //Verbindung.syncZiehungen(this.db,this,this.feedTask);
                 }
             }
             if (resultCode == RESULT_CANCELED) {
@@ -252,7 +252,7 @@ public class MainZiehung  extends Activity implements Reciever, Finish_Dialog.Fi
 
     @Override
     public void onDialogPositiveClick(DialogFragment dialog, String preis, boolean neu) {
-        String sql ="UPDATE Probenziehung SET Status=1 Preis=\""+preis+"\" WHERE Ziehungsdatum=\""+lastc.getString(lastc.getColumnIndex("Ziehungsdatum"))+"\" AND Ziehungszeit=\""+lastc.getString(lastc.getColumnIndex("Ziehungszeit"))+"\" AND KVName=\""+lastc.getString(lastc.getColumnIndex("KVName"))+"\" AND KNummer="+lastc.getInt(lastc.getColumnIndex("KVName"))+" AND Name=\""+lastc.getString(lastc.getColumnIndex("Name"))+"\"";
+        String sql ="UPDATE Probenziehung SET Status=1,Preis="+preis+" WHERE Ziehungsdatum=\""+lastc.getString(lastc.getColumnIndex("Ziehungsdatum"))+"\" AND Ziehungszeit=\""+lastc.getString(lastc.getColumnIndex("Ziehungszeit"))+"\" AND KVName=\""+lastc.getString(lastc.getColumnIndex("KVName"))+"\" AND KNummer="+lastc.getInt(lastc.getColumnIndex("KVName"))+" AND Name=\""+lastc.getString(lastc.getColumnIndex("Name"))+"\"";
         db.exeSQL(sql);
         if(neu){
             Intent intent = new Intent(MainZiehung.this,NeueZiehung.class);
