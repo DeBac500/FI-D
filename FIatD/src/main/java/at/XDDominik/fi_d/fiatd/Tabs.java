@@ -10,7 +10,9 @@ import at.XDDominik.fi_d.fiatd.Ziehung.MainZiehung;
 import at.XDDominik.fi_d.fiatd.ZiehungBearb.MainZiehungBearb;
 
 /**
- * Created by dominik on 18.02.14.
+ * Klasse welche für die Verwaltung der Tabs zuständig ist
+ * @author Dominik Backhausen dominik.backhausen@gmail.com
+ * @version 0.9
  */
 public class Tabs implements ActionBar.TabListener{
     private Activity main;
@@ -21,6 +23,11 @@ public class Tabs implements ActionBar.TabListener{
         main=a;
         ab = main.getActionBar();
     }
+
+    /**
+     * Initialisiert den Tab und wählt ihn an
+     * @param i die zu initialisierende Tabnummer
+     */
     public void initTab(int i){
         ab.removeAllTabs();
         select = i;
@@ -32,6 +39,11 @@ public class Tabs implements ActionBar.TabListener{
         this.active=true;
     }
 
+    /**
+     * Zeigt die entsprechende Ansicht an, die angezeigt werden soll wenn der Tab ausgewählt wird
+     * @param tab 
+     * @param fragmentTransaction 
+     */
     @Override
     public void onTabSelected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
         Intent intent;
@@ -64,6 +76,10 @@ public class Tabs implements ActionBar.TabListener{
                         break;
                 }
     }
+
+    /**
+     * Wählt den Tab wieder ab
+     */
     public void unselect(){
         try{
             ab.selectTab(null);
@@ -71,11 +87,21 @@ public class Tabs implements ActionBar.TabListener{
         select = -1;
     }
 
+    /**
+     * Zeigt die entsprechende Ansicht an, die angezeigt werden soll wenn der Tab ausgewählt wird
+     * @param tab 
+     * @param fragmentTransaction 
+     */
     @Override
     public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
 
     }
 
+    /**
+     * Zeigt die entsprechende Ansicht an, die angezeigt werden soll wenn der Tab ausgewählt wird
+     * @param tab 
+     * @param fragmentTransaction 
+     */
     @Override
     public void onTabReselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
 

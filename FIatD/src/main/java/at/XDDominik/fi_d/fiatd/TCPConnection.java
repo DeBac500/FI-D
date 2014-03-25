@@ -10,9 +10,9 @@ import Server.Probenziehung;
 import at.XDDominik.fi_d.fiatd.ClientServerZiehung.ServerReciever;
 
 /**
- *  Connection Class to a single Client
- *  @author Dominik Backhausen
- *
+ * Verbindungsklasse welche alle Methoden enthält um eine TCP-Verbindung zu erstellen
+ * @author Dominik Backhausen dominik.backhausen@gmail.com
+ * @version 0.9
  */
 public class TCPConnection implements Runnable {
     private int ID;
@@ -24,10 +24,9 @@ public class TCPConnection implements Runnable {
     private Thread t;
 
     /**
-     *  constructor to create a instance of this Class
-     *  @param sc The Server Controller wich is needed to notify the programm when a new Message was receafed!
-     *  @param socket The Soket wich is the Conection to the Client
-     *
+     * Konstrukor um eine Instanz dieser Klasse zu
+     * @param sc Benachrichtigt das Programm wenn eine neue Nachricht empfangen wird
+     * @param socket Socket der fuer die Verbindung benötigt wird
      */
     public TCPConnection(Reciever sc, Socket socket) {
         this.controller = sc;
@@ -38,7 +37,7 @@ public class TCPConnection implements Runnable {
     }
 
     /**
-     *  The Run-Method of a Thread wich is waitang for a new Message
+     * Wartet auf eine neue Nachricht
      */
     @Override
     public void run() {
@@ -69,8 +68,8 @@ public class TCPConnection implements Runnable {
     }
 
     /**
-     *  This Opens the Conection to the CLient
-     *  @throws java.io.IOException Is throwen when the Streams could not be created
+     * Oeffnet die Verbindung zum Client
+     * @throws java.io.IOException wird geworfen wenn der Stream nicht erstellt werden kann
      */
     public void open() throws IOException {
         this.streamOut = new ObjectOutputStream(socket.getOutputStream());
@@ -80,7 +79,7 @@ public class TCPConnection implements Runnable {
     }
 
     /**
-     *  This Methode close the Conection to the CLient and Logout the User form the Database!
+     * Schließt die Verbindung und loggt den User aus
      */
     public void close() {
         try{
@@ -94,14 +93,14 @@ public class TCPConnection implements Runnable {
     }
 
     /**
-     *  This Methode sends a New Object to the Client
-     *  @param msg the Object which should be send
+     * Sendet eine Nachricht an den Client
+     * @param msg Nachricht die gesendet wird
      */
     public void sendMessage(Object msg) {
         try{
             streamOut.writeObject(msg);
             streamOut.flush();
-            System.out.println("Senden erfolgreich!!!");
+            System.out.println("Senden erfolgreich!");
         }catch(Exception e){
             System.err.println("Senden der Nachricht Fehlgeschlagen!");
         }
