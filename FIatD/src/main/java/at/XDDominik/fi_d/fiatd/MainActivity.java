@@ -130,7 +130,13 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 a.overridePendingTransition(0,0);
                 return true;
             case R.id.action_sync:
-                Verbindung.syncZiehungen(new Database(a),a,new Verbindung(a,null));
+                Database db = new Database(a);
+                db.open();
+                Syncer s = new Syncer(db,a);
+                Verbindung v = new Verbindung(a,s);
+                s.setVerbindung(v);
+                v.execute();
+
                 return true;
             default:
                 return false;

@@ -3,6 +3,7 @@ package at.XDDominik.fi_d.fiatd;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.net.Socket;
 import java.util.LinkedList;
 
@@ -14,7 +15,7 @@ import at.XDDominik.fi_d.fiatd.ClientServerZiehung.ServerReciever;
  * @author Dominik Backhausen dominik.backhausen@gmail.com
  * @version 0.9
  */
-public class TCPConnection implements Runnable {
+public class TCPConnection implements Runnable,Serializable {
     private int ID;
     private ObjectOutputStream streamOut = null;
     private ObjectInputStream streamIn = null;
@@ -33,7 +34,6 @@ public class TCPConnection implements Runnable {
         this.socket = socket;
         this.ID = socket.getPort();
         t = new Thread(this);
-
     }
 
     /**
@@ -49,16 +49,19 @@ public class TCPConnection implements Runnable {
             catch (InterruptedException e) {}
             try{
                 Object o = streamIn.readObject();
-                System.out.println("FFFFFFFF:   Empfangen!!!!");
+                System.out.println("FFFFFFFF:   Empfangen!!!!\n"+ o);
                 if(controller != null){
                     if(o instanceof LinkedList && this.controller instanceof ServerReciever){
                         System.out.println(o.toString());
                         LinkedList<Probenziehung> em = (LinkedList<Probenziehung>)o;
                         ServerReciever to = (ServerReciever)this.controller;
                         to.setLinkedList(em);
-                    }else
+                    }else{
+                        System.out.println("DA!!\n"+controller.getClass().getName());
                         controller.handleIn(o);
-                }
+                    }
+                }else
+                    System.out.println("Kein Controller!!!");
             }catch(Exception e){
                 e.printStackTrace();
                 System.err.println(ID + " Conectin timed out!");
@@ -100,7 +103,7 @@ public class TCPConnection implements Runnable {
         try{
             streamOut.writeObject(msg);
             streamOut.flush();
-            System.out.println("Senden erfolgreich!");
+            System.out.println("Senden erfolgreich!!!\n" + msg +"\n");
         }catch(Exception e){
             System.err.println("Senden der Nachricht Fehlgeschlagen!");
         }
