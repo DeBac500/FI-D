@@ -28,7 +28,7 @@ public class EditeProbe extends ScrollView {
     private ArrayList<EditText> input;
     private ArrayList<TextView> output;
     private EditeProbeactivity a;
-    private String bildp = "kein Bild", artnr, dat,kunde;
+    private String bildp = "kein Bild", artnr, dat,kunde, KVName ,KNummer, Name, Ziehungszeit;
     private Button bild;
     public EditeProbe(EditeProbeactivity context, Cursor profil) {
         super(context);
@@ -136,6 +136,33 @@ public class EditeProbe extends ScrollView {
             @Override
             public void onClick(View view) {
                 //TODO save
+                ArrayList<String> numbers = new ArrayList<String>();
+                numbers.add("KNummer");
+                numbers.add("ArtNr");
+                numbers.add("Packungszahl");
+                numbers.add("Chargennummer");
+                numbers.add("LieferNr");
+
+                String sql = "UPDATE Probendaten SET ";
+                for(int  i= 0; i < output.size();i++){
+                    if(numbers.contains(output.get(i))){
+                        if(i >= output.size()-1){
+                            sql += output.get(i) + "=" + input.get(i) + "";
+                        }else{
+                            sql += output.get(i) + "=" + input.get(i) + ",";
+                        }
+                    }else{
+                        if(i >= output.size()-1){
+                            sql += output.get(i) + "=\"" + input.get(i) + "\"";
+                        }else{
+                            sql += output.get(i) + "=\"" + input.get(i) + "\",";
+                        }
+                    }
+                }
+                sql += " WHERE ArtNr=" + artnr + " AND KVName=\"" + KVName + "\" AND KNummer=" + KNummer + " AND Name=\"" + Name +
+                        "\" AND Ziehungsdatum=\"" + dat + "\" AND Ziehungszeit=\"" + Ziehungszeit + "\"";
+
+                EditeProbe.this.context.getDB().exeSQL(sql);
 
                 Intent returnIntent = new Intent();
                 EditeProbe.this.context.setResult(Activity.RESULT_OK, returnIntent);
@@ -176,12 +203,33 @@ public class EditeProbe extends ScrollView {
             text.setInputType(InputType.TYPE_CLASS_DATETIME);
     }
     public void setStand(Cursor c){
+        ArrayList<String> fixwerte = new ArrayList<String>();
+        fixwerte.add("ArtNr");
+        fixwerte.add("Bezeichnung");
+        fixwerte.add("EANCode");
+        fixwerte.add("Bio");
+        fixwerte.add("KVName");
+        fixwerte.add("KNummer");
+        fixwerte.add("Name");
+        fixwerte.add("Ziehungsdatum");
+        fixwerte.add("Ziehungsort");
+        fixwerte.add("Preis");
+        fixwerte.add("Status");
+
         for(int ii = 0; ii < input.size();ii++){
             input.get(ii).setHint(c.getString(c.getColumnIndex((String)output.get(ii).getText())));
             input.get(ii).setText(c.getString(c.getColumnIndex((String)output.get(ii).getText())));
+            if(fixwerte.contains((String)output.get(ii).getText())){
+                input.get(ii).setInputType(0);
+                input.get(ii).setFocusable(false);
+            }
         }
         artnr = c.getString(c.getColumnIndex("ArtNr"));
         dat = c.getString(c.getColumnIndex("Ziehungsdatum"));
+        KVName = c.getString(c.getColumnIndex("KVName"));
+        KNummer = c.getString(c.getColumnIndex("KNummer"));
+        Name = c.getString(c.getColumnIndex("Name"));
+        Ziehungszeit = c.getString(c.getColumnIndex("Ziehungszeit"));
     }
     public void setKunde(String k){
         this.kunde = k;
@@ -214,6 +262,7 @@ public class EditeProbe extends ScrollView {
     }
     public void setBildp(String bildp){
         this.bildp = bildp;
+        bild.setText(bildp);
         bild.postInvalidate();
     }
 }
