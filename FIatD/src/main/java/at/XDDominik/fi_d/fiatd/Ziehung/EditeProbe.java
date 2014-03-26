@@ -146,20 +146,12 @@ public class EditeProbe extends ScrollView {
                 String sql = "UPDATE Probendaten SET ";
                 for(int  i= 0; i < output.size();i++){
                     if(numbers.contains(output.get(i))){
-                        if(i >= output.size()-1){
-                            sql += output.get(i) + "=" + input.get(i) + "";
-                        }else{
-                            sql += output.get(i) + "=" + input.get(i) + ",";
-                        }
+                        sql += output.get(i) + "=" + input.get(i) + ",";
                     }else{
-                        if(i >= output.size()-1){
-                            sql += output.get(i) + "=\"" + input.get(i) + "\"";
-                        }else{
-                            sql += output.get(i) + "=\"" + input.get(i) + "\",";
-                        }
+                        sql += output.get(i) + "=\"" + input.get(i) + "\",";
                     }
                 }
-                sql += " WHERE ArtNr=" + artnr + " AND KVName=\"" + KVName + "\" AND KNummer=" + KNummer + " AND Name=\"" + Name +
+                sql += "Bild=\""+ bildp +"\" WHERE ArtNr=" + artnr + " AND KVName=\"" + KVName + "\" AND KNummer=" + KNummer + " AND Name=\"" + Name +
                         "\" AND Ziehungsdatum=\"" + dat + "\" AND Ziehungszeit=\"" + Ziehungszeit + "\"";
 
                 EditeProbe.this.context.getDB().exeSQL(sql);
