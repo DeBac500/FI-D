@@ -40,7 +40,7 @@ public class Tabs implements ActionBar.TabListener{
     }
 
     /**
-     * Zeigt die entsprechende Ansicht an, die angezeigt werden soll wenn der Tab ausgewählt wird
+     * Zeigt die entsprechende Ansicht an, die angezeigt werden soll wenn der Tab ausgewaehlt wird
      * @param tab 
      * @param fragmentTransaction 
      */
