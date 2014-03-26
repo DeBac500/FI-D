@@ -4,10 +4,13 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
-import android.util.Log;
 
 import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  *
@@ -20,7 +23,7 @@ public class CameraActivity extends Activity {
 
     private boolean done = true;
     File sdDir;
-
+    String mCurrentPhotoPath, name;
     protected static final String PHOTO_TAKEN = "photo_taken";
 
     @Override
@@ -49,46 +52,73 @@ public class CameraActivity extends Activity {
                 kunde= savedInstanceState.getString("KUNDE");
             }
             if((artnr != null && dat != null && kunde != null) && (artnr != "" && dat != "" && kunde != "") ){
-                File root = new File("sdcard" + File.separator + "LVA" + File.separator);
-                root.mkdirs();
-                sdDir = new File(root, artnr + "_" + kunde + "_" + dat + ".jpg");
-                Log.d(LOG_TAG, "Creating image storage file: " + sdDir.getPath());
-                startCameraActivity();
+                File image = createImageFile(artnr,kunde,dat);
+                dispatchTakePictureIntent(image);
+
            }else{
                 setResult(RESULT_CANCELED);
                 finish();
             }
         } catch (Exception e) {
+            e.printStackTrace();
+            setResult(RESULT_CANCELED);
             finish();
         }
 
     }
-    protected void startCameraActivity() {
-        Uri outputFileUri = Uri.fromFile(sdDir);
-        Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, outputFileUri);
-        startActivityForResult(intent, 0);
+    private File createImageFile(String artnr , String kunde ,String dat) throws IOException {
+        // Create an image file name
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String imageFileName = artnr + "_" + kunde + "_" + dat+ "_";
+        File storageDir = Environment.getExternalStoragePublicDirectory(
+                Environment.DIRECTORY_PICTURES);
+        File ff = new File(storageDir.getPath() + File.separator  + "LVA"+ File.separator);
+        ff.mkdirs();
+        File image = File.createTempFile(
+                imageFileName,  /* prefix */
+                ".jpg",         /* suffix */
+                ff      /* directory */
+        );
+
+        // Save a file: path for use with ACTION_VIEW intents
+        mCurrentPhotoPath = image.getAbsolutePath();
+        name = image.getName();
+        return image;
+    }
+
+    private void dispatchTakePictureIntent(File photoFile) {
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        // Ensure that there's a camera activity to handle the intent
+        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+            // Continue only if the File was successfully created
+            if (photoFile != null) {
+                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT,
+                        Uri.fromFile(photoFile));
+                startActivityForResult(takePictureIntent, 0);
+            }
+        }
+
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Intent intent = new Intent();
-        intent.putExtra("uri", sdDir.getPath());
-        setResult(RESULT_OK, intent);
-        finish();
-    }
-
-    @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
-        if (savedInstanceState.getBoolean(CameraActivity.PHOTO_TAKEN)) {
-            done = true;
+        if(resultCode == RESULT_OK){
+            galleryAddPic();
+            Intent intent = new Intent();
+            intent.putExtra("bild", name);
+            setResult(RESULT_OK,intent);
+            finish();
+        }else{
+            setResult(RESULT_CANCELED);
+            finish();
         }
     }
-
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        outState.putBoolean(CameraActivity.PHOTO_TAKEN,  done);
+    private void galleryAddPic() {
+        Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+        File f = new File(mCurrentPhotoPath);
+        Uri contentUri = Uri.fromFile(f);
+        mediaScanIntent.setData(contentUri);
+        this.sendBroadcast(mediaScanIntent);
     }
-
 
 }
