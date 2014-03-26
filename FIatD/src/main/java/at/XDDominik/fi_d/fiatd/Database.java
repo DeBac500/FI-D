@@ -8,13 +8,19 @@ import android.util.Log;
 
 
 /**
- * Created by dominik on 02.12.13.
+ * 
+ * @author Dominik Backhausen dbackhausen@gmail.com
+ * @version 0.9
  */
 public class Database extends SQLiteOpenHelper {
     private Context con;
     private SQLiteDatabase db;
     //private MySQLLiteHelper mysql;
 
+    /**
+     * 
+     * @param context
+     */
     public Database(Context context) {
         super(context,
                 context.getResources().getString(R.string.dbname),
@@ -24,13 +30,25 @@ public class Database extends SQLiteOpenHelper {
         //mysql = new MySQLLiteHelper(con);
 
     }
+    
+    /**
+     * 
+     */
     public void open(){
         db = this.getWritableDatabase();
     }
+    
+    /**
+     * 
+     */
     public void close(){
         super.close();
     }
 
+    /**
+     * 
+     * @param db
+     */
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("PRAGMA foreign_keys = ON");
@@ -74,6 +92,13 @@ public class Database extends SQLiteOpenHelper {
         }
 
     }
+    
+    /**
+     * 
+     * @param sql
+     * @param dat
+     * @return
+     */
     public String create(String sql , String[] dat){
         sql += " ";
         for(int i = 0; i < dat.length;i++){
@@ -94,6 +119,12 @@ public class Database extends SQLiteOpenHelper {
         return sql;
     }
 
+    /**
+     * 
+     * @param db
+     * @param oldVersion
+     * @param newVersion
+     */
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         Log.w(Database.class.getName(),
@@ -103,15 +134,36 @@ public class Database extends SQLiteOpenHelper {
             db.execSQL(sql);
         onCreate(db);
     }
+    
+    /**
+     * 
+     * @param sql
+     */
     public void exeSQL(String sql){
         db.execSQL(sql);
     }
+    
+    /**
+     * 
+     * @return
+     */
     public Cursor getArtikelCursor(){
         return db.rawQuery("SELECT *,ArtNr as _id FROM Artikel",null);
     }
+    
+    /**
+     * 
+     * @return
+     */
     public Cursor getZiehungCursor(){
         return db.rawQuery("SELECT *,KNummer as _id FROM Kunde NATURAL JOIN Probenziehung",null);
     }
+    
+    /**
+     * 
+     * @param c
+     * @return
+     */
     public Cursor getprobeninZ(Cursor c){
         return db.rawQuery("SELECT ArtNr as _id,* FROM Artikel NATURAL JOIN Probendaten WHERE KVName = " +
                 "\""+c.getString(c.getColumnIndex("KVName"))+"\" AND " +
@@ -120,24 +172,55 @@ public class Database extends SQLiteOpenHelper {
                 "Ziehungsdatum = \""+c.getString(c.getColumnIndex("Ziehungsdatum"))+"\" AND " +
                 "Ziehungszeit = \""+c.getString(c.getColumnIndex("Ziehungszeit"))+"\" ;",null);
     }
+    
+    /**
+     * 
+     * @return
+     */
     public Cursor getProfil(){
         return db.rawQuery("SELECT *,PName as _id FROM Profil",null);
     }
+    
+    /**
+     * 
+     * @return
+     */
     public Cursor getProbenZieher(){
         return db.rawQuery("SELECT *,Name as _id FROM Probenzieher",null);
     }
+    
+    /**
+     * 
+     * @return
+     */
     public Cursor getKunden(){
         return db.rawQuery("SELECT KName,KNummer,KNummer as _id FROM Kunde",null);
     }
+    
+    /**
+     * 
+     * @return
+     */
     public Cursor getKundenVertreter(){
         return db.rawQuery("SELECT KVName,KNummer,KNummer as _id FROM Kundenvertreter",null);
     }
+    
+    /**
+     * 
+     * @param spinner
+     * @param von
+     */
     public void addPD(Cursor spinner,Cursor von){
         db.execSQL("INSERT INTO Probendaten (KVName, KNummer, Name, Ziehungsdatum, ArtNr, Ziehungszeit) VALUES " +
                 "(\""+spinner.getString(spinner.getColumnIndex("KVName"))+"\", "+spinner.getInt(spinner.getColumnIndex("KNummer"))+"," +
                 " \""+spinner.getString(spinner.getColumnIndex("Name"))+"\", \""+spinner.getString(spinner.getColumnIndex("Ziehungsdatum"))+"\"," +
                 von.getInt(von.getColumnIndex("ArtNr"))+", \""+spinner.getString(spinner.getColumnIndex("Ziehungszeit"))+"\")");
     }
+    
+    /**
+     * 
+     * @param c
+     */
     public void removePD(Cursor c){
         db.execSQL("DELETE FROM Probendaten WHERE KVName = \""+c.getString(c.getColumnIndex("KVName"))+"\" AND " +
                 "KNummer = "+c.getInt(c.getColumnIndex("KNummer"))+" AND " +
@@ -146,6 +229,12 @@ public class Database extends SQLiteOpenHelper {
                 "Ziehungszeit = \""+c.getString(c.getColumnIndex("Ziehungszeit"))+"\" AND " +
                 "ArtNr = \""+c.getString(c.getColumnIndex("ArtNr"))+"\" ;");
     }
+    
+    /**
+     * 
+     * @param c
+     * @return
+     */
     public Cursor getArtikelex(Cursor c){
         return db.rawQuery("SELECT ArtNr as _id,* FROM Artikel WHERE " +
                 "Artikel.ArtNr NOT IN ( SELECT ArtNr FROM Probendaten WHERE " +
@@ -154,10 +243,22 @@ public class Database extends SQLiteOpenHelper {
                 "Ziehungsdatum = \""+c.getString(c.getColumnIndex("Ziehungsdatum"))+"\" AND " +
                 "Ziehungszeit = \""+c.getString(c.getColumnIndex("Ziehungszeit"))+"\");",null);
     }
+    
+    /**
+     * 
+     * @param c
+     * @return
+     */
     public Cursor getKVinK(Cursor c){
         return db.rawQuery("SELECT KVName as _id,* FROM Kundenvertreter WHERE " +
                 "KNummer == " + c.getInt(c.getColumnIndex("KNummer")),null);
     }
+    
+    /**
+     * 
+     * @param kz
+     * @return
+     */
     public Cursor getZiehungAll(Cursor kz){
         return db.rawQuery("SELECT * FROM Probenziehung NATURAL JOIN Kundenvertreter NATURAL JOIN Kunde Where KVName = \""+kz.getString(kz.getColumnIndex("KVName"))+"\" AND " +
                 "KNummer = "+kz.getInt(kz.getColumnIndex("KNummer"))+" AND " +
@@ -165,6 +266,11 @@ public class Database extends SQLiteOpenHelper {
                 "Ziehungsdatum = \""+kz.getString(kz.getColumnIndex("Ziehungsdatum"))+"\" AND " +
                 "Ziehungszeit = \""+kz.getString(kz.getColumnIndex("Ziehungszeit"))+"\"",null);
     }
+    
+    /**
+     * 
+     * @return
+     */
     public Cursor getFinishZ(){
         return db.rawQuery("SELECT * FROM Probenziehung WHERE Status=1",null);
     }

@@ -18,11 +18,18 @@ import java.io.IOException;
 import java.util.Properties;
 
 /**
- * Created by dominik on 17.02.14.
+ * Ist fuer das Anzeigen des Menues unter dem Settings-Button zustaendig
+ * @author Dominik Backhausen dbackhausen@gmail.com
+ * @version 0.9
  */
 public class Settings_Dialog extends DialogFragment{
     private final View v;
     private Activity a;
+    
+    /**
+     * Erstellt eine Instanz der Klasse und 
+     * @param a 
+     */
     public Settings_Dialog(Activity a){
         this.a = a;
         LayoutInflater inflater = a.getLayoutInflater();
@@ -42,6 +49,10 @@ public class Settings_Dialog extends DialogFragment{
             e.printStackTrace();
         }
     }
+
+    /**
+     * 
+     */
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());

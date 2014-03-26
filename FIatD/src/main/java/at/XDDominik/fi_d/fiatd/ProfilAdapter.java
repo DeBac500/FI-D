@@ -11,12 +11,18 @@ import android.widget.TextView;
 
 
 /**
- * Created by dominik on 18.02.14.
+ * 
+ * @author Dominik Backhausen dbackhausen@gmail.com
+ * @version 0.9
  */
 public class ProfilAdapter extends CursorAdapter{
     private Activity main;
     private LayoutInflater inflater;
     private boolean bb;
+    
+    /**
+     * 
+     */
     public ProfilAdapter(Activity context, Cursor c, boolean autoRequery) {
         super(context, c, false);
         this.main=context;
@@ -24,6 +30,13 @@ public class ProfilAdapter extends CursorAdapter{
         this.inflater = LayoutInflater.from(context);
     }
 
+    /**
+     * 
+     * @param context
+     * @param cursor
+     * @param parent
+     * @return
+     */
     @Override
     public View newView(Context context, Cursor cursor, ViewGroup parent) {
         if(bb)
@@ -32,6 +45,12 @@ public class ProfilAdapter extends CursorAdapter{
             return inflater.inflate(R.layout.profile_list, parent,false);
     }
 
+    /**
+     * 
+     * @param view
+     * @param context
+     * @param cursor
+     */
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
         TextView tv1;

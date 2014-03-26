@@ -20,7 +20,9 @@ import Server.ProbenDaten;
 import Server.Probenziehung;
 
 /**
- * Created by dominik on 25.03.14.
+ * Verwaltet den Sendevorgang aus der mobilen Datenbank zur Server Datenbank
+ * @author Dominik Backhausen dbackhausen@gmail.com
+ * @version 0.9
  */
 public class Sender implements Runnable{
     private Database db;
@@ -36,7 +38,7 @@ public class Sender implements Runnable{
         this.v = v;
     }
     /**
-     * Ist für die Synchronisation der Daten über eine angegebene Verbindung, aus der angegebenen Datenbank auf dem Mobilgerät zuständig.
+     * Ist fuer die Synchronisation der Daten ueber eine angegebene Verbindung, aus der angegebenen Datenbank auf dem Mobilgeraet zustaendig.
      */
     public void syncZiehungen(){
         try {
@@ -131,7 +133,15 @@ public class Sender implements Runnable{
             e.printStackTrace();
         }
     }
+    
+    /**
+     * 
+     */
     public void setnext(){this.next = true;}
+    
+    /**
+     * 
+     */
     @Override
     public void run() {
         while(!interrupt){
