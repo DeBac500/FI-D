@@ -2,6 +2,7 @@ package at.XDDominik.fi_d.fiatd.Profil;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteConstraintException;
 import android.graphics.Color;
 import android.view.Gravity;
 import android.view.View;
@@ -115,6 +116,7 @@ public class EditeProfil extends ScrollView implements Serializable {
         comit.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
+                try{
                 EditeProfil p = EditeProfil.this;
                 if(p.getNeu()){
                     String sql = "INSERT INTO Profil";
@@ -146,6 +148,7 @@ public class EditeProfil extends ScrollView implements Serializable {
                 }
                 Intent intent = new Intent(EditeProfil.this.context, MainProfil.class);
                 EditeProfil.this.context.startActivity(intent);
+                }catch(SQLiteConstraintException e){}
             }
         });
         this.setHorizontalScrollBarEnabled(true);

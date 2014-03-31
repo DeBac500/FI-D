@@ -32,14 +32,14 @@ public class Database extends SQLiteOpenHelper {
     }
     
     /**
-     * Öffnet eine Datenbankverbindung
+     * ï¿½ffnet eine Datenbankverbindung
      */
     public void open(){
         db = this.getWritableDatabase();
     }
     
     /**
-     * Schließt eine Datenbankverbindung
+     * Schlieï¿½t eine Datenbankverbindung
      */
     public void close(){
         super.close();
@@ -105,7 +105,7 @@ public class Database extends SQLiteOpenHelper {
             String name, att;
             //if(dat[i].split(",").length ==2){
             name = dat[i].split(",")[0];
-            att = dat[i].split(",")[1];
+            att = dat[i].split(",",2)[1];
             //}else{
             //  name = dat[i].split(",")[1];
             // att = dat[i].split(",")[2];
@@ -136,7 +136,7 @@ public class Database extends SQLiteOpenHelper {
     }
     
     /**
-     * Führt eine Query in der Datenbank aus
+     * Fï¿½hrt eine Query in der Datenbank aus
      * @param sql SQL Anweisung
      */
     public void exeSQL(String sql){
@@ -144,7 +144,7 @@ public class Database extends SQLiteOpenHelper {
     }
     
     /**
-     * Gibt einen Cursor des Artikels mit Hilfe eines SQL SELECT zurück
+     * Gibt einen Cursor des Artikels mit Hilfe eines SQL SELECT zurï¿½ck
      * @return SQL Anweisung
      */
     public Cursor getArtikelCursor(){
@@ -152,7 +152,7 @@ public class Database extends SQLiteOpenHelper {
     }
     
     /**
-     * Gibt einen Cursor der Ziehung mit Hilfe eines SQL SELECT zurück
+     * Gibt einen Cursor der Ziehung mit Hilfe eines SQL SELECT zurï¿½ck
      * @return SQL Anweisung
      */
     public Cursor getZiehungCursor(){
@@ -160,7 +160,7 @@ public class Database extends SQLiteOpenHelper {
     }
     
     /**
-     * Gibt alle Proben anhand eines bestimmten Cursors mit Hilfe eines SQL SELECT zurück
+     * Gibt alle Proben anhand eines bestimmten Cursors mit Hilfe eines SQL SELECT zurï¿½ck
      * @param c der Cursor
      * @return SQL Anweisung
      */
@@ -174,7 +174,7 @@ public class Database extends SQLiteOpenHelper {
     }
     
     /**
-     * Gibt einen Cursor des Profils mit Hilfe eines SQL SELECT zurück
+     * Gibt einen Cursor des Profils mit Hilfe eines SQL SELECT zurï¿½ck
      * @return	SQL Anweisung
      */
     public Cursor getProfil(){
@@ -182,7 +182,7 @@ public class Database extends SQLiteOpenHelper {
     }
     
     /**
-     * Gibt einen Cursor des Probenziehers mit Hilfe eines SQL SELECT zurück
+     * Gibt einen Cursor des Probenziehers mit Hilfe eines SQL SELECT zurï¿½ck
      * @return	SQL Anweisung
      */
     public Cursor getProbenZieher(){
@@ -190,7 +190,7 @@ public class Database extends SQLiteOpenHelper {
     }
     
     /**
-     * Gibt einen Cursor des Kunden mit Hilfe eines SQL SELECT zurück
+     * Gibt einen Cursor des Kunden mit Hilfe eines SQL SELECT zurï¿½ck
      * @return	SQL Anweisung
      */
     public Cursor getKunden(){
@@ -198,7 +198,7 @@ public class Database extends SQLiteOpenHelper {
     }
     
     /**
-     * Gibt einen Cursor des Kundenvertreters mit Hilfe eines SQL SELECT zurück
+     * Gibt einen Cursor des Kundenvertreters mit Hilfe eines SQL SELECT zurï¿½ck
      * @return	SQL Anweisung
      */
     public Cursor getKundenVertreter(){
@@ -206,7 +206,7 @@ public class Database extends SQLiteOpenHelper {
     }
     
     /**
-     * Fügt einen neuen Datensatz mit Daten zu einer Probe in die Datenbank ein
+     * Fï¿½gt einen neuen Datensatz mit Daten zu einer Probe in die Datenbank ein
      * @param spinner 
      * @param von 
      */
@@ -218,7 +218,7 @@ public class Database extends SQLiteOpenHelper {
     }
     
     /**
-     * Löscht einen Datensatz mit Daten zu einer Probe aus der Datenbank
+     * Lï¿½scht einen Datensatz mit Daten zu einer Probe aus der Datenbank
      * @param c der Cursor
      */
     public void removePD(Cursor c){
@@ -231,7 +231,7 @@ public class Database extends SQLiteOpenHelper {
     }
     
     /**
-     * Gibt alle Artikel zurück die nicht in den Probendaten vorhanden sind
+     * Gibt alle Artikel zurï¿½ck die nicht in den Probendaten vorhanden sind
      * @param c der Cursor
      * @return SQL Anweisung
      */
@@ -245,7 +245,7 @@ public class Database extends SQLiteOpenHelper {
     }
     
     /**
-     * Gibt alle Kundenvertreter mit zugehöriger ID zurück
+     * Gibt alle Kundenvertreter mit zugehï¿½riger ID zurï¿½ck
      * @param c der Cursor
      * @return SQL Anweisung
      */
@@ -255,7 +255,7 @@ public class Database extends SQLiteOpenHelper {
     }
     
     /**
-     * Gibt alle Probenziehungen mit zugehörigem Kundenvertreter und Kunde zurück
+     * Gibt alle Probenziehungen mit zugehï¿½rigem Kundenvertreter und Kunde zurï¿½ck
      * @param kz der Cursor
      * @return SQL Anweisung
      */
@@ -268,7 +268,7 @@ public class Database extends SQLiteOpenHelper {
     }
     
     /**
-     * Gibt alle finalisierten Probenziehungen zurück
+     * Gibt alle finalisierten Probenziehungen zurï¿½ck
      * @return SQL Anweisung
      */
     public Cursor getFinishZ(){

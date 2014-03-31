@@ -6,6 +6,7 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteConstraintException;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -64,7 +65,7 @@ public class Artikel_Dialog extends DialogFragment{
                             mListener.onDialogPositiveClick(Artikel_Dialog.this);
                         }catch(NumberFormatException e){
                             Toast.makeText(Artikel_Dialog.this.getActivity(),"Bitte Zahlen eingeben",Toast.LENGTH_SHORT).show();
-                        }
+                        }catch(SQLiteConstraintException e){}
                     }
                 })
                 .setNegativeButton("Abbrechen", new DialogInterface.OnClickListener() {

@@ -6,6 +6,7 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteConstraintException;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,6 +39,7 @@ public class Kunde_Dialog extends DialogFragment{
                 .setPositiveButton("Speichern", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
+                        try{
                         EditText hh=(EditText)v.findViewById(R.id.nkna);
                         EditText hh1=(EditText)v.findViewById(R.id.nknu);
                         if(hh.getHint() != null)
@@ -45,6 +47,9 @@ public class Kunde_Dialog extends DialogFragment{
                         else
                             db.exeSQL("INSERT INTO Kunde VALUES (\""+hh1.getText()+"\",\""+hh.getText()+"\")");
                         mListener.onDialogPositiveClick(Kunde_Dialog.this);
+                        }catch(SQLiteConstraintException e){
+
+                        }
                     }
                 })
                 .setNegativeButton("Abbrechen", new DialogInterface.OnClickListener() {
@@ -55,8 +60,8 @@ public class Kunde_Dialog extends DialogFragment{
                 .setNeutralButton("Löschen", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        EditText h=(EditText)v.findViewById(R.id.nknu);
-                        db.exeSQL("DELETE FROM Kunde WHERE KNummer=\"" + h.getHint()+"\"");
+                        EditText h = (EditText) v.findViewById(R.id.nknu);
+                        db.exeSQL("DELETE FROM Kunde WHERE KNummer=\"" + h.getHint() + "\"");
                         mListener.onDialogPositiveClick(Kunde_Dialog.this);
                     }
                 });

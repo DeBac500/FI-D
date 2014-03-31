@@ -3,21 +3,21 @@
     <string name="version">1</string>
     <string name="dbname">proben</string>
     <string-array name="Artikel">
-        <item>ArtNr,NUMERIC(35) NOT NULL</item>
+        <item>ArtNr,NUMERIC(35) NOT NULL PRIMARY KEY</item>
         <item>Bezeichnung,VARCHAR(256)</item>
         <item>EANCode,NUMERIC(35)</item>
         <item>Bio,BOOL</item>
     </string-array>
     <string-array name="Kunde">
-        <item>KNummer,NUMERIC(35) NOT NULL</item>
+        <item>KNummer,NUMERIC(35) NOT NULL PRIMARY KEY</item>
         <item>KName,VARCHAR(256)</item>
     </string-array>
     <string-array name="Kundenvertreter">
         <item>KVName,VARCHAR(256) NOT NULL</item>
-        <item>KNummer,NUMERIC(35) NOT NULL</item>
+        <item>KNummer,NUMERIC(35) NOT NULL, PRIMARY KEY(KVName,KNummer), FOREIGN KEY(KNummer) REFERENCES Kunde(KNummer)</item>
     </string-array>
     <string-array name="Probenzieher">
-        <item>Name,VARCHAR(256) NOT NULL</item>
+        <item>Name,VARCHAR(256) NOT NULL PRIMARY KEY</item>
     </string-array>
     <string-array name="Probenziehung">
         <item>KVName,VARCHAR(256) NOT NULL</item>
@@ -27,7 +27,7 @@
         <item>Ziehungszeit,TIME NOT NULL</item>
         <item>Ziehungsort,VARCHAR(256)</item>
         <item>Preis,DECIMAL(30)</item>
-        <item>Status,NUMERIC(35)</item>
+        <item>Status,NUMERIC(35),PRIMARY KEY(KVName,KNummer,Name,Ziehungsdatum,Ziehungszeit), FOREIGN KEY (KVName,KNummer) REFERENCES Kundenvertreter (KVName,KNummer), FOREIGN KEY (Name) REFERENCES Probenzieher (Name)</item>
     </string-array>
     <string-array name="Probendaten">
         <item>KVName,VARCHAR(256) NOT NULL</item>
@@ -44,11 +44,11 @@
         <item>Probenbeschreibung,VARCHAR(2048)</item>
         <item>B2BNr,VARCHAR(256)</item>
         <item>Packungsgroesse,VARCHAR(256)</item>
-        <item>Bild,VARCHAR(256)</item>
+        <item>Bild,VARCHAR(256),PRIMARY KEY(KVName,KNummer,Name,Ziehungsdatum,ArtNr,Ziehungszeit),FOREIGN KEY (KVName,KNummer,Name,Ziehungsdatum,Ziehungszeit) REFERENCES Probenziehung (KVName,KNummer,Name,Ziehungsdatum,Ziehungszeit),FOREIGN KEY (ArtNr) REFERENCES Artikel (ArtNr)</item>
 
     </string-array>
     <string-array name="Profil">
-        <item>PName,VARCHAR(256) NOT NULL</item>
+        <item>PName,VARCHAR(256) NOT NULL PRIMARY KEY</item>
         <item>KVName,BOOL</item>
         <item>KNummer,BOOL</item>
         <item>Name,BOOL</item>
@@ -91,21 +91,6 @@
         <item>
             DROP TABLE IF EXISTS Profil
         </item>
-    </string-array>
-
-    <string-array name="extend">
-        <item>ALTER TABLE Artikel ADD CONSTRAINT PK_Artikel PRIMARY KEY (ArtNr)</item>
-        <item>ALTER TABLE Kunde ADD CONSTRAINT PK_Kunde PRIMARY KEY (KNummer)</item>
-        <item>ALTER TABLE Kundenvertreter ADD CONSTRAINT PK_Kundenvertreter PRIMARY KEY (KVName,KNummer)</item>
-        <item>ALTER TABLE Probenzieher ADD CONSTRAINT PK_Probenzieher PRIMARY KEY (Name)</item>
-        <item>ALTER TABLE Probenziehung ADD CONSTRAINT PK_Probenziehung PRIMARY KEY (KVName,KNummer,Name,Ziehungsdatum,Ziehungszeit)</item>
-        <item>ALTER TABLE Probendaten ADD CONSTRAINT PK_Probendaten PRIMARY KEY (KVName,KNummer,Name,Ziehungsdatum,ArtNr,Ziehungszeit)</item>
-        <item>ALTER TABLE Kundenvertreter ADD CONSTRAINT FK_Kundenvertreter_0 FOREIGN KEY (KNummer) REFERENCES Kunde (KNummer)</item>
-        <item>ALTER TABLE Probenziehung ADD CONSTRAINT FK_Probenziehung_0 FOREIGN KEY (KVName,KNummer) REFERENCES Kundenvertreter (KVName,KNummer)</item>
-        <item>ALTER TABLE Probenziehung ADD CONSTRAINT FK_Probenziehung_1 FOREIGN KEY (Name) REFERENCES Probenzieher (Name)</item>
-        <item>ALTER TABLE Probendaten ADD CONSTRAINT FK_Probendaten_0 FOREIGN KEY (KVName,KNummer,Name,Ziehungsdatum,Ziehungszeit) REFERENCES Probenziehung (KVName,KNummer,Name,Ziehungsdatum,Ziehungszeit)</item>
-        <item>ALTER TABLE Probendaten ADD CONSTRAINT FK_Probendaten_1 FOREIGN KEY (ArtNr) REFERENCES Artikel (ArtNr)</item>
-        <item>ALTER TABLE Profil ADD CONSTRAINT PK_Profil PRIMARY KEY (PName)</item>
     </string-array>
 
     <string-array name="insert">

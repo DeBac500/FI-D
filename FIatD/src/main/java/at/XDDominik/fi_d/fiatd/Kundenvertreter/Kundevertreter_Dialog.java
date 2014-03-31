@@ -6,6 +6,7 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteConstraintException;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +15,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import at.XDDominik.fi_d.fiatd.Database;
-import at.XDDominik.fi_d.fiatd.Kunde.*;
 import at.XDDominik.fi_d.fiatd.R;
 
 /**
@@ -44,6 +44,7 @@ public class Kundevertreter_Dialog extends DialogFragment{
                 .setPositiveButton("Speichern", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
+                        try{
                         EditText kvn=(EditText)v.findViewById(R.id.nkvn);
                         EditText kvkd=(EditText)v.findViewById(R.id.nkvkd);
                         Spinner k = (Spinner)v.findViewById(R.id.nkvk);
@@ -55,6 +56,7 @@ public class Kundevertreter_Dialog extends DialogFragment{
                         }else
                             db.exeSQL("INSERT INTO Kundenvertreter VALUES (\"" + kvn.getText() + "\"," + ktt + ")");
                         mListener.onDialogPositiveClick(Kundevertreter_Dialog.this);
+                        }catch(SQLiteConstraintException e){}
                     }
                 })
                 .setNegativeButton("Abbrechen", new DialogInterface.OnClickListener() {
@@ -65,8 +67,8 @@ public class Kundevertreter_Dialog extends DialogFragment{
                 .setNeutralButton("Löschen", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        EditText kvn1=(EditText)v.findViewById(R.id.nkvn);
-                        EditText kvkd1=(EditText)v.findViewById(R.id.nkvkd);
+                        EditText kvn1 = (EditText) v.findViewById(R.id.nkvn);
+                        EditText kvkd1 = (EditText) v.findViewById(R.id.nkvkd);
                         int kdt = Integer.parseInt(kvkd1.getText().toString());
                         db.exeSQL("DELETE FROM Kundenvertreter WHERE KNummer=" + kdt + " AND KVName=\"" + kvn1.getHint() + "\"");
                         mListener.onDialogPositiveClick(Kundevertreter_Dialog.this);

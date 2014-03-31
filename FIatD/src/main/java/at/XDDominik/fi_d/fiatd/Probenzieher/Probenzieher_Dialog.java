@@ -6,11 +6,11 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteConstraintException;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import at.XDDominik.fi_d.fiatd.Database;
 import at.XDDominik.fi_d.fiatd.R;
@@ -39,6 +39,7 @@ public class Probenzieher_Dialog extends DialogFragment{
                 .setPositiveButton("Speichern", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
+                        try{
 
                         EditText gg=(EditText)v.findViewById(R.id.npzn);
                         if(gg.getHint()!=null){
@@ -48,6 +49,7 @@ public class Probenzieher_Dialog extends DialogFragment{
                             db.exeSQL("INSERT INTO Probenzieher VALUES (\"" + gg.getText() + "\")");
                         }
                         mListener.onDialogPositiveClick(Probenzieher_Dialog.this);
+                        }catch(SQLiteConstraintException e){}
                     }
                 })
                 .setNegativeButton("Abbrechen", new DialogInterface.OnClickListener() {
