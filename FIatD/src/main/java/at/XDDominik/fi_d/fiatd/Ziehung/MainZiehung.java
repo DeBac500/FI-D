@@ -172,7 +172,7 @@ public class MainZiehung  extends Activity implements Reciever, Finish_Dialog.Fi
                 this.finpd.add(lastc.getPosition());
             }
             if (resultCode == RESULT_CANCELED) {
-                Toast.makeText(this, "Nein", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, "Nein", Toast.LENGTH_SHORT).show();
             }
         }
         if(requestCode == 2){

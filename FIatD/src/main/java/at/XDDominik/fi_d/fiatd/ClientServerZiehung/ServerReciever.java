@@ -77,6 +77,14 @@ public class ServerReciever implements Reciever{
         });
 
     }
+    public void sendUP(LinkedList<Probenziehung> list){
+        for(Probenziehung z : list){
+            z.setStatus(2);
+        }
+        TCPConnection tcp =t.getTCP();
+        tcp.sendMessage("save:");
+        tcp.sendMessage(list);
+    }
 
     @Override
     public void handleIn(Object o) {
@@ -87,7 +95,7 @@ public class ServerReciever implements Reciever{
                 if(t != null)
                     tcp = t.getTCP();
                 if(tcp != null){
-                    tcp.sendMessage("all:");
+                    tcp.sendMessage("zero:");
                 }
             }
         }

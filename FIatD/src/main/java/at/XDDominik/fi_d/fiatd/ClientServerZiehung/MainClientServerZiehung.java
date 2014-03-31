@@ -20,6 +20,7 @@ import at.XDDominik.fi_d.fiatd.Database;
 import at.XDDominik.fi_d.fiatd.MainActivity;
 import at.XDDominik.fi_d.fiatd.R;
 import at.XDDominik.fi_d.fiatd.Reciever;
+import at.XDDominik.fi_d.fiatd.Saver;
 import at.XDDominik.fi_d.fiatd.TCPConnection;
 import at.XDDominik.fi_d.fiatd.Tabs;
 import at.XDDominik.fi_d.fiatd.Verbindung;
@@ -35,7 +36,7 @@ public class MainClientServerZiehung extends Activity implements Reciever{
     private ProbenAdapter pa;
     private Cursor fclientc;
     private ArrayList<Integer> fclient = new ArrayList<Integer>();
-    public ArrayList<Probenziehung> fserver = new ArrayList<Probenziehung>();
+    public LinkedList<Probenziehung> fserver = new LinkedList<Probenziehung>();
     private ServerReciever sr;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +80,14 @@ public class MainClientServerZiehung extends Activity implements Reciever{
         ImageButton links = (ImageButton)findViewById(R.id.links);
         ImageButton rechts = (ImageButton)findViewById(R.id.rechts);
 
+        links.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Saver s = new Saver(MainClientServerZiehung.this.db);
+                s.saveEveryThing(MainClientServerZiehung.this.fserver);
+
+            }
+        });
 
 
 
