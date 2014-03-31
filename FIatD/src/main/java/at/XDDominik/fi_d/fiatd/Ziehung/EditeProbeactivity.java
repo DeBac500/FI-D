@@ -21,6 +21,7 @@ public class EditeProbeactivity extends Activity {
     public static String profname = "ProfielName", data = "Probendaten", zieh = "Ziehung";
 
     private Database db;
+    private EditeProbe e;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +56,7 @@ public class EditeProbeactivity extends Activity {
         if(prof != -1 && data != -1&& zieh != -1){
             Cursor c = db.getProfil();
             c.moveToPosition(prof);
-            EditeProbe e = new EditeProbe(this,c);
+            e = new EditeProbe(this,c);
             Cursor c1 = db.getZiehungCursor();
             c1.moveToPosition(zieh);
             Cursor c2 = db.getprobeninZ(c1);
@@ -83,9 +84,15 @@ public class EditeProbeactivity extends Activity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        System.out.println("Camera Finish!!!");
         if(requestCode == 100){
-            if(resultCode == RESULT_OK)
+            if(resultCode == RESULT_OK){
+                System.out.println("jgfhdfghsghfsfsgfdsfgds");
                 Toast.makeText(this,"Foto gemacht",Toast.LENGTH_SHORT);
+                String bildp = (String)data.getExtras().get("bild");
+                e.setBildp(bildp);
+                e.invalidate();
+            }
             if(resultCode == RESULT_CANCELED)
                 Toast.makeText(this,"Abbgebrochen",Toast.LENGTH_SHORT);
         }
