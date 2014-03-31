@@ -8,7 +8,7 @@ import android.util.Log;
 
 
 /**
- * 
+ * Erstellt die Datenbank und verwaltet die Datenbankverbindung
  * @author Dominik Backhausen dbackhausen@gmail.com
  * @version 0.9
  */
@@ -18,8 +18,8 @@ public class Database extends SQLiteOpenHelper {
     //private MySQLLiteHelper mysql;
 
     /**
-     * 
-     * @param context
+     * Konstruktor zur Erstellung einer Referenz zur Datenbank und dessen Verbindung
+     * @param context das Programm
      */
     public Database(Context context) {
         super(context,
@@ -32,22 +32,22 @@ public class Database extends SQLiteOpenHelper {
     }
     
     /**
-     * 
+     * Öffnet eine Datenbankverbindung
      */
     public void open(){
         db = this.getWritableDatabase();
     }
     
     /**
-     * 
+     * Schließt eine Datenbankverbindung
      */
     public void close(){
         super.close();
     }
 
     /**
-     * 
-     * @param db
+     * Erstellt die Datenbank mit Hilfe von SQL Queries
+     * @param db die Datenbank
      */
     @Override
     public void onCreate(SQLiteDatabase db) {
@@ -94,10 +94,10 @@ public class Database extends SQLiteOpenHelper {
     }
     
     /**
-     * 
-     * @param sql
-     * @param dat
-     * @return
+     * Erzeugt eine SQL Query mit mitgegebenen Daten
+     * @param sql SQL Anweisung
+     * @param dat mitgegebene Daten
+     * @return SQL Anweisung
      */
     public String create(String sql , String[] dat){
         sql += " ";
@@ -120,10 +120,10 @@ public class Database extends SQLiteOpenHelper {
     }
 
     /**
-     * 
-     * @param db
-     * @param oldVersion
-     * @param newVersion
+     * Upgraded die Version der Datenbank
+     * @param db Datenbank
+     * @param oldVersion Alte Version
+     * @param newVersion Neue Version
      */
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
@@ -136,33 +136,33 @@ public class Database extends SQLiteOpenHelper {
     }
     
     /**
-     * 
-     * @param sql
+     * Führt eine Query in der Datenbank aus
+     * @param sql SQL Anweisung
      */
     public void exeSQL(String sql){
         db.execSQL(sql);
     }
     
     /**
-     * 
-     * @return
+     * Gibt einen Cursor des Artikels mit Hilfe eines SQL SELECT zurück
+     * @return SQL Anweisung
      */
     public Cursor getArtikelCursor(){
         return db.rawQuery("SELECT *,ArtNr as _id FROM Artikel",null);
     }
     
     /**
-     * 
-     * @return
+     * Gibt einen Cursor der Ziehung mit Hilfe eines SQL SELECT zurück
+     * @return SQL Anweisung
      */
     public Cursor getZiehungCursor(){
         return db.rawQuery("SELECT *,KNummer as _id FROM Kunde NATURAL JOIN Probenziehung",null);
     }
     
     /**
-     * 
-     * @param c
-     * @return
+     * Gibt alle Proben anhand eines bestimmten Cursors mit Hilfe eines SQL SELECT zurück
+     * @param c der Cursor
+     * @return SQL Anweisung
      */
     public Cursor getprobeninZ(Cursor c){
         return db.rawQuery("SELECT ArtNr as _id,* FROM Artikel NATURAL JOIN Probendaten WHERE KVName = " +
@@ -174,41 +174,41 @@ public class Database extends SQLiteOpenHelper {
     }
     
     /**
-     * 
-     * @return
+     * Gibt einen Cursor des Profils mit Hilfe eines SQL SELECT zurück
+     * @return	SQL Anweisung
      */
     public Cursor getProfil(){
         return db.rawQuery("SELECT *,PName as _id FROM Profil",null);
     }
     
     /**
-     * 
-     * @return
+     * Gibt einen Cursor des Probenziehers mit Hilfe eines SQL SELECT zurück
+     * @return	SQL Anweisung
      */
     public Cursor getProbenZieher(){
         return db.rawQuery("SELECT *,Name as _id FROM Probenzieher",null);
     }
     
     /**
-     * 
-     * @return
+     * Gibt einen Cursor des Kunden mit Hilfe eines SQL SELECT zurück
+     * @return	SQL Anweisung
      */
     public Cursor getKunden(){
         return db.rawQuery("SELECT KName,KNummer,KNummer as _id FROM Kunde",null);
     }
     
     /**
-     * 
-     * @return
+     * Gibt einen Cursor des Kundenvertreters mit Hilfe eines SQL SELECT zurück
+     * @return	SQL Anweisung
      */
     public Cursor getKundenVertreter(){
         return db.rawQuery("SELECT KVName,KNummer,KNummer as _id FROM Kundenvertreter",null);
     }
     
     /**
-     * 
-     * @param spinner
-     * @param von
+     * Fügt einen neuen Datensatz mit Daten zu einer Probe in die Datenbank ein
+     * @param spinner 
+     * @param von 
      */
     public void addPD(Cursor spinner,Cursor von){
         db.execSQL("INSERT INTO Probendaten (KVName, KNummer, Name, Ziehungsdatum, ArtNr, Ziehungszeit) VALUES " +
@@ -218,8 +218,8 @@ public class Database extends SQLiteOpenHelper {
     }
     
     /**
-     * 
-     * @param c
+     * Löscht einen Datensatz mit Daten zu einer Probe aus der Datenbank
+     * @param c der Cursor
      */
     public void removePD(Cursor c){
         db.execSQL("DELETE FROM Probendaten WHERE KVName = \""+c.getString(c.getColumnIndex("KVName"))+"\" AND " +
@@ -231,9 +231,9 @@ public class Database extends SQLiteOpenHelper {
     }
     
     /**
-     * 
-     * @param c
-     * @return
+     * Gibt alle Artikel zurück die nicht in den Probendaten vorhanden sind
+     * @param c der Cursor
+     * @return SQL Anweisung
      */
     public Cursor getArtikelex(Cursor c){
         return db.rawQuery("SELECT ArtNr as _id,* FROM Artikel WHERE " +
@@ -245,9 +245,9 @@ public class Database extends SQLiteOpenHelper {
     }
     
     /**
-     * 
-     * @param c
-     * @return
+     * Gibt alle Kundenvertreter mit zugehöriger ID zurück
+     * @param c der Cursor
+     * @return SQL Anweisung
      */
     public Cursor getKVinK(Cursor c){
         return db.rawQuery("SELECT KVName as _id,* FROM Kundenvertreter WHERE " +
@@ -255,9 +255,9 @@ public class Database extends SQLiteOpenHelper {
     }
     
     /**
-     * 
-     * @param kz
-     * @return
+     * Gibt alle Probenziehungen mit zugehörigem Kundenvertreter und Kunde zurück
+     * @param kz der Cursor
+     * @return SQL Anweisung
      */
     public Cursor getZiehungAll(Cursor kz){
         return db.rawQuery("SELECT * FROM Probenziehung NATURAL JOIN Kundenvertreter NATURAL JOIN Kunde Where KVName = \""+kz.getString(kz.getColumnIndex("KVName"))+"\" AND " +
@@ -268,8 +268,8 @@ public class Database extends SQLiteOpenHelper {
     }
     
     /**
-     * 
-     * @return
+     * Gibt alle finalisierten Probenziehungen zurück
+     * @return SQL Anweisung
      */
     public Cursor getFinishZ(){
         return db.rawQuery("SELECT * FROM Probenziehung WHERE Status=1",null);

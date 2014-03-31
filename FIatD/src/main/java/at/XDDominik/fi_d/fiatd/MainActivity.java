@@ -30,6 +30,10 @@ import at.XDDominik.fi_d.fiatd.Ziehung.MainZiehung;
 public class MainActivity extends Activity implements View.OnClickListener {
     public static String config = "config.properties",ip = "IP-Address", port = "Server-Port";
     
+    /**
+     * 
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
@@ -44,7 +48,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         try {
             FileInputStream fis = openFileInput(MainActivity.config);
             fis.close();
-            System.out.println("Prop notcreated!");
+            System.out.println("Prop not created!");
         } catch (FileNotFoundException e) {
             try {
                 Properties pro = new Properties();
