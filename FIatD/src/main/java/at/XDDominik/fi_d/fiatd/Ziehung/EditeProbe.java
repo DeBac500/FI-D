@@ -146,9 +146,9 @@ public class EditeProbe extends ScrollView {
                 String sql = "UPDATE Probendaten SET ";
                 for(int  i= 0; i < output.size();i++){
                     if(numbers.contains(output.get(i))){
-                        sql += output.get(i) + "=" + input.get(i) + ",";
+                        sql += output.get(i).getText() + "=" + input.get(i).getText() + ",";
                     }else{
-                        sql += output.get(i) + "=\"" + input.get(i) + "\",";
+                        sql += output.get(i).getText() + "=\"" + input.get(i).getText() + "\",";
                     }
                 }
                 sql += "Bild=\""+ bildp +"\" WHERE ArtNr=" + artnr + " AND KVName=\"" + KVName + "\" AND KNummer=" + KNummer + " AND Name=\"" + Name +
