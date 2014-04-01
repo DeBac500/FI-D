@@ -55,7 +55,7 @@ public class UnterschKunde extends Activity {
         }
         if(kname != null && kdatum  != null){
             TextView tv = (TextView)findViewById(R.id.un_text);
-            tv.setText("Unterschrift Kunde");
+            tv.setText("Unterschrift Kunde für Ziehung " +kdatum +" " + kname );
 
             pp = (PaintView)findViewById(R.id.view);
             pp.setType("Kunde");
