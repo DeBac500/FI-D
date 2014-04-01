@@ -69,9 +69,11 @@ public class Kundevertreter_Dialog extends DialogFragment{
                     public void onClick(DialogInterface dialogInterface, int i) {
                         EditText kvn1 = (EditText) v.findViewById(R.id.nkvn);
                         EditText kvkd1 = (EditText) v.findViewById(R.id.nkvkd);
-                        int kdt = Integer.parseInt(kvkd1.getText().toString());
-                        db.exeSQL("DELETE FROM Kundenvertreter WHERE KNummer=" + kdt + " AND KVName=\"" + kvn1.getHint() + "\"");
-                        mListener.onDialogPositiveClick(Kundevertreter_Dialog.this);
+                        if(kvn1.getHint()!= null || kvkd1.getHint() !=null){
+                            int kdt = Integer.parseInt(kvkd1.getText().toString());
+                            db.exeSQL("DELETE FROM Kundenvertreter WHERE KNummer=" + kdt + " AND KVName=\"" + kvn1.getHint() + "\"");
+                            mListener.onDialogPositiveClick(Kundevertreter_Dialog.this);
+                        }
                     }
                 });
         return builder.create();

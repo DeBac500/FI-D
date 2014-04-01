@@ -279,6 +279,6 @@ public class Database extends SQLiteOpenHelper {
         return db.rawQuery(sql,null);
     }
     public int uptadeexecute(String sql){
-        return db.rawQuery(sql,null).getCount();
+        return db.rawQuery(sql,null).getColumnCount();
     }
 }

@@ -5,7 +5,7 @@
     <string-array name="Artikel">
         <item>ArtNr,NUMERIC(35) NOT NULL PRIMARY KEY</item>
         <item>Bezeichnung,VARCHAR(256)</item>
-        <item>EANCode,NUMERIC(35)</item>
+        <item>EANCode,VARCHAR(35)</item>
         <item>Bio,BOOL</item>
     </string-array>
     <string-array name="Kunde">

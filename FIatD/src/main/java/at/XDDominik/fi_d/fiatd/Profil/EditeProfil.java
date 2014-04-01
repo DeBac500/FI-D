@@ -161,7 +161,7 @@ public class EditeProfil extends ScrollView implements Serializable {
         put.get(i).setText(text);
         put.get(i).setTextColor(Color.BLACK);
         put.get(i).setTextSize(25);
-        put.get(i).setChecked(false);
+        put.get(i).setChecked(true);
         put.get(i).setTextSize(30);
         tr.addView(put.get(i));
         return tr;

@@ -52,6 +52,7 @@ public class MainZiehung  extends Activity implements Reciever, Finish_Dialog.Fi
     private ArrayList<Integer> finpd = new ArrayList<Integer>();
     private boolean unlva = false, unkund = false;
     public Cursor ziehc;
+    private ZiehungsAdapter zadp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,7 +104,7 @@ public class MainZiehung  extends Activity implements Reciever, Finish_Dialog.Fi
         proben.setAdapter(proa);
 
         ziehungen = (Spinner)findViewById(R.id.zieh_ziehung);
-        ZiehungsAdapter zadp = new ZiehungsAdapter(this,db.getZiehungCursor(),false);
+        zadp = new ZiehungsAdapter(this,db.getZiehungCursor(),false);
         ZiehungsItemListener zil = new ZiehungsItemListener(this);
         ziehungen.setOnItemSelectedListener(zil);
         ziehungen.setAdapter(zadp);
@@ -252,13 +253,16 @@ public class MainZiehung  extends Activity implements Reciever, Finish_Dialog.Fi
 
     @Override
     public void onDialogPositiveClick(DialogFragment dialog, String preis, boolean neu) {
-        String sql ="UPDATE Probenziehung SET Status=1,Preis="+preis+" WHERE Ziehungsdatum=\""+lastc.getString(lastc.getColumnIndex("Ziehungsdatum"))+"\" AND Ziehungszeit=\""+lastc.getString(lastc.getColumnIndex("Ziehungszeit"))+"\" AND KVName=\""+lastc.getString(lastc.getColumnIndex("KVName"))+"\" AND KNummer="+lastc.getInt(lastc.getColumnIndex("KVName"))+" AND Name=\""+lastc.getString(lastc.getColumnIndex("Name"))+"\"";
+        String sql ="UPDATE Probenziehung SET Status=1,Preis="+preis+" WHERE Ziehungsdatum=\""+lastc.getString(lastc.getColumnIndex("Ziehungsdatum"))+"\" AND Ziehungszeit=\""+lastc.getString(lastc.getColumnIndex("Ziehungszeit"))+"\" AND KVName=\""+lastc.getString(lastc.getColumnIndex("KVName"))+"\" AND KNummer="+lastc.getInt(lastc.getColumnIndex("KNummer"))+" AND Name=\""+lastc.getString(lastc.getColumnIndex("Name"))+"\"";
+        System.out.println(sql);
         db.exeSQL(sql);
+        zadp.swapCursor(db.getZiehungCursor());
         if(neu){
             Intent intent = new Intent(MainZiehung.this,NeueZiehung.class);
             intent.putExtra("Update",true);
             MainZiehung.this.startActivityForResult(intent, 4);
-        }else
+        }else{
             Toast.makeText(getApplicationContext(),"Ziehung erfolgreich beendet!", Toast.LENGTH_SHORT).show();
+        }
     }
 }

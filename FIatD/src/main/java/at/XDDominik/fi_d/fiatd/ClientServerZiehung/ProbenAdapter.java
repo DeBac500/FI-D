@@ -2,6 +2,7 @@ package at.XDDominik.fi_d.fiatd.ClientServerZiehung;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,6 +46,12 @@ public class ProbenAdapter extends CursorAdapter{
         tv2.setText(cursor.getString(cursor.getColumnIndex("KName")));
         tv1.setFocusable(false);
         tv2.setFocusable(false);
+        int stat = cursor.getInt(cursor.getColumnIndex("Status"));
+        if(stat == 1){
+            view.setBackgroundColor(Color.GREEN+100);
+        }else
+            view.setBackground(view.getResources().getDrawable(R.drawable.list_selector));
+        System.out.println("Status:" + stat + "\nKname: "+ tv2.getText().toString());
 
         CheckBox c = (CheckBox)view.findViewById(R.id.check);
         c.setClickable(false);

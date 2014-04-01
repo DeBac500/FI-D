@@ -10,6 +10,7 @@ import android.database.sqlite.SQLiteConstraintException;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -44,24 +45,22 @@ public class Artikel_Dialog extends DialogFragment{
                             EditText nr=(EditText)v.findViewById(R.id.nartnr);
                             EditText besch=(EditText)v.findViewById(R.id.nartbesch);
                             EditText ean = (EditText)v.findViewById(R.id.narteanc);
-                            EditText bio = (EditText)v.findViewById(R.id.nartbio);
+                            CheckBox bio = (CheckBox)v.findViewById(R.id.nartbio);
                             int anr = Integer.parseInt(nr.getText().toString());
                             System.out.println("NR: " + anr);
 
-                            int eanc = Integer.parseInt(ean.getText().toString());
+
                             int bioc = 0;
-                            if(bio.getText().toString().equalsIgnoreCase("Ja"))
+                            if(bio.isChecked())
                                 bioc = 1;
-                            else if(bio.getText().toString().equalsIgnoreCase("Nein"))
-                                bioc = 0;
                             else{
                                 Toast.makeText(Artikel_Dialog.this.getActivity(), "Bitte ja oder nein eungaben", Toast.LENGTH_SHORT).show();
                             }
                             if(nr.getHint() != null){
                                 int oanr=Integer.parseInt(nr.getHint().toString());
-                                db.exeSQL("UPDATE Artikel SET ArtNr=" + anr + ",Bezeichnung=\"" + besch.getText() + "\",EANCode=" + eanc + ",Bio=" + bioc + " WHERE ArtNr=" + oanr);
+                                db.exeSQL("UPDATE Artikel SET ArtNr=" + anr + ",Bezeichnung=\"" + besch.getText() + "\",EANCode=" + ean.getText().toString() + ",Bio=" + bioc + " WHERE ArtNr=" + oanr);
                             }else
-                                db.exeSQL("INSERT INTO Artikel (ArtNr, Bezeichnung, EANCode, Bio) VALUES ("+anr+", \""+besch.getText()+"\", "+eanc+", "+bioc+")");
+                                db.exeSQL("INSERT INTO Artikel (ArtNr, Bezeichnung, EANCode, Bio) VALUES ("+anr+", \""+besch.getText()+"\", "+ean.getText().toString()+", "+bioc+")");
                             mListener.onDialogPositiveClick(Artikel_Dialog.this);
                         }catch(NumberFormatException e){
                             Toast.makeText(Artikel_Dialog.this.getActivity(),"Bitte Zahlen eingeben",Toast.LENGTH_SHORT).show();
@@ -78,9 +77,11 @@ public class Artikel_Dialog extends DialogFragment{
                     public void onClick(DialogInterface dialogInterface, int i) {
                         try {
                             EditText nr = (EditText) v.findViewById(R.id.nartnr);
-                            int oanr = Integer.parseInt(nr.getHint().toString());
-                            db.exeSQL("DELETE FROM Artikel WHERE ArtNr=" + oanr);
-                            mListener.onDialogPositiveClick(Artikel_Dialog.this);
+                            if(nr.getHint()!=null){
+                                int oanr = Integer.parseInt(nr.getHint().toString());
+                                db.exeSQL("DELETE FROM Artikel WHERE ArtNr=" + oanr);
+                                mListener.onDialogPositiveClick(Artikel_Dialog.this);
+                            }
                         } catch (NumberFormatException e) {
                             Toast.makeText(Artikel_Dialog.this.getActivity(), "Konnte nicht gelöscht werden!\nBitte nochmal versuchen!", Toast.LENGTH_SHORT).show();
                         }

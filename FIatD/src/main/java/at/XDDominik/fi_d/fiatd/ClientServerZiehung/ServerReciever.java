@@ -25,7 +25,7 @@ public class ServerReciever implements Reciever{
     private MainClientServerZiehung main;
     private Verbindung t;
     private ArrayAdapter<Probenziehung> a2;
-
+    private boolean does= true;
     public ServerReciever(MainClientServerZiehung main){
         this.main = main;
         t = new Verbindung(main,this);
@@ -75,6 +75,7 @@ public class ServerReciever implements Reciever{
                 a2.notifyDataSetChanged();
             }
         });
+        does = false;
 
     }
     public void sendUP(LinkedList<Probenziehung> list){
@@ -89,15 +90,21 @@ public class ServerReciever implements Reciever{
     @Override
     public void handleIn(Object o) {
         if(o instanceof String){
-            String s = (String)o;
-            if(s.equalsIgnoreCase("Ready")){
-                TCPConnection tcp = null;
-                if(t != null)
-                    tcp = t.getTCP();
-                if(tcp != null){
-                    tcp.sendMessage("zero:");
+            if(does){
+                String s = (String)o;
+                if(s.equalsIgnoreCase("Ready")){
+                    TCPConnection tcp = null;
+                    if(t != null)
+                        tcp = t.getTCP();
+                    if(tcp != null){
+                        tcp.sendMessage("zero:");
+                    }
                 }
             }
+        }
+        if(o instanceof LinkedList){
+            LinkedList<Probenziehung> t = (LinkedList<Probenziehung>)o;
+            this.setLinkedList(t);
         }
     }
 

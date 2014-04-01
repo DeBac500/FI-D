@@ -37,9 +37,11 @@ public class ZiehungsAdapter extends CursorAdapter{
         tv2 = (TextView)view.findViewById(R.id.spin1_tv2);
         tv1.setText(cursor.getString(cursor.getColumnIndex("Ziehungsdatum")));
         tv2.setText(cursor.getString(cursor.getColumnIndex("KName")));
-        if(cursor.getInt(cursor.getColumnIndex("Status"))!=0)
+        if(cursor.getInt(cursor.getColumnIndex("Status"))==1)
             view.setBackgroundColor(Color.GREEN+100);
-        System.out.println("Stauts: "+ cursor.getInt(cursor.getColumnIndex("Status")));
+        else
+            view.setBackgroundColor(Color.parseColor("#e7e7e8"));
+        //System.out.println("Stauts: "+ cursor.getInt(cursor.getColumnIndex("Status")));
         tv1.setFocusable(false);
         tv2.setFocusable(false);
     }

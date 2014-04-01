@@ -59,7 +59,7 @@ public class UnterschLVA extends Activity {
         }
         if(kname != null && kdatum  != null){
             TextView tv = (TextView)findViewById(R.id.un_text);
-            tv.setText("Unterschrift LVA");
+            tv.setText("Unterschrift LVA für Ziehung: " +kdatum +" " + kname );
 
             pp = (PaintView)findViewById(R.id.view);
             pp.setType("LVA");

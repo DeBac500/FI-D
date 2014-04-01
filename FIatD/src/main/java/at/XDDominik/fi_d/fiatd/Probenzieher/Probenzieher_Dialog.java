@@ -61,9 +61,11 @@ public class Probenzieher_Dialog extends DialogFragment{
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         EditText g = (EditText) v.findViewById(R.id.npzn);
-                        if (!g.getHint().toString().equalsIgnoreCase(""))
-                            db.exeSQL("DELETE FROM Probenzieher WHERE Name=\"" + g.getHint() + "\"");
-                        mListener.onDialogPositiveClick(Probenzieher_Dialog.this);
+                        if(g.getHint()!= null){
+                            if (!g.getHint().toString().equalsIgnoreCase(""))
+                                db.exeSQL("DELETE FROM Probenzieher WHERE Name=\"" + g.getHint() + "\"");
+                            mListener.onDialogPositiveClick(Probenzieher_Dialog.this);
+                        }
                     }
                 });
         return builder.create();

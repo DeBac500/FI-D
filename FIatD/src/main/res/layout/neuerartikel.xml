@@ -42,14 +42,13 @@
             android:singleLine="true"
             android:id="@+id/narteanc"/>
     </TableRow>
-    <TableRow>
-        <TextView
-            android:text="Bio:"
-            android:textSize="30dp"/>
-        <EditText
+    <TableRow
+        >
+        <CheckBox
+            android:layout_span="2"
+            android:gravity="center"
+            android:text="Bio"
             android:textSize="30dp"
-            android:singleLine="true"
-            android:hint="Ja oder Nein"
             android:id="@+id/nartbio"/>
     </TableRow>
 

@@ -84,6 +84,7 @@ public class MainClientServerZiehung extends Activity implements Reciever{
             @Override
             public void onClick(View view) {
                 Saver s = new Saver(MainClientServerZiehung.this.db);
+                System.out.println(MainClientServerZiehung.this.fserver);
                 s.saveEveryThing(MainClientServerZiehung.this.fserver);
 
             }

@@ -39,6 +39,8 @@ public class ZiehungsAdapterSpinner extends CursorAdapter{
         tv2.setText(cursor.getString(cursor.getColumnIndex("KName")));
         if(cursor.getInt(cursor.getColumnIndex("Status"))==1)
             view.setBackgroundColor(Color.GREEN+100);
+        else
+            view.setBackgroundColor(Color.parseColor("#e7e7e8"));
         tv1.setFocusable(false);
         tv2.setFocusable(false);
     }
