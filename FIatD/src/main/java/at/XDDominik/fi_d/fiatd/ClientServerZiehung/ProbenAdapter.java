@@ -51,7 +51,7 @@ public class ProbenAdapter extends CursorAdapter{
             view.setBackgroundColor(Color.GREEN+100);
         }else
             view.setBackground(view.getResources().getDrawable(R.drawable.list_selector));
-        System.out.println("Status:" + stat + "\nKname: "+ tv2.getText().toString());
+        //System.out.println("Status:" + stat + "\nKname: "+ tv2.getText().toString());
 
         CheckBox c = (CheckBox)view.findViewById(R.id.check);
         c.setClickable(false);

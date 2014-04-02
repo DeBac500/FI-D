@@ -17,7 +17,7 @@ public class Syncer implements Reciever {
     /**
      * Erstellt eine Instanz dieser Klasse
      * @param db Datenbank
-     * @param a Aktuelle Aktivität
+     * @param a Aktuelle Aktivitï¿½t
      */
     public Syncer(Database db, Activity a){
         this.db = db;
@@ -46,6 +46,7 @@ public class Syncer implements Reciever {
                     first = false;
                 }
         }else{
+            //System.out.println("next!!!");
             ss.setnext();
         }
 

@@ -50,14 +50,6 @@ public class MainClientServerZiehung extends Activity implements Reciever{
         Tabs tabs = new Tabs(this);
         tabs.initTab(2);
 
-
-
-
-        sr = new ServerReciever(this);
-        sr.setUp();
-
-
-
         ListView lv1 = (ListView)findViewById(R.id.list_client);
         pa = new ProbenAdapter(this,db.getZiehungCursor(),false,lv1);
         lv1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -77,6 +69,9 @@ public class MainClientServerZiehung extends Activity implements Reciever{
         });
         lv1.setAdapter(pa);
 
+        sr = new ServerReciever(this);
+        sr.setUp();
+
         ImageButton links = (ImageButton)findViewById(R.id.links);
         ImageButton rechts = (ImageButton)findViewById(R.id.rechts);
 
@@ -86,7 +81,7 @@ public class MainClientServerZiehung extends Activity implements Reciever{
                 Saver s = new Saver(MainClientServerZiehung.this.db);
                 System.out.println(MainClientServerZiehung.this.fserver);
                 s.saveEveryThing(MainClientServerZiehung.this.fserver);
-
+                pa.notifyDataSetChanged();
             }
         });
 

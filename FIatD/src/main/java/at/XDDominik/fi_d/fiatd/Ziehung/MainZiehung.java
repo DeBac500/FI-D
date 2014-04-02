@@ -29,11 +29,9 @@ import at.XDDominik.fi_d.fiatd.MainActivity;
 import at.XDDominik.fi_d.fiatd.ProfilAdapter;
 import at.XDDominik.fi_d.fiatd.R;
 import at.XDDominik.fi_d.fiatd.Reciever;
-import at.XDDominik.fi_d.fiatd.TCPConnection;
 import at.XDDominik.fi_d.fiatd.Tabs;
 import at.XDDominik.fi_d.fiatd.Unterschrift.UnterschKunde;
 import at.XDDominik.fi_d.fiatd.Unterschrift.UnterschLVA;
-import at.XDDominik.fi_d.fiatd.Verbindung;
 import at.XDDominik.fi_d.fiatd.ZiehungBearb.NeueZiehung;
 
 /**
@@ -41,8 +39,6 @@ import at.XDDominik.fi_d.fiatd.ZiehungBearb.NeueZiehung;
  */
 public class MainZiehung  extends Activity implements Reciever, Finish_Dialog.Finish_Listener{
     private Database db;
-
-    private Verbindung feedTask;
 
     private ProbenAdapter proa;
     private Spinner ziehungen, profile;
@@ -65,9 +61,6 @@ public class MainZiehung  extends Activity implements Reciever, Finish_Dialog.Fi
 
         Tabs tabs = new Tabs(this);
         tabs.initTab(0);
-
-        feedTask = new Verbindung(this,this);
-        feedTask.execute(new String[] { "hello", "hello" });
 
         Button com = (Button)findViewById(R.id.zieh_commit);
         com.setOnClickListener(new View.OnClickListener() {
@@ -242,11 +235,6 @@ public class MainZiehung  extends Activity implements Reciever, Finish_Dialog.Fi
     }
     @Override
     public void finish(){
-        TCPConnection tcp = null;
-        if(feedTask != null)
-            tcp = feedTask.getTCP();
-        if(tcp != null)
-            tcp.close();
         super.finish();
     }
 

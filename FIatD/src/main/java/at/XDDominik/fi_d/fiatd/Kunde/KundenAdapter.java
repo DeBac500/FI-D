@@ -33,7 +33,7 @@ public class KundenAdapter extends CursorAdapter {
         TextView tv1;
         tv1 = (TextView)view.findViewById(R.id.beschreibung);
         //tv2 = (TextView)view.findViewById(R.id.nummer);
-        tv1.setText(cursor.getString(cursor.getColumnIndex("KName")));
+        tv1.setText(cursor.getString(cursor.getColumnIndex("KName")) +" - " + cursor.getString(cursor.getColumnIndex("KVName")));
         //tv2.setText(cursor.getString(cursor.getColumnIndex("Bezeichnung")));
         tv1.setFocusable(false);
         //tv2.setFocusable(false);

@@ -69,7 +69,10 @@ public class Sender implements Runnable{
                         String mhd = temp.getString(temp.getColumnIndex("MHD"));
                         boolean bio =false;
                         SimpleDateFormat simp = new SimpleDateFormat("yyyy-MM-dd");
-                        pdl.add(new ProbenDaten(anz,simp.parse(mhd),cn,ln,lieferant,besch,b2bnr,groesse,arn,bezeichnung,eancode,bio,bildp));
+                        if(mhd != "")
+                            pdl.add(new ProbenDaten(anz,simp.parse(mhd),cn,ln,lieferant,besch,b2bnr,groesse,arn,bezeichnung,eancode,bio,bildp));
+                        else
+                            pdl.add(new ProbenDaten(anz,null,cn,ln,lieferant,besch,b2bnr,groesse,arn,bezeichnung,eancode,bio,bildp));
                     }
 
                     String pribenzieher = c.getString(c.getColumnIndex("Name"));
@@ -100,7 +103,7 @@ public class Sender implements Runnable{
                     fis.close();
 
                 }
-
+                //TODO Fotos senden
 
                 befhel.add("save:");
                 tosend.add(liste);

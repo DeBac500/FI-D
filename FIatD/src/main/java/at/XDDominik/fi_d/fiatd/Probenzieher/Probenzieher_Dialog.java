@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import at.XDDominik.fi_d.fiatd.Database;
 import at.XDDominik.fi_d.fiatd.R;
@@ -22,8 +23,10 @@ public class Probenzieher_Dialog extends DialogFragment{
     private Database db;
     private Probenzieher_Dialog_Listener mListener;
     private final View v;
+    private Activity a;
     public Probenzieher_Dialog(Database db,Activity a){
         this.db = db;
+        this.a = a;
         LayoutInflater inflater = a.getLayoutInflater();
         v = inflater.inflate(R.layout.neueprobenzieher,null);
     }
@@ -49,7 +52,9 @@ public class Probenzieher_Dialog extends DialogFragment{
                             db.exeSQL("INSERT INTO Probenzieher VALUES (\"" + gg.getText() + "\")");
                         }
                         mListener.onDialogPositiveClick(Probenzieher_Dialog.this);
-                        }catch(SQLiteConstraintException e){}
+                        }catch(SQLiteConstraintException e){
+                            Toast.makeText(a,"Schon vorhanden!",Toast.LENGTH_SHORT).show();
+                        }
                     }
                 })
                 .setNegativeButton("Abbrechen", new DialogInterface.OnClickListener() {
@@ -62,8 +67,7 @@ public class Probenzieher_Dialog extends DialogFragment{
                     public void onClick(DialogInterface dialogInterface, int i) {
                         EditText g = (EditText) v.findViewById(R.id.npzn);
                         if(g.getHint()!= null){
-                            if (!g.getHint().toString().equalsIgnoreCase(""))
-                                db.exeSQL("DELETE FROM Probenzieher WHERE Name=\"" + g.getHint() + "\"");
+                            db.exeSQL("DELETE FROM Probenzieher WHERE Name=\"" + g.getHint() + "\"");
                             mListener.onDialogPositiveClick(Probenzieher_Dialog.this);
                         }
                     }

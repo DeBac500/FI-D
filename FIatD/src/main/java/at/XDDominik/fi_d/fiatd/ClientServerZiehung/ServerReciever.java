@@ -6,12 +6,8 @@ import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.ListView;
 
-import java.util.Date;
 import java.util.LinkedList;
 
-import Server.InvalidParameterException;
-import Server.Kunde;
-import Server.KundenVertreter;
 import Server.Probenziehung;
 import at.XDDominik.fi_d.fiatd.R;
 import at.XDDominik.fi_d.fiatd.Reciever;
@@ -26,6 +22,7 @@ public class ServerReciever implements Reciever{
     private Verbindung t;
     private ArrayAdapter<Probenziehung> a2;
     private boolean does= true;
+    private ListView lv;
     public ServerReciever(MainClientServerZiehung main){
         this.main = main;
         t = new Verbindung(main,this);
@@ -33,19 +30,20 @@ public class ServerReciever implements Reciever{
     }
     public void setUp(){
 
-        ListView lv= (ListView)main.findViewById(R.id.list_server);
+        lv= (ListView)main.findViewById(R.id.list_server);
 
         LinkedList<Probenziehung> temp =main.getLinkedList();
-        try{
-            Kunde k = new Kunde(1,"Sparkunde1");
-            KundenVertreter kv = new KundenVertreter("Spar kv",k);
-            Date d = new Date();
+        //try{
+        //    Kunde k = new Kunde(1,"Sparkunde1");
+        //    KundenVertreter kv = new KundenVertreter("Spar kv",k);
+        //    Date d = new Date();
+//
+ //           Probenziehung p = new Probenziehung(null,"TestPZ",kv,d,"Wien",100,100);
+  //          temp.add(p);
+   //         temp.add(p);
+    //    }catch(InvalidParameterException e){}
 
-            Probenziehung p = new Probenziehung(null,"TestPZ",kv,d,"Wien",100,100);
-            temp.add(p);
-            temp.add(p);
-        }catch(InvalidParameterException e){}
-        a2 = new ServerAdapter(main,R.layout.list_view,temp,lv);
+
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -60,7 +58,11 @@ public class ServerReciever implements Reciever{
                 }
             }
         });
+        a2 = new ServerAdapter(main,R.layout.list_view,temp,lv);
         lv.setAdapter(a2);
+        a2.clear();
+        View emptyText = (View)main.findViewById(R.layout.empty);
+        lv.setEmptyView(emptyText);
     }
 
     public void setLinkedList(LinkedList<Probenziehung> temp){
@@ -71,7 +73,7 @@ public class ServerReciever implements Reciever{
             public void run() {
                 a2.clear();
                 a2.addAll(main.pzz);
-                System.out.println("sakjhdjashjlkdhsajkdhaskljdhkljsadhkljashda");
+                //System.out.println("sakjhdjashjlkdhsajkdhaskljdhkljsadhkljashda");
                 a2.notifyDataSetChanged();
             }
         });
@@ -104,6 +106,7 @@ public class ServerReciever implements Reciever{
         }
         if(o instanceof LinkedList){
             LinkedList<Probenziehung> t = (LinkedList<Probenziehung>)o;
+
             this.setLinkedList(t);
         }
     }

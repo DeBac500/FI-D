@@ -53,9 +53,6 @@ public class Artikel_Dialog extends DialogFragment{
                             int bioc = 0;
                             if(bio.isChecked())
                                 bioc = 1;
-                            else{
-                                Toast.makeText(Artikel_Dialog.this.getActivity(), "Bitte ja oder nein eungaben", Toast.LENGTH_SHORT).show();
-                            }
                             if(nr.getHint() != null){
                                 int oanr=Integer.parseInt(nr.getHint().toString());
                                 db.exeSQL("UPDATE Artikel SET ArtNr=" + anr + ",Bezeichnung=\"" + besch.getText() + "\",EANCode=" + ean.getText().toString() + ",Bio=" + bioc + " WHERE ArtNr=" + oanr);
@@ -89,6 +86,10 @@ public class Artikel_Dialog extends DialogFragment{
                 });
         return builder.create();
     }
+    public void setEAN(String ean){
+        EditText eantv = (EditText)v.findViewById(R.id.narteanc);
+        eantv.setText(ean);
+    }
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
@@ -106,7 +107,7 @@ public class Artikel_Dialog extends DialogFragment{
         EditText nr=(EditText)v.findViewById(R.id.nartnr);
         EditText besch=(EditText)v.findViewById(R.id.nartbesch);
         EditText ean = (EditText)v.findViewById(R.id.narteanc);
-        EditText bio = (EditText)v.findViewById(R.id.nartbio); 
+        CheckBox bio = (CheckBox)v.findViewById(R.id.nartbio);
         
         nr.setText(c.getString(c.getColumnIndex("ArtNr")));
         besch.setText(c.getString(c.getColumnIndex("Bezeichnung")));
@@ -118,9 +119,9 @@ public class Artikel_Dialog extends DialogFragment{
 
         Integer s = c.getInt(c.getColumnIndex("Bio"));
         if(s > 0 )
-            bio.setText("Ja");
+            bio.setChecked(true);
         else if(s == 0)
-            bio.setText("Nein");
+            bio.setChecked(false);
 
     }
     public interface Probenzieher_Dialog_Listener {

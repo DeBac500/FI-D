@@ -5,7 +5,7 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="14"
+        android:minSdkVersion="16"
         android:targetSdkVersion="18" />
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -47,6 +47,7 @@
         <activity android:name=".Ziehung.EditeProbeactivity" />
         <activity android:name=".Ziehung.MakePhotoActivity" />
         <activity android:name=".CameraActivity" />
+        <activity android:name=".FotoView" />
     </application>
 
 </manifest>

@@ -37,7 +37,7 @@ public class mainKunde extends Activity implements Kunde_Dialog.Probenzieher_Dia
         tabs.unselect();
 
         ListView profile = (ListView)findViewById(R.id.list_kunde);
-        pa = new KundenAdapter(this,db.getKunden(),false);
+        pa = new KundenAdapter(this,db.getKundenView(),false);
         profile.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {

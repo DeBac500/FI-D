@@ -29,7 +29,7 @@ import at.XDDominik.fi_d.fiatd.Ziehung.MainZiehung;
  */
 public class MainActivity extends Activity implements View.OnClickListener {
     public static String config = "config.properties",ip = "IP-Address", port = "Server-Port";
-    
+    private Menu menu;
     /**
      * 
      * @param savedInstanceState
@@ -44,7 +44,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
         Button next = (Button)findViewById(R.id.welc_next);
         next.setOnClickListener(this);
 
-        System.out.println("Test!!!!");
+        //System.out.println("Test!!!!");
+
         try {
             FileInputStream fis = openFileInput(MainActivity.config);
             fis.close();
@@ -66,6 +67,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+
 
     }
 

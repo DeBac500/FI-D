@@ -2,6 +2,7 @@ package at.XDDominik.fi_d.fiatd.Artikel;
 
 import android.app.Activity;
 import android.app.DialogFragment;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -11,6 +12,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 
 import at.XDDominik.fi_d.fiatd.Database;
 import at.XDDominik.fi_d.fiatd.MainActivity;
@@ -57,7 +61,14 @@ public class mainArtikel extends Activity implements Artikel_Dialog.Probenzieher
                 newFragment.show(getFragmentManager(), "Probenzieher");
             }
         });
-
+        Button b2 = (Button)findViewById(R.id.setting_addartikelcode);
+        b2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                IntentIntegrator scanIntegrator = new IntentIntegrator(mainArtikel.this);
+                scanIntegrator.initiateScan();
+            }
+        });
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -79,5 +90,14 @@ public class mainArtikel extends Activity implements Artikel_Dialog.Probenzieher
     @Override
     public void onDialogPositiveClick(DialogFragment dialog) {
         pa.swapCursor(db.getArtikelCursor());
+    }
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        IntentResult scanningResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+        if (scanningResult != null) {
+            String scanContent = scanningResult.getContents();
+            Artikel_Dialog newFragment = new Artikel_Dialog(db,mainArtikel.this);
+            newFragment.setEAN(scanContent);
+            newFragment.show(getFragmentManager(), "Probenzieher");
+        }
     }
 }

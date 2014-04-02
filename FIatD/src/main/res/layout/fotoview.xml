@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content" android:layout_height="wrap_content"
+    android:layout_gravity="center">
+    <TableRow>
+        <TextView
+            android:textSize="30dp"
+            android:text="Kein Bild"
+            android:id="@+id/bildtxt"
+            android:layout_span="2"/>
+    </TableRow>
+<TableRow>
+    <ImageView
+        android:layout_span="2"
+        android:id="@+id/image"/>
+</TableRow>
+<TableRow
+    >
+    <Button
+        android:text="Back"
+        android:textSize="30dp"/>
+    <Button
+        android:text="Album"
+        android:textSize="30dp"/>
+</TableRow>
+</TableLayout>

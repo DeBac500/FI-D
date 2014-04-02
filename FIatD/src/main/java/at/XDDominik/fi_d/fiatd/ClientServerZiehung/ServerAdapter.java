@@ -25,6 +25,7 @@ public class ServerAdapter extends ArrayAdapter<Probenziehung>{
     private ArrayList<CheckBox> box = new ArrayList<CheckBox>();
     private ListView mv;
     private List<Probenziehung> val;
+
     public ServerAdapter(MainClientServerZiehung context, int textViewResourceId, List<Probenziehung> objects,ListView lv) {
         super(context, textViewResourceId, objects);
         this.main = context;
@@ -51,5 +52,9 @@ public class ServerAdapter extends ArrayAdapter<Probenziehung>{
         for(CheckBox temp:box)
             temp.setChecked(false);
         mv.postInvalidate();
+    }
+    @Override
+    public int getCount(){
+        return val.size();
     }
 }

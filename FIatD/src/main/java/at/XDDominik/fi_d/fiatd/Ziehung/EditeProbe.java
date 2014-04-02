@@ -13,11 +13,13 @@ import android.widget.ScrollView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import at.XDDominik.fi_d.fiatd.CameraActivity;
+import at.XDDominik.fi_d.fiatd.FotoView;
 import at.XDDominik.fi_d.fiatd.R;
 
 /**
@@ -30,6 +32,7 @@ public class EditeProbe extends ScrollView {
     private EditeProbeactivity a;
     private String bildp = "kein Bild", artnr, dat,kunde, KVName ,KNummer, Name, Ziehungszeit;
     private Button bild;
+    private  ArrayList<String> all;
     public EditeProbe(EditeProbeactivity context, Cursor profil) {
         super(context);
         this.a = context;
@@ -40,7 +43,7 @@ public class EditeProbe extends ScrollView {
         input = new ArrayList<EditText>();
         output = new ArrayList<TextView>();
 
-        ArrayList<String> all = EditeProbe.generateList(context,profil);
+        all = EditeProbe.generateList(context,profil);
 
         int mid = (all.size())/2;
 
@@ -115,7 +118,9 @@ public class EditeProbe extends ScrollView {
         bild.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(EditeProbe.this.context,"Click!!",Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(EditeProbe.this.context,FotoView.class);
+                intent.putExtra("Name",EditeProbe.this.bild.getText().toString());
+                EditeProbe.this.context.startActivityForResult(intent, 100);
             }
         });
         //end photo
@@ -142,13 +147,25 @@ public class EditeProbe extends ScrollView {
                 numbers.add("Packungszahl");
                 numbers.add("Chargennummer");
                 numbers.add("LieferNr");
+                SimpleDateFormat dated = new SimpleDateFormat("yyyy-MM-dd");
+                SimpleDateFormat datet = new SimpleDateFormat("HH:mm:ss");
 
                 String sql = "UPDATE Probendaten SET ";
                 for(int  i= 0; i < output.size();i++){
                     if(numbers.contains(output.get(i))){
                         sql += output.get(i).getText() + "=" + input.get(i).getText() + ",";
                     }else{
-                        sql += output.get(i).getText() + "=\"" + input.get(i).getText() + "\",";
+                        if(all.get(i).contains("DATE")){
+                            try {
+                                sql += output.get(i).getText() + "=\"" + dated.format(dated.parse(input.get(i).getText().toString())) + "\",";
+                            } catch (ParseException e) {}
+                        }else if(all.get(i).contains("TIME")){
+                            try {
+                                sql += output.get(i).getText() + "=\"" + datet.format(datet.parse(input.get(i).getText().toString())) + "\",";
+                            } catch (ParseException e) {}
+                        }else{
+                            sql += output.get(i).getText() + "=\"" + input.get(i).getText() + "\",";
+                        }
                     }
                 }
                 sql += "Bild=\""+ bildp +"\" WHERE ArtNr=" + artnr + " AND KVName=\"" + KVName + "\" AND KNummer=" + KNummer + " AND Name=\"" + Name +
@@ -207,6 +224,7 @@ public class EditeProbe extends ScrollView {
         fixwerte.add("Ziehungsort");
         fixwerte.add("Preis");
         fixwerte.add("Status");
+        fixwerte.add("Ziehungszeit");
 
         for(int ii = 0; ii < input.size();ii++){
             input.get(ii).setHint(c.getString(c.getColumnIndex((String)output.get(ii).getText())));

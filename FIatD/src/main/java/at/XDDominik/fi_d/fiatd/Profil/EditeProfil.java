@@ -13,6 +13,7 @@ import android.widget.ScrollView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -148,7 +149,9 @@ public class EditeProfil extends ScrollView implements Serializable {
                 }
                 Intent intent = new Intent(EditeProfil.this.context, MainProfil.class);
                 EditeProfil.this.context.startActivity(intent);
-                }catch(SQLiteConstraintException e){}
+                }catch(SQLiteConstraintException e){
+                    Toast.makeText(EditeProfil.this.context,"Schon Vorhanden",Toast.LENGTH_SHORT).show();
+                }
             }
         });
         this.setHorizontalScrollBarEnabled(true);

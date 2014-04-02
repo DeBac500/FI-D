@@ -7,10 +7,12 @@
         <TextView
             android:text="Artikel"
             android:textSize="30dp"
+            android:layout_span="2"
             android:layout_gravity="center"/>
     </TableRow>
     <TableRow>
         <ListView
+            android:layout_span="2"
             android:layout_height="600dp"
             android:id="@+id/list_artikel"/>
     </TableRow>
@@ -19,8 +21,15 @@
             android:text="Neuen Artikel Erstellen"
             android:layout_column="0"
             android:textSize="30dp"
-            android:width="1000dp"
+            android:width="500dp"
             android:textAlignment="center"
             android:id="@+id/setting_addartikel"/>
+        <Button
+            android:text="Code Lesen und Artikel Erstellen"
+            android:layout_column="0"
+            android:textSize="30dp"
+            android:width="500dp"
+            android:textAlignment="center"
+            android:id="@+id/setting_addartikelcode"/>
     </TableRow>
 </TableLayout>

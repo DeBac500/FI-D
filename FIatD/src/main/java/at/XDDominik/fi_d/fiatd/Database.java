@@ -196,7 +196,9 @@ public class Database extends SQLiteOpenHelper {
     public Cursor getKunden(){
         return db.rawQuery("SELECT KName,KNummer,KNummer as _id FROM Kunde",null);
     }
-    
+    public Cursor getKundenView(){
+        return db.rawQuery("SELECT *,KNummer as _id FROM Kunde NATURAL JOIN Kundenvertreter",null);
+    }
     /**
      * Gibt einen Cursor des Kundenvertreters mit Hilfe eines SQL SELECT zur�ck
      * @return	SQL Anweisung
