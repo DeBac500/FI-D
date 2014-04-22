@@ -12,12 +12,18 @@ import android.widget.TextView;
 import at.XDDominik.fi_d.fiatd.R;
 
 /**
- * Created by Dominik on 17.02.14.
+ * Listenadapter der dafür sorgt dass die Elemente in der Liste dargestellt 
+ * werden
+ * @author Dominik Backhausen dominik.backhausen@gmail.com
+ * @version 0.9
  */
 public class ZiehungsAdapter extends CursorAdapter{
     private MainZiehung main;
     private LayoutInflater inflater;
 
+    /**
+     * Erstellt den Adapter für Kunde
+     */
     public ZiehungsAdapter(MainZiehung context, Cursor c, boolean autoRequery) {
         super(context, c, autoRequery);
         this.main=context;

@@ -18,7 +18,9 @@ import at.XDDominik.fi_d.fiatd.R;
 import at.XDDominik.fi_d.fiatd.Tabs;
 
 /**
- * Created by dominik on 18.02.14.
+ * Erstellt das Fenster für Kundenvertreter
+ * @author Dominik Backhausen dominik.backhausen@gmail.com
+ * @version 0.9
  */
 public class mainKundevertreter extends Activity implements Kundevertreter_Dialog.Probenzieher_Dialog_Listener{
     private Database db;
@@ -74,6 +76,10 @@ public class mainKundevertreter extends Activity implements Kundevertreter_Dialo
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
+
+    /**
+     * Gibt die Datenbank zurück
+     */
     public Database getDB(){return this.db;}
 
     @Override

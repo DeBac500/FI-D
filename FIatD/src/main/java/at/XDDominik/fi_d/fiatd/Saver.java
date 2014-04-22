@@ -9,15 +9,23 @@ import Server.ProbenDaten;
 import Server.Probenziehung;
 
 /**
- * Created by dominik on 31.03.14.
+ * Speichert Daten in der Datenbank
+ * @author Dominik Backhausen dbackhausen@gmail.com
+ * @version 0.9
  */
 public class Saver {
     private Database dbconn;
 
+    /**
+     * Erstellt ein Objekt zum Speichern von Daten in der Datenbank
+     */
     public Saver(Database db){
         dbconn = db;
     }
 
+    /**
+     * Speichert alles aus der übergebenen Liste
+     */
     public void saveEveryThing(LinkedList<Probenziehung> ll) {
         Kunde k;
         KundenVertreter kv;

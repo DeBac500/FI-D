@@ -16,7 +16,10 @@ import java.util.ArrayList;
 import at.XDDominik.fi_d.fiatd.R;
 
 /**
- * Created by dominik on 25.02.14.
+ * Listenadapter der dafür sorgt dass die Elemente in der Liste dargestellt 
+ * werden
+ * @author Dominik Backhausen dominik.backhausen@gmail.com
+ * @version 0.9
  */
 public class ZiehungsAdapter extends CursorAdapter{
     private MainZiehungBearb main;
@@ -24,6 +27,9 @@ public class ZiehungsAdapter extends CursorAdapter{
     private ArrayList<CheckBox> box = new ArrayList<CheckBox>();
     private ListView mv;
 
+    /**
+     * Erstellt den Adapter für Ziehung
+     */
     public ZiehungsAdapter(MainZiehungBearb context, Cursor c, boolean autoRequery, ListView mv) {
         super(context, c, autoRequery);
         this.main=context;
@@ -53,6 +59,10 @@ public class ZiehungsAdapter extends CursorAdapter{
         c.setChecked(false);
         this.box.add(c);
     }
+
+    /**
+     * Macht alle Checkboxes inaktiv
+     */
     public void setallboxf(){
         for(CheckBox temp:box)
             temp.setChecked(false);

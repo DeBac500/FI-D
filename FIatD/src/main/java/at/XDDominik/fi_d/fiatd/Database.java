@@ -277,9 +277,18 @@ public class Database extends SQLiteOpenHelper {
         return db.rawQuery("SELECT * FROM Probenziehung WHERE Status=1",null);
     }
 
+    /**
+     * Führt SQL Anweisungen aus
+     * @return SQL Anweisung
+     */
     public Cursor queryexecute(String sql){
         return db.rawQuery(sql,null);
     }
+
+    /**
+     * Führt SQL Anweisungen aus
+     * @return SQL Anweisung
+     */
     public int uptadeexecute(String sql){
         return db.rawQuery(sql,null).getColumnCount();
     }

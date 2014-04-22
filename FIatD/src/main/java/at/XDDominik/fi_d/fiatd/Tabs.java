@@ -39,11 +39,6 @@ public class Tabs implements ActionBar.TabListener{
         this.active=true;
     }
 
-    /**
-     * Zeigt die entsprechende Ansicht an, die angezeigt werden soll wenn der Tab ausgewaehlt wird
-     * @param tab 
-     * @param fragmentTransaction 
-     */
     @Override
     public void onTabSelected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
         Intent intent;
@@ -87,21 +82,11 @@ public class Tabs implements ActionBar.TabListener{
         select = -1;
     }
 
-    /**
-     * Zeigt die entsprechende Ansicht an, die angezeigt werden soll wenn der Tab ausgewählt wird
-     * @param tab 
-     * @param fragmentTransaction 
-     */
     @Override
     public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
 
     }
 
-    /**
-     * Zeigt die entsprechende Ansicht an, die angezeigt werden soll wenn der Tab ausgewählt wird
-     * @param tab 
-     * @param fragmentTransaction 
-     */
     @Override
     public void onTabReselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
 

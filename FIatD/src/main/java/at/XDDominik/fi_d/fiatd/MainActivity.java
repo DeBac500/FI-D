@@ -23,17 +23,14 @@ import at.XDDominik.fi_d.fiatd.Profil.MainProfil;
 import at.XDDominik.fi_d.fiatd.Ziehung.MainZiehung;
 
 /**
- * 
+ * Welcome Screen
  * @author Dominik Backhausen dbackhausen@gmail.com
  * @version 0.9
  */
 public class MainActivity extends Activity implements View.OnClickListener {
     public static String config = "config.properties",ip = "IP-Address", port = "Server-Port";
     private Menu menu;
-    /**
-     * 
-     * @param savedInstanceState
-     */
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
@@ -72,11 +69,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
     }
 
-    /**
-     * 
-     * @param menu
-     * @return
-     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         
@@ -85,21 +77,12 @@ public class MainActivity extends Activity implements View.OnClickListener {
         return true;
     }
 
-    /**
-     * 
-     * @param v
-     */
     @Override
     public void onClick(View v) {
         Intent intent = new Intent(this, MainZiehung.class);
         startActivity(intent);
     }
     
-    /**
-     * 
-     * @param item
-     * @return
-     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         boolean b = MainActivity.OptionsItemSelected(item,this);
@@ -110,7 +93,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
     }
     
     /**
-     * 
+     * Leitet durch entsprechenden Klick auf andere Aktivität weiter
      * @param item
      * @param a
      * @return

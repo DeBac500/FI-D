@@ -11,6 +11,11 @@ import android.widget.Toast;
 
 import at.XDDominik.fi_d.fiatd.R;
 
+/**
+ * Verwaltet die Aktivität für Aktionen mit der Kamera
+ * @author Dominik Backhausen dominik.backhausen@gmail.com
+ * @version 0.9
+ */
 public class MakePhotoActivity extends Activity {
     private final static String DEBUG_TAG = "MakePhotoActivity";
     private Camera camera;
@@ -42,6 +47,9 @@ public class MakePhotoActivity extends Activity {
                 //new PhotoHandler(getApplicationContext()));
     }
 
+    /**
+     * Gibt die KameraID für die richtige zu verwendende Kamera zurück
+     */
     private int findFrontFacingCamera() {
         int cameraId = -1;
         // Search for the front facing camera

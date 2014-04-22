@@ -33,9 +33,6 @@ public class Syncer implements Reciever {
         ss = new Sender(db,a,this.v);
     }
     
-   /**
-    * Verwaltet den Synchronisationsvorgang, indem auf ein "ready" vom Server gewartet und danach synchronisiert wird
-    */
     @Override
     public void handleIn(Object o) {
         //System.out.println("Empfangen!!");

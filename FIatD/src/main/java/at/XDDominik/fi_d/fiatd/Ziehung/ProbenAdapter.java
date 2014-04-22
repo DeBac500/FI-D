@@ -15,7 +15,10 @@ import java.util.ArrayList;
 import at.XDDominik.fi_d.fiatd.R;
 
 /**
- * Created by dominik on 18.02.14.
+ * Listenadapter der dafür sorgt dass die Elemente in der Liste dargestellt 
+ * werden
+ * @author Dominik Backhausen dominik.backhausen@gmail.com
+ * @version 0.9
  */
 public class ProbenAdapter extends CursorAdapter{
     private MainZiehung main;
@@ -23,6 +26,9 @@ public class ProbenAdapter extends CursorAdapter{
     private ArrayList<CheckBox> box = new ArrayList<CheckBox>();
     private ListView mv;
 
+    /**
+     * Erstellt den Adapter für Kunde
+     */
     public ProbenAdapter(MainZiehung context, Cursor c, boolean autoRequery,ListView mv) {
         super(context, c, autoRequery);
         this.main=context;

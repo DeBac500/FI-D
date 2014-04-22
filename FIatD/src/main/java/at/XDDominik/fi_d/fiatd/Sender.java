@@ -138,13 +138,10 @@ public class Sender implements Runnable{
     }
     
     /**
-     * 
+     * Setzt das nächste Element, dass zum Senden bereit ist
      */
     public void setnext(){this.next = true;}
     
-    /**
-     * 
-     */
     @Override
     public void run() {
         while(!interrupt){

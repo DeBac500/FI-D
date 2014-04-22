@@ -26,7 +26,9 @@ import at.XDDominik.fi_d.fiatd.Tabs;
 import at.XDDominik.fi_d.fiatd.Verbindung;
 
 /**
- * Created by dominik on 24.02.14.
+ * Erstellt das Fenster für Client Server Ziehungen
+ * @author Dominik Backhausen dominik.backhausen@gmail.com
+ * @version 0.9
  */
 public class MainClientServerZiehung extends Activity implements Reciever{
     private Database db;
@@ -89,10 +91,18 @@ public class MainClientServerZiehung extends Activity implements Reciever{
 
 
     }
+
+    /**
+     * Setzt die Liste mit den Probenziehungen
+     */
     public void setLinkedList(LinkedList<Probenziehung> temp){
         this.pzz = temp;
         a2.notifyDataSetChanged();
     }
+
+    /**
+     * Gibt die Liste mit den Probenziehungen zurück
+     */
     public LinkedList<Probenziehung> getLinkedList(){return this.pzz;}
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -109,6 +119,10 @@ public class MainClientServerZiehung extends Activity implements Reciever{
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
+
+    /**
+     * Gibt die Datenbank zurück
+     */
     public Database getDB(){return this.db;}
 
     @Override

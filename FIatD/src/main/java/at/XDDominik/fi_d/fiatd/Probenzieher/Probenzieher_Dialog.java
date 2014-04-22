@@ -17,13 +17,19 @@ import at.XDDominik.fi_d.fiatd.Database;
 import at.XDDominik.fi_d.fiatd.R;
 
 /**
- * Created by dominik on 17.02.14.
+ * Verwaltet den Dialog für Probenzieher
+ * @author Dominik Backhausen dominik.backhausen@gmail.com
+ * @version 0.9
  */
 public class Probenzieher_Dialog extends DialogFragment{
     private Database db;
     private Probenzieher_Dialog_Listener mListener;
     private final View v;
     private Activity a;
+
+    /**
+     * Erstellt den Dialog für Kunde
+     */
     public Probenzieher_Dialog(Database db,Activity a){
         this.db = db;
         this.a = a;
@@ -87,11 +93,19 @@ public class Probenzieher_Dialog extends DialogFragment{
                     + " must implement Probenzieher_Dialog_Listener");
         }
     }
+
+    /**
+     * Bereitet den Dialog vor
+     */
     public void setup(Cursor c){
         EditText g = (EditText) v.findViewById(R.id.npzn);
         g.setText(c.getString(c.getColumnIndex("Name")));
         g.setHint(c.getString(c.getColumnIndex("Name")));
     }
+
+    /**
+     * Callback-Interface
+     */
     public interface Probenzieher_Dialog_Listener {
         public void onDialogPositiveClick(DialogFragment dialog);
     }

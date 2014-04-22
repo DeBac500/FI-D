@@ -11,12 +11,17 @@ import android.widget.TextView;
 import at.XDDominik.fi_d.fiatd.R;
 
 /**
- * Created by dominik on 18.02.14.
+ * Verwaltet den Adapter für Artikel
+ * @author Dominik Backhausen dominik.backhausen@gmail.com
+ * @version 0.9
  */
 public class ArtikelAdapter extends CursorAdapter {
     private mainArtikel main;
     private LayoutInflater inflater;
 
+    /**
+     * Erstellt den Adapter für Artikel
+     */
     public ArtikelAdapter(mainArtikel context, Cursor c, boolean autoRequery) {
         super(context, c, autoRequery);
         this.main=context;

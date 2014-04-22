@@ -21,7 +21,9 @@ import java.util.ArrayList;
 import at.XDDominik.fi_d.fiatd.Ziehung.EditeProbe;
 
 /**
- * Created by dominik on 04.12.13.
+ * Erstellt die Editieransicht für Profil
+ * @author Dominik Backhausen dominik.backhausen@gmail.com
+ * @version 0.9
  */
 public class EditeProfil extends ScrollView implements Serializable {
     private ArrayList<CheckBox> put;
@@ -30,6 +32,10 @@ public class EditeProfil extends ScrollView implements Serializable {
     private String oldname;
     private Button deleate;
     private boolean neu;
+
+    /**
+     * Erstellt die Ansicht
+     */
     public EditeProfil(MainProfil context) {
         super(context);
         this.context = context;
@@ -158,6 +164,9 @@ public class EditeProfil extends ScrollView implements Serializable {
         this.setOverScrollMode(OVER_SCROLL_ALWAYS);
     }
 
+    /**
+     * Fügt eine neue Zeile der Ansicht hinzu
+     */
     public TableRow addRow(int i , String text){
         TableRow tr = new TableRow(context);
         put.add(new CheckBox(context.getApplicationContext()));
@@ -169,6 +178,10 @@ public class EditeProfil extends ScrollView implements Serializable {
         tr.addView(put.get(i));
         return tr;
     }
+
+    /**
+     * Bereitet vor
+     */
     public void setStand(Cursor c, long id){
         //c.move((int)i);
         neu = false;
@@ -187,8 +200,24 @@ public class EditeProfil extends ScrollView implements Serializable {
         }
         this.invalidate();
     }
+
+    /**
+     * Gibt das neue Element zurück
+     */
     public boolean getNeu(){return neu;}
+
+    /**
+     * Gibt die Checkboxes zurück
+     */
     public ArrayList<CheckBox> getCheck(){return put;}
+
+    /**
+     * Gibt den Namen zurück
+     */
     public EditText getName(){return name;}
+
+    /**
+     * Gibt den alten Namen zurück
+     */
     public String getOldname(){return oldname;}
 }

@@ -23,7 +23,9 @@ import at.XDDominik.fi_d.fiatd.FotoView;
 import at.XDDominik.fi_d.fiatd.R;
 
 /**
- * Created by dominik on 04.12.13.
+ * Erstellt die Editieransicht für Probe
+ * @author Dominik Backhausen dominik.backhausen@gmail.com
+ * @version 0.9
  */
 public class EditeProbe extends ScrollView {
     private EditeProbeactivity context;
@@ -33,6 +35,10 @@ public class EditeProbe extends ScrollView {
     private String bildp = "kein Bild", artnr, dat,kunde, KVName ,KNummer, Name, Ziehungszeit;
     private Button bild;
     private  ArrayList<String> all;
+
+    /**
+     * Erstellt die Ansicht
+     */
     public EditeProbe(EditeProbeactivity context, Cursor profil) {
         super(context);
         this.a = context;
@@ -183,6 +189,9 @@ public class EditeProbe extends ScrollView {
         this.setOverScrollMode(OVER_SCROLL_ALWAYS);
     }
 
+    /**
+     * Fügt eine neue Zeile der Ansicht hinzu
+     */
     public TableRow addRow(int i , String text,Cursor profil){
         TableRow tr = new TableRow(context);
         output.add(new TextView(context.getApplicationContext()));
@@ -203,6 +212,10 @@ public class EditeProbe extends ScrollView {
         tr.addView(input.get(i));
         return tr;
     }
+
+    /**
+     * Setzt den Typ
+     */
     public void setType(EditText text, String para){
         if(para.contains("NUMERIC"))
             text.setInputType(InputType.TYPE_CLASS_NUMBER);
@@ -211,6 +224,10 @@ public class EditeProbe extends ScrollView {
         if(para.contains("DATE"))
             text.setInputType(InputType.TYPE_CLASS_DATETIME);
     }
+
+    /**
+     * Bereitet vor
+     */
     public void setStand(Cursor c){
         ArrayList<String> fixwerte = new ArrayList<String>();
         fixwerte.add("ArtNr");
@@ -243,9 +260,17 @@ public class EditeProbe extends ScrollView {
         bildp = c.getString(c.getColumnIndex("Bild"));
         bild.setText(bildp);
     }
+
+    /**
+     * Setzt den Kunden
+     */
     public void setKunde(String k){
         this.kunde = k;
     }
+
+    /**
+     * Generiert eine Liste
+     */
     public static ArrayList<String> generateList(Context context,Cursor profil){
         String[] art = context.getResources().getStringArray(R.array.Artikel);
         String[] dat = context.getResources().getStringArray(R.array.Probendaten);
@@ -272,6 +297,10 @@ public class EditeProbe extends ScrollView {
                     all.add(dat[i]);
         return all;
     }
+
+    /**
+     * Setzt den Pfad zum Bild
+     */
     public void setBildp(String bildp){
         this.bildp = bildp;
         bild.setText(bildp);

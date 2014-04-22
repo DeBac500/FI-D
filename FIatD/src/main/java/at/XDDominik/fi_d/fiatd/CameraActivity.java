@@ -13,7 +13,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- *
+ * Greift auf die Kamera zu
  * @author Dominik Backhausen dominik.backhausen@gmail.com
  * @version 0.9
  */
@@ -66,6 +66,10 @@ public class CameraActivity extends Activity {
         }
 
     }
+
+    /**
+     * Erstellt eine Bild-Datei
+     */
     private File createImageFile(String artnr , String kunde ,String dat) throws IOException {
         // Create an image file name
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
@@ -86,6 +90,9 @@ public class CameraActivity extends Activity {
         return image;
     }
 
+    /**
+     * 
+     */
     private void dispatchTakePictureIntent(File photoFile) {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         // Ensure that there's a camera activity to handle the intent
@@ -113,6 +120,10 @@ public class CameraActivity extends Activity {
             finish();
         }
     }
+
+    /**
+     * Fügt ein Bild zur Gallerie hinzu
+     */
     private void galleryAddPic() {
         Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
         File f = new File(mCurrentPhotoPath);

@@ -35,7 +35,9 @@ import at.XDDominik.fi_d.fiatd.Unterschrift.UnterschLVA;
 import at.XDDominik.fi_d.fiatd.ZiehungBearb.NeueZiehung;
 
 /**
- * Created by Dominik on 17.02.14.
+ * Erstellt das Fenster für eine Ziehung
+ * @author Dominik Backhausen dominik.backhausen@gmail.com
+ * @version 0.9
  */
 public class MainZiehung  extends Activity implements Reciever, Finish_Dialog.Finish_Listener{
     private Database db;
@@ -154,7 +156,15 @@ public class MainZiehung  extends Activity implements Reciever, Finish_Dialog.Fi
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
+
+    /**
+     * Gibt die Datenbank zurück
+     */
     public Database getDB(){return this.db;}
+
+    /**
+     * Gibt den Probenadapter zurück
+     */
     public ProbenAdapter getPA(){return  this.proa;}
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -225,6 +235,10 @@ public class MainZiehung  extends Activity implements Reciever, Finish_Dialog.Fi
             }
         }
     }
+
+    /**
+     * Entfernt alles
+     */
     public void removeall(){
         this.finpd.clear();
     }

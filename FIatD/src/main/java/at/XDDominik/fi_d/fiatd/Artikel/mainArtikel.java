@@ -22,11 +22,14 @@ import at.XDDominik.fi_d.fiatd.R;
 import at.XDDominik.fi_d.fiatd.Tabs;
 
 /**
- * Created by dominik on 18.02.14.
+ * Erstellt das Fenster für Artikel
+ * @author Dominik Backhausen dominik.backhausen@gmail.com
+ * @version 0.9
  */
 public class mainArtikel extends Activity implements Artikel_Dialog.Probenzieher_Dialog_Listener{
     private Database db;
     private ArtikelAdapter pa;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
@@ -70,6 +73,7 @@ public class mainArtikel extends Activity implements Artikel_Dialog.Probenzieher
             }
         });
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         boolean b = MainActivity.OptionsItemSelected(item,this);
@@ -85,12 +89,19 @@ public class mainArtikel extends Activity implements Artikel_Dialog.Probenzieher
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
+    /**
+     * Gibt die Datenbank zurück
+     */
     public Database getDB(){return this.db;}
 
     @Override
     public void onDialogPositiveClick(DialogFragment dialog) {
         pa.swapCursor(db.getArtikelCursor());
     }
+
+    /**
+     * Callback-Methode für Aktivitäten
+     */
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         IntentResult scanningResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if (scanningResult != null) {

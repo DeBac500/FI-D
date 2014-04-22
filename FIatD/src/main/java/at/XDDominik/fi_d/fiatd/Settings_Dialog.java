@@ -50,9 +50,6 @@ public class Settings_Dialog extends DialogFragment{
         }
     }
 
-    /**
-     * 
-     */
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
