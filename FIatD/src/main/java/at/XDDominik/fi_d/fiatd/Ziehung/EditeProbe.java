@@ -240,6 +240,8 @@ public class EditeProbe extends ScrollView {
         KNummer = c.getString(c.getColumnIndex("KNummer"));
         Name = c.getString(c.getColumnIndex("Name"));
         Ziehungszeit = c.getString(c.getColumnIndex("Ziehungszeit"));
+        bildp = c.getString(c.getColumnIndex("Bild"));
+        bild.setText(bildp);
     }
     public void setKunde(String k){
         this.kunde = k;
