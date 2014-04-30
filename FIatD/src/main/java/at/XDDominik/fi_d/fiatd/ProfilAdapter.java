@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 
 /**
- * 
+ * Verwaltet den Profiladapter
  * @author Dominik Backhausen dbackhausen@gmail.com
  * @version 0.9
  */
@@ -21,7 +21,7 @@ public class ProfilAdapter extends CursorAdapter{
     private boolean bb;
     
     /**
-     * 
+     * Erstellt einen Profiladapter
      */
     public ProfilAdapter(Activity context, Cursor c, boolean autoRequery) {
         super(context, c, false);
@@ -30,13 +30,6 @@ public class ProfilAdapter extends CursorAdapter{
         this.inflater = LayoutInflater.from(context);
     }
 
-    /**
-     * 
-     * @param context
-     * @param cursor
-     * @param parent
-     * @return
-     */
     @Override
     public View newView(Context context, Cursor cursor, ViewGroup parent) {
         if(bb)
@@ -45,12 +38,6 @@ public class ProfilAdapter extends CursorAdapter{
             return inflater.inflate(R.layout.profile_list, parent,false);
     }
 
-    /**
-     * 
-     * @param view
-     * @param context
-     * @param cursor
-     */
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
         TextView tv1;

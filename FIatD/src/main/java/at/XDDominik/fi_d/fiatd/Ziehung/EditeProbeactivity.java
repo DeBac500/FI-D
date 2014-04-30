@@ -15,7 +15,9 @@ import at.XDDominik.fi_d.fiatd.R;
 import at.XDDominik.fi_d.fiatd.Tabs;
 
 /**
- * Created by dominik on 03.03.14.
+ * Erstellt die Aktivität für Probe
+ * @author Dominik Backhausen dominik.backhausen@gmail.com
+ * @version 0.9
  */
 public class EditeProbeactivity extends Activity {
     public static String profname = "ProfielName", data = "Probendaten", zieh = "Ziehung";

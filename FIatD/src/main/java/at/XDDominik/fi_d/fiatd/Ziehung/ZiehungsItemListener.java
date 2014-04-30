@@ -5,7 +5,9 @@ import android.view.View;
 import android.widget.AdapterView;
 
 /**
- * Created by Dominik on 17.02.14.
+ * Ein Ziehungsitemlistener
+ * @author Dominik Backhausen dominik.backhausen@gmail.com
+ * @version 0.9
  */
 public class ZiehungsItemListener implements AdapterView.OnItemSelectedListener, AdapterView.OnItemClickListener {
     private MainZiehung main;

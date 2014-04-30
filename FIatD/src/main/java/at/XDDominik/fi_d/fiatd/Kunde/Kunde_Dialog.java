@@ -16,12 +16,18 @@ import at.XDDominik.fi_d.fiatd.Database;
 import at.XDDominik.fi_d.fiatd.R;
 
 /**
- * Created by dominik on 17.02.14.
+ * Verwaltet den Dialog für Kunde
+ * @author Dominik Backhausen dominik.backhausen@gmail.com
+ * @version 0.9
  */
 public class Kunde_Dialog extends DialogFragment{
     private Database db;
     private Probenzieher_Dialog_Listener mListener;
     private final View v;
+
+    /**
+     * Erstellt den Dialog für Kunde
+     */
     public Kunde_Dialog(Database db, Activity a){
         this.db = db;
         LayoutInflater inflater = a.getLayoutInflater();
@@ -80,6 +86,10 @@ public class Kunde_Dialog extends DialogFragment{
                     + " must implement Probenzieher_Dialog_Listener");
         }
     }
+
+    /**
+     * Bereitet den Dialog vor
+     */
     public void setup(Cursor c){
         EditText hh=(EditText)v.findViewById(R.id.nkna);
         EditText hh1=(EditText)v.findViewById(R.id.nknu);
@@ -88,6 +98,10 @@ public class Kunde_Dialog extends DialogFragment{
         hh1.setText(c.getString(c.getColumnIndex("KNummer")));
         hh1.setHint(c.getString(c.getColumnIndex("KNummer")));
     }
+
+    /**
+     * Callback-Interface
+     */
     public interface Probenzieher_Dialog_Listener {
         public void onDialogPositiveClick(DialogFragment dialog);
     }

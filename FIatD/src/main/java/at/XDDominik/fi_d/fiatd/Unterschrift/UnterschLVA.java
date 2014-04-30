@@ -16,7 +16,9 @@ import at.XDDominik.fi_d.fiatd.R;
 import at.XDDominik.fi_d.fiatd.Tabs;
 
 /**
- * Created by dominik on 25.02.14.
+ * Erstellt das Fenster für Unterschrift LVA
+ * @author Dominik Backhausen dominik.backhausen@gmail.com
+ * @version 0.9
  */
 public class UnterschLVA extends Activity {
     public static String KDatum = "KDatum", KName = "KName",load = "laden";
@@ -114,6 +116,10 @@ public class UnterschLVA extends Activity {
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
+
+    /**
+     * Gibt die Datenbank zurück
+     */
     public Database getDB(){return this.db;}
 
 }

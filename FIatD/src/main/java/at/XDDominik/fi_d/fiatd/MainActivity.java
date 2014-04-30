@@ -26,17 +26,14 @@ import at.XDDominik.fi_d.fiatd.Ziehung.MainZiehung;
 import at.XDDominik.fi_d.fiatd.ZiehungBearb.MainZiehungBearb;
 
 /**
- * 
+ * Welcome Screen
  * @author Dominik Backhausen dbackhausen@gmail.com
  * @version 0.9
  */
 public class MainActivity extends Activity{
     public static String config = "config.properties",ip = "IP-Address", port = "Server-Port";
     private Menu menu;
-    /**
-     * 
-     * @param savedInstanceState
-     */
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
@@ -102,11 +99,6 @@ public class MainActivity extends Activity{
 
     }
 
-    /**
-     * 
-     * @param menu
-     * @return
-     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         
@@ -115,11 +107,6 @@ public class MainActivity extends Activity{
         return true;
     }
     
-    /**
-     * 
-     * @param item
-     * @return
-     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         boolean b = MainActivity.OptionsItemSelected(item,this);
@@ -130,7 +117,7 @@ public class MainActivity extends Activity{
     }
     
     /**
-     * 
+     * Leitet durch entsprechenden Klick auf andere Aktivität weiter
      * @param item
      * @param a
      * @return

@@ -15,7 +15,9 @@ import at.XDDominik.fi_d.fiatd.TCPConnection;
 import at.XDDominik.fi_d.fiatd.Verbindung;
 
 /**
- * Created by dominik on 05.03.14.
+ * Empfängt Nachrichten vom Server
+ * @author Dominik Backhausen dominik.backhausen@gmail.com
+ * @version 0.9
  */
 public class ServerReciever implements Reciever{
     private MainClientServerZiehung main;
@@ -28,6 +30,10 @@ public class ServerReciever implements Reciever{
         t = new Verbindung(main,this);
         t.execute();
     }
+
+    /**
+     * Bereitet den Server Recever vor
+     */
     public void setUp(){
 
         lv= (ListView)main.findViewById(R.id.list_server);
@@ -65,6 +71,9 @@ public class ServerReciever implements Reciever{
         lv.setEmptyView(emptyText);
     }
 
+    /**
+     * Setzt die Liste mit den Probenziehungen
+     */
     public void setLinkedList(LinkedList<Probenziehung> temp){
         System.out.println(temp.toString());
         main.pzz = temp;
@@ -80,6 +89,10 @@ public class ServerReciever implements Reciever{
         does = false;
 
     }
+
+    /**
+     * Sendet Daten
+     */
     public void sendUP(LinkedList<Probenziehung> list){
         for(Probenziehung z : list){
             z.setStatus(2);

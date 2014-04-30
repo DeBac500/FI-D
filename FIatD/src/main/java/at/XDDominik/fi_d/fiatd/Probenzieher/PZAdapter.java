@@ -12,12 +12,18 @@ import at.XDDominik.fi_d.fiatd.R;
 import at.XDDominik.fi_d.fiatd.Ziehung.MainZiehung;
 
 /**
- * Created by dominik on 18.02.14.
+ * Listenadapter der dafür sorgt dass die Elemente in der Liste dargestellt 
+ * werden
+ * @author Dominik Backhausen dominik.backhausen@gmail.com
+ * @version 0.9
  */
 public class PZAdapter extends CursorAdapter {
     private mainProbenzieher main;
     private LayoutInflater inflater;
 
+    /**
+     * Erstellt den Adapter für Probenzieher
+     */
     public PZAdapter(mainProbenzieher context, Cursor c, boolean autoRequery) {
         super(context, c, autoRequery);
         this.main=context;

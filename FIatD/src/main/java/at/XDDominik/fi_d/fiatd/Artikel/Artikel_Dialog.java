@@ -18,17 +18,24 @@ import at.XDDominik.fi_d.fiatd.Database;
 import at.XDDominik.fi_d.fiatd.R;
 
 /**
- * Created by dominik on 17.02.14.
+ * Verwaltet den Dialog für Artikel
+ * @author Dominik Backhausen dominik.backhausen@gmail.com
+ * @version 0.9
  */
 public class Artikel_Dialog extends DialogFragment{
     private Database db;
     private Probenzieher_Dialog_Listener mListener;
     private final View v;
+
+    /**
+     * Erstellt den Dialog für Artikel
+     */
     public Artikel_Dialog(Database db, Activity a){
         this.db = db;
         LayoutInflater inflater = a.getLayoutInflater();
         v = inflater.inflate(R.layout.neuerartikel,null);
     }
+
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -86,10 +93,15 @@ public class Artikel_Dialog extends DialogFragment{
                 });
         return builder.create();
     }
+
+    /**
+     * Setzt die EAN
+     */
     public void setEAN(String ean){
         EditText eantv = (EditText)v.findViewById(R.id.narteanc);
         eantv.setText(ean);
     }
+
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
@@ -103,6 +115,10 @@ public class Artikel_Dialog extends DialogFragment{
                     + " must implement Probenzieher_Dialog_Listener");
         }
     }
+
+    /**
+     * Bereitet vor und setzt die Standardwerte für den Dialog
+     */
     public void setup(Cursor c){
         EditText nr=(EditText)v.findViewById(R.id.nartnr);
         EditText besch=(EditText)v.findViewById(R.id.nartbesch);
@@ -124,6 +140,10 @@ public class Artikel_Dialog extends DialogFragment{
             bio.setChecked(false);
 
     }
+
+    /**
+     * Callback-Interface
+     */
     public interface Probenzieher_Dialog_Listener {
         public void onDialogPositiveClick(DialogFragment dialog);
     }

@@ -11,12 +11,18 @@ import android.widget.TextView;
 import at.XDDominik.fi_d.fiatd.R;
 
 /**
- * Created by dominik on 18.02.14.
+ * Listenadapter der dafür sorgt dass die Elemente in der Liste dargestellt 
+ * werden
+ * @author Dominik Backhausen dominik.backhausen@gmail.com
+ * @version 0.9
  */
 public class KundenvertreterAdapter extends CursorAdapter {
     private mainKundevertreter main;
     private LayoutInflater inflater;
 
+    /**
+     * Erstellt den Adapter für Kundenvertreter
+     */
     public KundenvertreterAdapter(mainKundevertreter context, Cursor c, boolean autoRequery) {
         super(context, c, autoRequery);
         this.main=context;

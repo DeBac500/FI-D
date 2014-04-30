@@ -28,7 +28,9 @@ import at.XDDominik.fi_d.fiatd.R;
 import at.XDDominik.fi_d.fiatd.Tabs;
 
 /**
- * Created by dominik on 26.02.14.
+ * Erstellt das Fenster für eine Neue Ziehung
+ * @author Dominik Backhausen dominik.backhausen@gmail.com
+ * @version 0.9
  */
 public class NeueZiehung extends Activity {
     private Database db;
@@ -163,5 +165,9 @@ public class NeueZiehung extends Activity {
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
+
+    /**
+     * Gibt die Datenbank zurück
+     */
     public Database getDB(){return this.db;}
 }

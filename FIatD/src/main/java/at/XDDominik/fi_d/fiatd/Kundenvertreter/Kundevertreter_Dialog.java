@@ -18,12 +18,18 @@ import at.XDDominik.fi_d.fiatd.Database;
 import at.XDDominik.fi_d.fiatd.R;
 
 /**
- * Created by dominik on 17.02.14.
+ * Verwaltet den Dialog für Kundenvertreter
+ * @author Dominik Backhausen dominik.backhausen@gmail.com
+ * @version 0.9
  */
 public class Kundevertreter_Dialog extends DialogFragment{
     private Database db;
     private Probenzieher_Dialog_Listener mListener;
     private final View v;
+
+    /**
+     * Erstellt den Dialog für Kundenvertreter
+     */
     public Kundevertreter_Dialog(Database db, Activity a){
         this.db = db;
         LayoutInflater inflater = a.getLayoutInflater();
@@ -91,6 +97,10 @@ public class Kundevertreter_Dialog extends DialogFragment{
                     + " must implement Probenzieher_Dialog_Listener");
         }
     }
+
+    /**
+     * Bereitet den Dialog vor
+     */
     public void setup(Cursor c){
         EditText kvn=(EditText)v.findViewById(R.id.nkvn);
         EditText kvkd=(EditText)v.findViewById(R.id.nkvkd);
@@ -106,6 +116,10 @@ public class Kundevertreter_Dialog extends DialogFragment{
             }
         }
     }
+
+    /**
+     * Callback-Interface
+     */
     public interface Probenzieher_Dialog_Listener {
         public void onDialogPositiveClick(DialogFragment dialog);
     }

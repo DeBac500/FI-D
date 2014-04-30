@@ -16,7 +16,9 @@ import at.XDDominik.fi_d.fiatd.R;
 import at.XDDominik.fi_d.fiatd.Tabs;
 
 /**
- * Created by dominik on 25.02.14.
+ * Erstellt das Fenster für Unterschrift Kunde
+ * @author Dominik Backhausen dominik.backhausen@gmail.com
+ * @version 0.9
  */
 public class UnterschKunde extends Activity {
     public static String KDatum = "KDatum", KName = "KName";
@@ -108,6 +110,10 @@ public class UnterschKunde extends Activity {
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
+
+    /**
+     * Gibt die Datenbank zurück
+     */
     public Database getDB(){return this.db;}
 
 }

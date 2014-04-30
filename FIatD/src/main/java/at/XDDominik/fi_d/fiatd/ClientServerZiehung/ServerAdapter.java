@@ -17,7 +17,10 @@ import Server.Probenziehung;
 import at.XDDominik.fi_d.fiatd.R;
 
 /**
- * Created by dominik on 05.03.14.
+ * Listenadapter der dafür sorgt dass die Elemente in der Liste dargestellt 
+ * werden
+ * @author Dominik Backhausen dominik.backhausen@gmail.com
+ * @version 0.9
  */
 public class ServerAdapter extends ArrayAdapter<Probenziehung>{
     private MainClientServerZiehung main;
@@ -26,12 +29,16 @@ public class ServerAdapter extends ArrayAdapter<Probenziehung>{
     private ListView mv;
     private List<Probenziehung> val;
 
+    /**
+     * Erstellt den Adapter für den Server
+     */
     public ServerAdapter(MainClientServerZiehung context, int textViewResourceId, List<Probenziehung> objects,ListView lv) {
         super(context, textViewResourceId, objects);
         this.main = context;
         this.mv = lv;
         this.val = objects;
     }
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         inflater = (LayoutInflater) main.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -48,11 +55,16 @@ public class ServerAdapter extends ArrayAdapter<Probenziehung>{
 
         return rowView;
     }
+    
+    /**
+     * Setzt alle Checkboxes inaktiv
+     */
     public void setallboxf(){
         for(CheckBox temp:box)
             temp.setChecked(false);
         mv.postInvalidate();
     }
+
     @Override
     public int getCount(){
         return val.size();

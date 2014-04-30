@@ -29,11 +29,6 @@ public class Verbindung extends AsyncTask {
         this.a = a;
     }
 
-    /**
-     * Erzeugt die Verbindung im Hintergrund
-     * @param params mögliche Definitionsparameter
-     * @return  mögliches Ergebnis
-     */
     @Override
     protected Object doInBackground(Object[] params) {
         try{

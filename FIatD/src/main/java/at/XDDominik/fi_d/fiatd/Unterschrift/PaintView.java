@@ -22,6 +22,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Erstellt das Feld auf dem die Unterschrift gezeichnet werden kann
+ * @author Dominik Backhausen dominik.backhausen@gmail.com
+ * @version 0.9
+ */
 public class PaintView extends View implements View.OnTouchListener {
     private static final String TAG = "PaintView";
 

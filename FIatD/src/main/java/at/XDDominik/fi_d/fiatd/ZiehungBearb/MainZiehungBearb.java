@@ -25,7 +25,9 @@ import at.XDDominik.fi_d.fiatd.R;
 import at.XDDominik.fi_d.fiatd.Tabs;
 
 /**
- * Created by dominik on 24.02.14.
+ * Erstellt das Fenster zum Ziehung bearbeiten
+ * @author Dominik Backhausen dominik.backhausen@gmail.com
+ * @version 0.9
  */
 public class MainZiehungBearb extends Activity {
     private Database db;
@@ -184,10 +186,22 @@ public class MainZiehungBearb extends Activity {
         ((CursorAdapter)ziehungen.getAdapter()).swapCursor(db.getZiehungCursor());
         super.onResume();
     }
+
+    /**
+     * Gibt die Datenbank zurück
+     */
     public Database getDB(){return this.db;}
+
+    /**
+     * Erstellt einen Adapter für Sachen in der Ziehung
+     */
     public ZiehungsAdapter getZiehungsAdapterInZ(){
         return this.za1;
     }
+
+    /**
+     * Erstellt einen Adapter für alles
+     */
     public ZiehungsAdapter getZiehungsAdapterAll(){
         return this.za;
     }

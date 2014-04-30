@@ -14,11 +14,17 @@ import android.widget.TextView;
 import at.XDDominik.fi_d.fiatd.R;
 
 /**
- * Created by dominik on 17.02.14.
+ * Verwaltet den Dialog für eine fertiggestellte Ziehung
+ * @author Dominik Backhausen dominik.backhausen@gmail.com
+ * @version 0.9
  */
 public class Finish_Dialog extends DialogFragment{
     private Finish_Listener mListener;
     private final View v;
+
+    /**
+     * Erstellt den Dialog für eine fertiggestellte Ziehung
+     */
     public Finish_Dialog( Activity a){
         LayoutInflater inflater = a.getLayoutInflater();
         v = inflater.inflate(R.layout.finish,null);
@@ -59,6 +65,10 @@ public class Finish_Dialog extends DialogFragment{
                     + " must implement Finish_Listener");
         }
     }
+
+    /**
+     * Callback-Interface
+     */
     public interface Finish_Listener {
         public void onDialogPositiveClick(DialogFragment dialog,String preis ,boolean neu);
     }

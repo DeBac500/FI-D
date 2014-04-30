@@ -36,9 +36,6 @@ public class TCPConnection implements Runnable,Serializable {
         t = new Thread(this);
     }
 
-    /**
-     * Wartet auf eine neue Nachricht
-     */
     @Override
     public void run() {
         System.out.println("Server Thread " + ID + " running.");
