@@ -4,17 +4,20 @@
         android:title="@string/action_settings"
         android:orderInCategory="100"
         android:showAsAction="never|withText"/>
+
     <item android:id="@+id/action_search"
         android:icon="@android:drawable/ic_menu_search"
         android:title="@string/action_search"
         android:showAsAction="always"
-        android:enabled="false"/>
+        android:enabled="false"
+        android:visible="false"/>
 
     <item android:id="@+id/action_help"
         android:icon="@android:drawable/ic_menu_help"
         android:title="Help"
         android:showAsAction="always"
-        android:enabled="false"/>
+        android:enabled="false"
+        android:visible="false"/>
 
     <item android:id="@+id/action_sync"
         android:icon="@android:drawable/ic_popup_sync"

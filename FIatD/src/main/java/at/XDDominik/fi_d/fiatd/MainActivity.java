@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -16,18 +17,20 @@ import java.io.IOException;
 import java.util.Properties;
 
 import at.XDDominik.fi_d.fiatd.Artikel.mainArtikel;
+import at.XDDominik.fi_d.fiatd.ClientServerZiehung.MainClientServerZiehung;
 import at.XDDominik.fi_d.fiatd.Kunde.mainKunde;
 import at.XDDominik.fi_d.fiatd.Kundenvertreter.mainKundevertreter;
 import at.XDDominik.fi_d.fiatd.Probenzieher.mainProbenzieher;
 import at.XDDominik.fi_d.fiatd.Profil.MainProfil;
 import at.XDDominik.fi_d.fiatd.Ziehung.MainZiehung;
+import at.XDDominik.fi_d.fiatd.ZiehungBearb.MainZiehungBearb;
 
 /**
  * 
  * @author Dominik Backhausen dbackhausen@gmail.com
  * @version 0.9
  */
-public class MainActivity extends Activity implements View.OnClickListener {
+public class MainActivity extends Activity{
     public static String config = "config.properties",ip = "IP-Address", port = "Server-Port";
     private Menu menu;
     /**
@@ -41,8 +44,35 @@ public class MainActivity extends Activity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button next = (Button)findViewById(R.id.welc_next);
-        next.setOnClickListener(this);
+        Button nextpz = (Button)findViewById(R.id.welc_next_pz);
+        nextpz.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, MainZiehung.class);
+                MainActivity.this.startActivity(intent);
+                MainActivity.this.finish();
+            }
+        });
+
+        Button nextcsz = (Button)findViewById(R.id.welc_next_csz);
+        nextcsz.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, MainClientServerZiehung.class);
+                MainActivity.this.startActivity(intent);
+                MainActivity.this.finish();
+            }
+        });
+
+        Button nextzeb = (Button)findViewById(R.id.welc_next_zeb);
+        nextzeb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, MainZiehungBearb.class);
+                MainActivity.this.startActivity(intent);
+                MainActivity.this.finish();
+            }
+        });
 
         //System.out.println("Test!!!!");
 
@@ -83,16 +113,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
-    }
-
-    /**
-     * 
-     * @param v
-     */
-    @Override
-    public void onClick(View v) {
-        Intent intent = new Intent(this, MainZiehung.class);
-        startActivity(intent);
     }
     
     /**
@@ -162,13 +182,14 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 a.overridePendingTransition(0,0);
                 return true;
             case R.id.action_sync:
+                Toast.makeText(a,"Starting sync",Toast.LENGTH_SHORT).show();
                 Database db = new Database(a);
                 db.open();
                 Syncer s = new Syncer(db,a);
                 Verbindung v = new Verbindung(a,s);
                 s.setVerbindung(v);
                 v.execute();
-
+                Toast.makeText(a,"Sync started",Toast.LENGTH_SHORT).show();
                 return true;
             default:
                 return false;

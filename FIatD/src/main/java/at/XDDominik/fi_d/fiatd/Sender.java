@@ -2,8 +2,10 @@ package at.XDDominik.fi_d.fiatd;
 
 import android.app.Activity;
 import android.database.Cursor;
+import android.os.Environment;
 import android.widget.Toast;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -65,7 +67,7 @@ public class Sender implements Runnable{
                         String groesse = temp.getString(temp.getColumnIndex("Packungsgroesse"));
                         String bezeichnung = temp.getString(temp.getColumnIndex("Bezeichnung"));
                         String eancode = temp.getString(temp.getColumnIndex("EANCode"));
-                        String bildp  = "";
+                        String bildp  = temp.getString(temp.getColumnIndex("Bild"));
                         String mhd = temp.getString(temp.getColumnIndex("MHD"));
                         boolean bio =false;
                         SimpleDateFormat simp = new SimpleDateFormat("yyyy-MM-dd");
@@ -73,6 +75,18 @@ public class Sender implements Runnable{
                             pdl.add(new ProbenDaten(anz,simp.parse(mhd),cn,ln,lieferant,besch,b2bnr,groesse,arn,bezeichnung,eancode,bio,bildp));
                         else
                             pdl.add(new ProbenDaten(anz,null,cn,ln,lieferant,besch,b2bnr,groesse,arn,bezeichnung,eancode,bio,bildp));
+                        if(bildp != ""){
+                            File storageDir = Environment.getExternalStoragePublicDirectory(
+                                    Environment.DIRECTORY_PICTURES);
+                            File im = new File(storageDir.getPath() + File.separator + "LVA" + File.separator + bildp);
+                            if(im.exists()){
+                                FileInputStream fis = new FileInputStream(im);
+                                byte[] arr = new byte[fis.available()];
+                                fis.read(arr);
+                                befhel.add("image:" + bildp);
+                                tosend.add(arr);
+                            }
+                        }
                     }
 
                     String pribenzieher = c.getString(c.getColumnIndex("Name"));
@@ -103,7 +117,7 @@ public class Sender implements Runnable{
                     fis.close();
 
                 }
-                //TODO Fotos senden
+
 
                 befhel.add("save:");
                 tosend.add(liste);
